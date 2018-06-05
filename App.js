@@ -19,7 +19,11 @@ import {
   DrawerActions
 } from "react-navigation";
 import Sound from "react-native-sound";
+import Swiper from 'react-native-swiper';
+import Intro from './BoardSimple';
 
+var playing = false;
+var whoosh = null;
 const { widthW } = Dimensions.get("window");
 
 function renderNode(node, index, siblings, parent, defaultRenderer) {
@@ -85,37 +89,7 @@ class Fiaba1 extends React.Component {
     )
   };
 
-  playSound(idf) {
-    // Enable playback in silence mode
-    Sound.setCategory("Playback");
-    console.log("playSound fiaba " + idf);
-    // Load the sound file 'whoosh.mp3' from the app bundle
-    // See notes below about preloading sounds within initialization code below.
-    var whoosh = new Sound("elevator.mp3", Sound.MAIN_BUNDLE, error => {
-      if (error) {
-        console.log("failed to load the sound", error);
-        return;
-      }
-      // loaded successfully
-      console.log(
-        "duration in seconds: " +
-          whoosh.getDuration() +
-          "number of channels: " +
-          whoosh.getNumberOfChannels()
-      );
 
-      whoosh.play(success => {
-        if (success) {
-          console.log("successfully finished playing");
-        } else {
-          console.log("playback failed due to audio decoding errors");
-          // reset the player to its uninitialized state (android only)
-          // this is the only option to recover after an error occured and use the player again
-          whoosh.reset();
-        }
-      });
-    });
-  }
   render() {
     const idf = 1;
     const htmlContent = `<p><h2>Ciao</h2><h1>SONO FIABA 1</h1><b>Ciao</b>
@@ -131,7 +105,7 @@ class Fiaba1 extends React.Component {
             this.props.navigation.dispatch(DrawerActions.openDrawer())
           }
         />
-        <Button title="Suono" onPress={() => this.playSound(idf)} />
+        <Button title="Suono" onPress={() => playSound(idf)} />
         <HTMLView
           value={htmlContent}
           renderNode={renderNode}
@@ -254,63 +228,91 @@ class Fiaba4 extends React.Component {
   }
 }
 
-const Fiabe1 = TabNavigator(
-  {
-    Fiaba1: {
-      screen: Fiaba1,
-      navigationOptions: {
-        tabBarVisible: false
-      }
-    },
-    Fiaba2: {
-      screen: Fiaba2,
-      navigationOptions: {
-        tabBarVisible: false
-      }
+playSound = idf => {
+    // Enable playback in silence mode
+    if(playing) {
+        whoosh.stop();
     }
-  },
-  {
-    tabBarVisible: false,
-    index: 0,
-    headerMode: "none",
-    initialRouteName: "Fiaba1",
-    transitionConfig
-  }
-);
+    Sound.setCategory("Playback");
+    console.log("playSound fiaba " + idf);
+    // Load the sound file 'whoosh.mp3' from the app bundle
+    // See notes below about preloading sounds within initialization code below.
+    $sound = idf == 0 ? 'genoa.mp3' : 'elevator.mp3';
+    whoosh = new Sound($sound, Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.log("failed to load the sound", error);
+        return;
+      }
+      // loaded successfully
+      console.log(
+        "duration in seconds: " +
+          whoosh.getDuration() +
+          "number of channels: " +
+          whoosh.getNumberOfChannels()
+      );
 
-const Fiabe2 = TabNavigator(
-  {
-    Fiaba3: {
-      screen: Fiaba3,
-      navigationOptions: {
-        tabBarVisible: false
-      }
-    },
-    Fiaba4: {
-      screen: Fiaba4,
-      navigationOptions: {
-        tabBarVisible: false
-      }
-    }
-  },
-  {
-    tabBarVisible: false,
-    index: 0,
-    headerMode: "none",
-    initialRouteName: "Fiaba3",
-    transitionConfig
+      whoosh.play(success => {
+        if (success) {
+          console.log("successfully finished playing");
+          playing = false;
+        } else {
+          console.log("playback failed due to audio decoding errors");
+          whoosh.reset();
+        }
+      });
+      playing = true;
+    });
   }
-);
+
+swiperIndexChanged = index => {
+  console.log("swiperIndexChanged", "index", index);
+  //stoppiamo suono se attivo
+  playSound(index);
+};
+
+const Capitolo1 = () => {
+  return (
+    <Swiper style={styles.wrapper} showsButtons={true} loop={false}  onIndexChanged={index => {
+            console.log("onindexchanged");
+            this.swiperIndexChanged(index);
+          }}>
+      <View style={styles.slide1}>
+      <Fiaba1 />
+      </View>
+      <View style={styles.slide2}>
+      <Fiaba2 />
+      </View>
+    </Swiper>
+  );
+};
+
+const Capitolo2 = () => {
+  return (
+    <Swiper style={styles.wrapper} showsButtons={true} loop={false}>
+      <View style={styles.slide1}>
+      <Fiaba3 />
+      </View>
+      <View style={styles.slide2}>
+      <Fiaba4 />
+      </View>
+    </Swiper>
+  );
+};
+
+
 
 export default DrawerNavigator({
+  Intro: {
+    screen: Intro 
+  },
   Home: {
     screen: MyHomeScreen
   },
   Capitolo1: {
-    screen: Fiabe1
+    screen: Capitolo1
   },
   Capitolo2: {
-    screen: Fiabe2
+    screen: Capitolo2
   }
 });
 
@@ -346,5 +348,30 @@ const styles = StyleSheet.create({
   a: {
     fontWeight: "300",
     color: "#FF3366" // make links coloured pink
+  },
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
-});
+})
