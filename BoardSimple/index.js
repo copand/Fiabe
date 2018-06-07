@@ -54,7 +54,8 @@ export default class Index extends Component {
                 <Text
                 style={styles.desc}>{page.description}</Text>
                 {i== 4 &&
-               <TouchableOpacity style={styles.footer} onPress={true}><Text style={styles.desc}>Capito</Text></TouchableOpacity>
+               <TouchableOpacity style={styles.footer} onPress={() =>
+            this.props.navigation.navigate("Home")}><Text style={styles.desc}>Capito</Text></TouchableOpacity>
                 }
                  
             </Animated.View>

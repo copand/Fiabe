@@ -21,11 +21,29 @@ import {
 import Sound from "react-native-sound";
 import Swiper from 'react-native-swiper';
 import Intro from './BoardSimple';
-import Fiaba from './Fiaba';
 
 var playing = false;
 var whoosh = null;
 const { widthW } = Dimensions.get("window");
+
+function renderNode(node, index, siblings, parent, defaultRenderer) {
+  if (node.name == "img") {
+    const a = node.attribs;
+    const { src, height, width } = node.attribs;
+    const imageHeight = height || 300;
+    return (
+      <View key={index}>
+        <Image
+          style={{
+            width: width * PixelRatio.get(),
+            height: imageHeight * PixelRatio.get()
+          }}
+          source={require("./foto.jpg")}
+        />
+      </View>
+    );
+  }
+}
 
 class MyHomeScreen extends React.Component {
   static navigationOptions = {
@@ -60,51 +78,152 @@ class MyHomeScreen extends React.Component {
   }
 }
 
-class Fiabe extends React.Component {
-
-    htmlContent1 = `<p><h2>Ciao</h2><h1>SONO FIABA 1</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <img src="/foto.jpg" width=200 height=200 />
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-
-    htmlContent2 = `<p><h2>Ciao</h2><h1>SONO FIABA 2</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-    htmlContent3 = `<p><h2>Ciao</h2><h1>SONO FIABA 3</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-
-    htmlContent4 = `<p><h2>Ciao</h2><h1>SONO FIABA 4</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+class Fiaba1 extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "Capitolo 1",
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require("./foto.jpg")}
+        style={[styles.icon, { tintColor: tintColor }]}
+      />
+    )
+  };
 
 
   render() {
+    const idf = 1;
+    const htmlContent = `<p><h2>Ciao</h2><h1>SONO FIABA 1</h1><b>Ciao</b>
+  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
+  <img src="/foto.jpg" width=200 height=200 />
+  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+
     return (
-        <Swiper index={this.props.inizio} style={styles.wrapper} showsButtons={true} loop={false} onIndexChanged={index => {swiperIndexChanged(index);}}>
-            <View style={styles.slide1}>
-            <Text>CAPITOLO UNO</Text>
-            </View>
-            <View style={styles.slide1}>
-              <Fiaba mynavigation={this.props.navigation} htmlContent={this.htmlContent1} idf='1'/>
-            </View>
-            <View style={styles.slide2}>
-              <Fiaba mynavigation={this.props.navigation} htmlContent={this.htmlContent2} idf='2'/>
-            </View>
-              <View style={styles.slide1}>
-            <Text>CAPITOLO DUE</Text>
-            </View>
-    
-          <View style={styles.slide1}>
-              <Fiaba mynavigation={this.props.navigation} htmlContent={this.htmlContent3} idf='3'/>
-            </View>
-            <View style={styles.slide2}>
-              <Fiaba mynavigation={this.props.navigation} htmlContent={this.htmlContent4} idf='4'/>
-            </View>
-        </Swiper>
+      <ScrollView>
+        <Button
+          title="menu"
+          onPress={() =>
+            this.props.mynavigation.dispatch(DrawerActions.openDrawer())
+          }
+        />
+        <Button title="Suono" onPress={() => playSound(idf)} />
+        <HTMLView
+          value={htmlContent}
+          renderNode={renderNode}
+          stylesheet={styles}
+        />
+        <Button
+          title="Prossima"
+          onPress={() => this.props.mynavigation.navigate("Capitolo2")}
+        />
+      </ScrollView>
+    );
+  }
+}
+
+class Fiaba2 extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "Capitolo 1",
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require("./foto.jpg")}
+        style={[styles.icon, { tintColor: tintColor }]}
+      />
+    )
+  };
+  render() {
+    const htmlContent = `<p><h2>Ciao</h2><h1>SONO FIABA 2</h1><b>Ciao</b>
+  <img src="/foto.jpg" width=200 height=200 />
+  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
+  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+
+    return (
+      <ScrollView>
+        <HTMLView
+          value={htmlContent}
+          renderNode={renderNode}
+          stylesheet={styles}
+        />
+        <Button
+          title="Precedente"
+          onPress={() => this.props.navigation.navigate("Fiaba1")}
+        />
+        <Button
+          title="Prossima"
+          onPress={() => this.props.navigation.navigate("Fiaba3")}
+        />
+      </ScrollView>
+    );
+  }
+}
+
+class Fiaba3 extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "fiaba 3",
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require("./foto.jpg")}
+        style={[styles.icon, { tintColor: tintColor }]}
+      />
+    )
+  };
+  render() {
+    const htmlContent = `<p><h2>Ciao</h2><h1>SONO FIABA 3</h1><b>Ciao</b>
+  <img src="/foto.jpg" width=200 height=200 />
+  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
+  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+
+    return (
+      <ScrollView>
+        <HTMLView
+          value={htmlContent}
+          renderNode={renderNode}
+          stylesheet={styles}
+        />
+        <Button
+          title="Precedente"
+          onPress={() => this.props.navigation.navigate("Fiaba1")}
+        />
+        <Button
+          title="Prossima"
+          onPress={() => this.props.navigation.navigate("Fiaba3")}
+        />
+      </ScrollView>
+    );
+  }
+}
+
+class Fiaba4 extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "fiaba 4",
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require("./foto.jpg")}
+        style={[styles.icon, { tintColor: tintColor }]}
+      />
+    )
+  };
+  render() {
+    const htmlContent = `<p><h2>Ciao</h2><h1>SONO FIABA 4</h1><b>Ciao</b>
+  <img src="/foto.jpg" width=200 height=200 />
+  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
+  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+
+    return (
+      <ScrollView>
+        <HTMLView
+          value={htmlContent}
+          renderNode={renderNode}
+          stylesheet={styles}
+        />
+        <Button
+          title="Precedente"
+          onPress={() => this.props.navigation.navigate("Fiaba1")}
+        />
+        <Button
+          title="Prossima"
+          onPress={() => this.props.navigation.navigate("Fiaba3")}
+        />
+      </ScrollView>
     );
   }
 }
@@ -151,6 +270,49 @@ swiperIndexChanged = index => {
   playSound(index);
 };
 
+class Capitolo1 extends React.Component {
+  render() {
+  	return (
+    		<Swiper style={styles.wrapper} showsButtons={true} loop={false} onIndexChanged={index => {swiperIndexChanged(index);}}>
+      			<View style={styles.slide1}>
+      				<Fiaba1 mynavigation={this.props.navigation}/>
+      			</View>
+      			<View style={styles.slide2}>
+      				<Fiaba2 />
+      			</View>
+    		</Swiper>
+  	);
+  }
+}
+
+/*
+const Capitolo1 = () => {
+  return (
+    <Swiper style={styles.wrapper} showsButtons={true} loop={false}  onIndexChanged={index => {this.swiperIndexChanged(index);}}>
+      <View style={styles.slide1}>
+      <Fiaba1 />
+      </View>
+      <View style={styles.slide2}>
+      <Fiaba2 />
+      </View>
+    </Swiper>
+  );
+};
+*/
+
+const Capitolo2 = () => {
+  return (
+    <Swiper style={styles.wrapper} showsButtons={true} loop={false}>
+      <View style={styles.slide1}>
+      <Fiaba3 />
+      </View>
+      <View style={styles.slide2}>
+      <Fiaba4 />
+      </View>
+    </Swiper>
+  );
+};
+
 
 
 export default DrawerNavigator({
@@ -161,10 +323,10 @@ export default DrawerNavigator({
     screen: MyHomeScreen
   },
   Capitolo1: {
-    screen:(props) => <Fiabe {...props} inizio={0} />,
+    screen: Capitolo1
   },
   Capitolo2: {
-    screen:(props) => <Fiabe {...props} inizio={3} />,
+    screen: Capitolo2
   }
 });
 
