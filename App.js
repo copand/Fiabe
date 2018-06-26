@@ -11,7 +11,7 @@ import {
   Animated,
   Easing
 } from "react-native";
-import HTMLView from "react-native-htmlview";
+//import HTMLView from "react-native-htmlview";
 import {
   TabNavigator,
   StackNavigator,
@@ -42,15 +42,10 @@ class MyHomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={{ fontSize: 30 }}>QUI PAGINA INIZIALE</Text>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut
-          malesuada sem. Nam ut lobortis elit. Aliquam scelerisque est lacus,
-          vel hendrerit tortor commodo non. Quisque id neque quam. Sed nisi
-          lorem, iaculis et eleifend sit amet, fermentum vehicula nunc. Sed ac
-          ipsum sem.
-        </Text>
+           <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'powderblue'}} />
+        <View style={{flex: 2, backgroundColor: 'skyblue'}} />
+        <View style={{flex: 3, backgroundColor: 'steelblue'}} />
       </View>
       /*
       <Button
@@ -63,7 +58,52 @@ class MyHomeScreen extends React.Component {
 }
 
 class Fiabe extends React.Component {
-  
+
+	fiaba_1 = {
+		0 :{	value: require("./Images/fiabe/comelanostranonnetta.png"),
+			type:  "image", classe: 'imagemc'},
+		1 :{	value: "Come la nostra nonnetta,",
+			type:  "text"},
+		2 :{	value: "come la nostra vecchietta,",
+			type:  "text"},
+		3 :{	value: "ama i suoi nipotini",
+			type:  "text", classe: "test"},
+		4 :{	value: "a tutti dà i bacini",
+			type:  "text"},
+		5 :{	value: "carezze dà sulle teste",
+			type:  "text"},
+		6 :{	value: "tutti i nipoti lei veste.",
+			type:  "text"},
+    7 :{  value: require("./Images/fiabe/comelanostranonnetta.png"),
+      type:  "image", classe: 'imagemc'},
+    8 :{  value: "Come la nostra nonnetta,",
+      type:  "text"},
+    9 :{  value: "come la nostra vecchietta,",
+      type:  "text"},
+    10 :{  value: "ama i suoi nipotini",
+      type:  "text", classe: "test"},
+    11 :{  value: "a tutti dà i bacini",
+      type:  "text"},
+    12 :{  value: "carezze dà sulle teste",
+      type:  "text"},
+    13 :{  value: "tutti i nipoti lei veste.",
+      type:  "text"},
+    14 :{  value: require("./Images/fiabe/comelanostranonnetta.png"),
+      type:  "image", classe: 'imagemc'},
+    15 :{  value: "Come la nostra nonnetta,",
+      type:  "text"},
+    16 :{  value: "come la nostra vecchietta,",
+      type:  "text"},
+    17 :{  value: "ama i suoi nipotini",
+      type:  "text", classe: "test"},
+    18 :{  value: "a tutti dà i bacini",
+      type:  "text"},
+    19 :{  value: "carezze dà sulle teste",
+      type:  "text"},
+    20 :{  value: "tutti i nipoti lei veste.",
+      type:  "text"}
+	}
+
   htmlContent1 = `<img width=50 src="11" />
            <div>               <p>Come la nostra nonnetta,</p>
                <p>come la nostra vecchietta ,</p>
@@ -113,14 +153,16 @@ class Fiabe extends React.Component {
         <View style={styles.slide1}>
           <Text>CAPITOLO UNO</Text>
         </View>
-        <View style={styles.slide1}>
+        <View>
           <Fiaba
             mynavigation={this.props.navigation}
-            htmlContent={this.htmlContent1}
+            htmlContent={this.fiaba_1}
             idf="1"
           />
         </View>
-        <View style={styles.slide2}>
+
+	    {/*
+	   <View style={styles.slide2}>
           <Fiaba
             mynavigation={this.props.navigation}
             htmlContent={this.htmlContent2}
@@ -145,6 +187,7 @@ class Fiabe extends React.Component {
             idf="4"
           />
         </View>
+	*/}
       </Swiper>
     );
   }
@@ -240,7 +283,9 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     color: "#FF3366" // make links coloured pink
   },
-  wrapper: {},
+  wrapper: {
+    flex:1
+  },
   slide1: {
     flex: 1,
     justifyContent: "center",

@@ -1,5 +1,5 @@
 import React from "react";
-import HTMLView from "react-native-htmlview";
+//import HTMLView from "react-native-htmlview";
 import {
 	ScrollView,
 	StyleSheet,
@@ -15,49 +15,29 @@ import {
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import Images from '../Constants.js'
 
-function renderNode(node, index, siblings, parent, defaultRenderer) {
-	if (node.name == "img") {
-		const a = node.attribs;
-		const { src, height, width } = node.attribs;
-		console.log("test img");
-		console.log(Images);
-		console.log(Images[src]);
-		//src= String(".."+src);
-		const imageHeight = height || 300;
-		return (
-			<View key={index}>
-				<Image
-					style={{
-						width: width * PixelRatio.get(),
-						height: imageHeight * PixelRatio.get()
-					}}
-					source={Images[src]}
-				/>
-			</View>
-		);
-	}
-}
-
 export default class Fiaba extends React.Component {
-	static navigationOptions = {
-	};
 
 	render() {
 		const idf = this.props.idf;
-		const htmlContent = this.props.htmlContent;
+		const content = this.props.htmlContent;
+		console.log('CONTENT');
+		console.log(content);
+
+		//const image_path = this.props.htmlContent.image_path;
+		//console.log('IMAGE PATH');
+		//console.log(this.props.htmlContent.pippo);
+		//console.log(this.props.htmlContent.image_path);
 
 		return (
 			<ScrollView>
-				<View style={{ flexDirection: "row" }}>
+				<View style={{ flexDirection: "row", backgroundColor:'red' }}>
 					<View
 						style={{
 							flex: 1,
 							alignItems: "flex-start",
-							flexDirection: "row"
 						}}
 					>
 						<Button
-							style={{ width: "50%" }}
 							title="menu"
 							onPress={() =>
 								this.props.mynavigation.dispatch(
@@ -70,17 +50,30 @@ export default class Fiaba extends React.Component {
 						style={{
 							flex: 1,
 							alignItems: "flex-end",
-							flexDirection: "row"
 						}}
 					>
 						<Button
-							style={{ width: "50%" }}
 							title="Suono"
 							onPress={() => playSound(idf)}
 						/>
 					</View>
 				</View>
-				{/*
+
+				<View>
+					{Object.keys(content).map(function(key){
+						let classe = content[key].classe ? content[key].classe : "";
+						if(content[key].type == 'image'){
+							return	<Image style={styles[classe]} key={key}
+								resizeMode="contain"
+								source={content[key].value}
+							/>
+						}
+						else if(content[key].type == 'text'){
+							return <Text key={key} style={styles[classe]}>{content[key].value}</Text>						
+						}
+					})}
+
+					{/*
 					<Image
 						resizeMode="contain"
 						style={{
@@ -90,14 +83,17 @@ export default class Fiaba extends React.Component {
 							borderWidth: 1,
 							borderRadius: 75
 						}}
-						source={require("../comelanostranonnetta.png")}
+						source={image_path}
 					/>
-				*/}
-				<HTMLView
-					value={htmlContent}
-					renderNode={renderNode}
-					stylesheet={styles}
-				/>
+				
+					<Text>Come la nostra nonnetta,</Text>
+               				<Text>come la nostra vecchietta,</Text>
+               				<Text>ama i suoi nipotini,</Text>
+               				<Text>a tutti dà i bacini,</Text>
+               				<Text>carezze dà sulle teste,</Text>
+               				<Text>tutti i nipoti lei veste.</Text>
+					*/}
+				</View>
 				{/*
 				<Button
 					title="Prossima"
@@ -112,6 +108,23 @@ export default class Fiaba extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	imagemc:{
+		alignSelf: "center",
+		height: 150,
+		width: 150,
+		borderWidth: 1,
+		borderRadius: 75
+	},
+	imagemr:{
+		alignSelf: "flex-end",
+		height: 150,
+		width: 150,
+		borderWidth: 1,
+		borderRadius: 75
+	},
+	test:{
+		backgroundColor:"#FF3366"
+	},
 	icon: {
 		width: 24,
 		height: 24
