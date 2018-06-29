@@ -22,6 +22,8 @@ import Sound from "react-native-sound";
 import Swiper from "react-native-swiper";
 import Intro from "./BoardSimple";
 import Fiaba from "./Fiaba";
+import fiaba_1 from "./Contenuti/fiaba1.js";
+import fiaba_2 from "./Contenuti/fiaba2.js";
 
 var playing = false;
 var whoosh = null;
@@ -59,86 +61,6 @@ class MyHomeScreen extends React.Component {
 
 class Fiabe extends React.Component {
 
-	fiaba_1 = {
-		0 :{	value: require("./Images/fiabe/comelanostranonnetta.png"),
-			type:  "image", classe: 'imagemc'},
-		1 :{	value: "Come la nostra nonnetta,",
-			type:  "text"},
-		2 :{	value: "come la nostra vecchietta,",
-			type:  "text"},
-		3 :{	value: "ama i suoi nipotini",
-			type:  "text", classe: "test"},
-		4 :{	value: "a tutti dà i bacini",
-			type:  "text"},
-		5 :{	value: "carezze dà sulle teste",
-			type:  "text"},
-		6 :{	value: "tutti i nipoti lei veste.",
-			type:  "text"},
-    7 :{  value: require("./Images/fiabe/comelanostranonnetta.png"),
-      type:  "image", classe: 'imagemc'},
-    8 :{  value: "Come la nostra nonnetta,",
-      type:  "text"},
-    9 :{  value: "come la nostra vecchietta,",
-      type:  "text"},
-    10 :{  value: "ama i suoi nipotini",
-      type:  "text", classe: "test"},
-    11 :{  value: "a tutti dà i bacini",
-      type:  "text"},
-    12 :{  value: "carezze dà sulle teste",
-      type:  "text"},
-    13 :{  value: "tutti i nipoti lei veste.",
-      type:  "text"},
-    14 :{  value: require("./Images/fiabe/comelanostranonnetta.png"),
-      type:  "image", classe: 'imagemc'},
-    15 :{  value: "Come la nostra nonnetta,",
-      type:  "text"},
-    16 :{  value: "come la nostra vecchietta,",
-      type:  "text"},
-    17 :{  value: "ama i suoi nipotini",
-      type:  "text", classe: "test"},
-    18 :{  value: "a tutti dà i bacini",
-      type:  "text"},
-    19 :{  value: "carezze dà sulle teste",
-      type:  "text"},
-    20 :{  value: "tutti i nipoti lei veste.",
-      type:  "text"}
-	}
-
-  htmlContent1 = `<img width=50 src="11" />
-           <div>               <p>Come la nostra nonnetta,</p>
-               <p>come la nostra vecchietta ,</p>
-               <p>ama i suoi nipotini,</p>
-               <p>a tutti dà i bacini,</p>
-               <p>carezze dà sulle teste,</p>
-               <p>tutti i nipoti lei veste.</p>
-       </div>`;
-
- htmlContent15 = `<p><h2>Ciao</h2><h1>SONO FIABA 2</h1><b>Ciao</b>
- <div>               <p>Come la nostra nonnetta,</p>
-               <p>come la nostra vecchietta ,</p>
-               <p>ama i suoi nipotini,</p>
-               <p>a tutti dà i bacini,</p>
-               <p>carezze dà sulle teste,</p>
-               <p>tutti i nipoti lei veste.</p>
-           </div>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-  
-  htmlContent2 = `<p><h2>Ciao</h2><h1>SONO FIABA 2</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-  htmlContent3 = `<p><h2>Ciao</h2><h1>SONO FIABA 3</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-
-  htmlContent4 = `<p><h2>Ciao</h2><h1>SONO FIABA 4</h1><b>Ciao</b>
-  <img src="/foto.jpg" width=200 height=200 />
-  <img src="/foto.jpg" width=50 height=50 /><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu mi sit amet quam hendrerit sagittis. Etiam convallis justo non diam euismod commodo.</p>
-  <a href="http://jsdf.co">&hearts; nice job!</a></p>`;
-
   render() {
     return (
       <Swiper
@@ -156,8 +78,17 @@ class Fiabe extends React.Component {
         <View>
           <Fiaba
             mynavigation={this.props.navigation}
-            htmlContent={this.fiaba_1}
+            htmlContent={fiaba_1}
             idf="1"
+            sfondo={require("./Images/background.png")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_2}
+            idf="2"
+            sfondo={require("./Images/background.png")}
           />
         </View>
 

@@ -13,28 +13,37 @@ import {
 	Easing
 } from "react-native";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
-import Images from '../Constants.js'
+import Images from "../Constants.js";
 
 export default class Fiaba extends React.Component {
-
 	render() {
 		const idf = this.props.idf;
 		const content = this.props.htmlContent;
-		console.log('CONTENT');
-		console.log(content);
-
-		//const image_path = this.props.htmlContent.image_path;
-		//console.log('IMAGE PATH');
-		//console.log(this.props.htmlContent.pippo);
-		//console.log(this.props.htmlContent.image_path);
-
+ 		const resizeMode = 'cover';
 		return (
 			<ScrollView>
-				<View style={{ flexDirection: "row", backgroundColor:'red' }}>
+				<View
+					style={{
+						position: "absolute",
+						top: 0,
+						left: 0,
+						width: "100%",
+						height: "100%"
+					}}
+				>
+					<Image
+						style={{
+							flex: 1,
+							resizeMode
+						}}
+						source={this.props.sfondo}
+					/>
+				</View>
+				<View style={{ flexDirection: "row", backgroundColor: "red" }}>
 					<View
 						style={{
 							flex: 1,
-							alignItems: "flex-start",
+							alignItems: "flex-start"
 						}}
 					>
 						<Button
@@ -49,50 +58,35 @@ export default class Fiaba extends React.Component {
 					<View
 						style={{
 							flex: 1,
-							alignItems: "flex-end",
+							alignItems: "flex-end"
 						}}
 					>
-						<Button
-							title="Suono"
-							onPress={() => playSound(idf)}
-						/>
+						<Button title="Suono" onPress={() => playSound(idf)} />
 					</View>
 				</View>
 
 				<View>
-					{Object.keys(content).map(function(key){
-						let classe = content[key].classe ? content[key].classe : "";
-						if(content[key].type == 'image'){
-							return	<Image style={styles[classe]} key={key}
-								resizeMode="contain"
-								source={content[key].value}
-							/>
-						}
-						else if(content[key].type == 'text'){
-							return <Text key={key} style={styles[classe]}>{content[key].value}</Text>						
+					{Object.keys(content).map(function(key) {
+						let classe = content[key].classe
+							? content[key].classe
+							: "normale";
+						if (content[key].type == "image") {
+							return (
+								<Image
+									style={styles[classe]}
+									key={key}
+									resizeMode="contain"
+									source={content[key].value}
+								/>
+							);
+						} else if (content[key].type == "text") {
+							return (
+								<Text key={key} style={styles[classe]}>
+									{content[key].value}
+								</Text>
+							);
 						}
 					})}
-
-					{/*
-					<Image
-						resizeMode="contain"
-						style={{
-							alignSelf: "center",
-							height: 150,
-							width: 150,
-							borderWidth: 1,
-							borderRadius: 75
-						}}
-						source={image_path}
-					/>
-				
-					<Text>Come la nostra nonnetta,</Text>
-               				<Text>come la nostra vecchietta,</Text>
-               				<Text>ama i suoi nipotini,</Text>
-               				<Text>a tutti dà i bacini,</Text>
-               				<Text>carezze dà sulle teste,</Text>
-               				<Text>tutti i nipoti lei veste.</Text>
-					*/}
 				</View>
 				{/*
 				<Button
@@ -108,23 +102,30 @@ export default class Fiaba extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	imagemc:{
+	imagemc: {
 		alignSelf: "center",
 		height: 150,
 		width: 150,
 		borderWidth: 1,
 		borderRadius: 75
 	},
-	imagemr:{
+	imagemr: {
 		alignSelf: "flex-end",
 		height: 150,
 		width: 150,
 		borderWidth: 1,
 		borderRadius: 75
 	},
-	test:{
-		backgroundColor:"#FF3366"
+	test: {
+		backgroundColor: "#FF3366"
 	},
+	normale: {
+		color: "green"
+	},
+	backgroundImage: {
+    	flex: 1,
+    	resizeMode: 'cover', // or 'stretch'
+  	},
 	icon: {
 		width: 24,
 		height: 24
