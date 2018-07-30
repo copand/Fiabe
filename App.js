@@ -16,7 +16,8 @@ import {
   TabNavigator,
   StackNavigator,
   DrawerNavigator,
-  DrawerActions
+  DrawerActions,
+  createDrawerNavigator
 } from "react-navigation";
 import Sound from "react-native-sound";
 import Swiper from "react-native-swiper";
@@ -31,23 +32,21 @@ const { widthW } = Dimensions.get("window");
 
 class MyHomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: "Home",
-    /*
+    drawerLabel: "HomeCop",
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require("/comelanostranonnetta.png")}
+        source={require("./Images/fiabe/comelanostranonnetta.png")}
         style={[styles.icon, { tintColor: tintColor }]}
       />
     )
-    */
   };
 
   render() {
     return (
-           <View style={{flex: 1}}>
-        <View style={{flex: 1, backgroundColor: 'powderblue'}} />
-        <View style={{flex: 2, backgroundColor: 'skyblue'}} />
-        <View style={{flex: 3, backgroundColor: 'steelblue'}} />
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "powderblue" }} />
+        <View style={{ flex: 2, backgroundColor: "skyblue" }} />
+        <View style={{ flex: 3, backgroundColor: "steelblue" }} />
       </View>
       /*
       <Button
@@ -60,7 +59,6 @@ class MyHomeScreen extends React.Component {
 }
 
 class Fiabe extends React.Component {
-
   render() {
     return (
       <Swiper
@@ -92,8 +90,8 @@ class Fiabe extends React.Component {
           />
         </View>
 
-	    {/*
-	   <View style={styles.slide2}>
+        {/*
+     <View style={styles.slide2}>
           <Fiaba
             mynavigation={this.props.navigation}
             htmlContent={this.htmlContent2}
@@ -118,7 +116,7 @@ class Fiabe extends React.Component {
             idf="4"
           />
         </View>
-	*/}
+  */}
       </Swiper>
     );
   }
@@ -166,20 +164,47 @@ swiperIndexChanged = index => {
   playSound(index);
 };
 
-export default DrawerNavigator({
-  Intro: {
-    screen: Intro
+const CopDrawer = DrawerNavigator(
+  {
+    Intro: {
+      screen: Intro
+    },
+    Home: {
+      screen: MyHomeScreen
+    },
+    Capitolo1: {
+      screen: props => <Fiabe {...props} inizio={0} />
+    },
+    Capitolo2: {
+      screen: props => <Fiabe {...props} inizio={3} />
+    }
   },
-  Home: {
-    screen: MyHomeScreen
-  },
-  Capitolo1: {
-    screen: props => <Fiabe {...props} inizio={0} />
-  },
-  Capitolo2: {
-    screen: props => <Fiabe {...props} inizio={3} />
+  {
+    drawerPosition: "left",
+    drawerWidth: Dimensions.get("window").width / 2.0,
+    drawerBackgroundColor: "orange",
+    contentOptions: {
+      activeTintColor: "#d03036",
+      activeBackgroundColor: "rgba(0,0,0,0)",
+      inactiveBackgroundColor: "rgba(0,0,0,0)",
+      inactiveTintColor: "#545f7a",
+      style: {
+        marginVertical: 0
+      },
+      labelStyle: {
+        fontWeight: "bold",
+        fontFamily: "Roboto",
+        backgroundColor: "transparent"
+      }
+    }
   }
-});
+);
+
+export default class CopContainer extends React.Component {
+  render() {
+    return <CopDrawer />;
+  }
+}
 
 const transitionConfig = () => {
   return {
@@ -215,7 +240,7 @@ const styles = StyleSheet.create({
     color: "#FF3366" // make links coloured pink
   },
   wrapper: {
-    flex:1
+    flex: 1
   },
   slide1: {
     flex: 1,

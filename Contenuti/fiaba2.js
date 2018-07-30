@@ -1,5 +1,5 @@
 const contenuto = {
-    0 :{  value: require("./Images/fiabe/comelanostranonnetta.png"),
+    0 :{  value: require("../Images/fiabe/comelanostranonnetta.png"),
       type:  "image", classe: 'imagemc'},
     1 :{  value: "Come la nostra nonnetta,",
       type:  "text"},

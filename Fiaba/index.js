@@ -19,26 +19,11 @@ export default class Fiaba extends React.Component {
 	render() {
 		const idf = this.props.idf;
 		const content = this.props.htmlContent;
- 		const resizeMode = 'cover';
+		const resizeMode = "cover";
+		const {width, height} = Dimensions.get('window');
 		return (
 			<ScrollView>
-				<View
-					style={{
-						position: "absolute",
-						top: 0,
-						left: 0,
-						width: "100%",
-						height: "100%"
-					}}
-				>
-					<Image
-						style={{
-							flex: 1,
-							resizeMode
-						}}
-						source={this.props.sfondo}
-					/>
-				</View>
+
 				<View style={{ flexDirection: "row", backgroundColor: "red" }}>
 					<View
 						style={{
@@ -65,7 +50,29 @@ export default class Fiaba extends React.Component {
 					</View>
 				</View>
 
-				<View>
+				<View
+					style={{
+						minHeight: height
+					}}
+				>
+				<View
+					style={{
+						position:"absolute",
+						backgroundColor: "orange",
+						top:0,
+						left:0,
+						bottom:0,
+						right:0
+					}}
+				>
+					<Image
+						style={{
+							flex: 1,
+							resizeMode
+						}}
+						source={this.props.sfondo}
+					/>
+				</View>
 					{Object.keys(content).map(function(key) {
 						let classe = content[key].classe
 							? content[key].classe
@@ -123,9 +130,9 @@ const styles = StyleSheet.create({
 		color: "green"
 	},
 	backgroundImage: {
-    	flex: 1,
-    	resizeMode: 'cover', // or 'stretch'
-  	},
+		flex: 1,
+		resizeMode: "cover" // or 'stretch'
+	},
 	icon: {
 		width: 24,
 		height: 24
