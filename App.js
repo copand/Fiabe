@@ -78,7 +78,7 @@ class Fiabe extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_1}
             idf="1"
-            sfondo={require("./Images/background.png")}
+            sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
         <View>
@@ -86,7 +86,7 @@ class Fiabe extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_2}
             idf="2"
-            sfondo={require("./Images/background.png")}
+            sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
 
