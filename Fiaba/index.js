@@ -53,7 +53,7 @@ export default class Fiaba extends React.Component {
 							alignItems: "flex-end"
 						}}
 					>
-					<TouchableOpacity onPress={() => playSoud(idf)}>
+					<TouchableOpacity onPress={() => playSound(idf)}>
 				 	   <Icon name="volume-up" size={50} style={{color:'black', marginLeft:10}} />
 				 	</TouchableOpacity>
 					</View>

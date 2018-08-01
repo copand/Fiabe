@@ -25,38 +25,12 @@ import Intro from "./BoardSimple";
 import Fiaba from "./Fiaba";
 import fiaba_1 from "./Contenuti/fiaba1.js";
 import fiaba_2 from "./Contenuti/fiaba2.js";
+import MyHomeScreen from "./Contenuti/Indice.js";
 
 var playing = false;
 var whoosh = null;
 const { widthW } = Dimensions.get("window");
 
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: "HomeCop",
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require("./Images/fiabe/comelanostranonnetta.png")}
-        style={[styles.icon, { tintColor: tintColor }]}
-      />
-    )
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, backgroundColor: "powderblue" }} />
-        <View style={{ flex: 2, backgroundColor: "skyblue" }} />
-        <View style={{ flex: 3, backgroundColor: "steelblue" }} />
-      </View>
-      /*
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-      */
-    );
-  }
-}
 
 class Fiabe extends React.Component {
   render() {
@@ -164,19 +138,21 @@ swiperIndexChanged = index => {
   playSound(index);
 };
 
+capitolo = capitolo => {
+  //this.props.navigation.navigate("Fiaba1")
+  //console.log('salto al capitolo ' + capitolo);
+}
+
 const CopDrawer = DrawerNavigator(
   {
     Intro: {
       screen: Intro
     },
     Home: {
-      screen: MyHomeScreen
+      screen: props => <MyHomeScreen {...props} capitolo={this.capitolo} />
     },
-    Capitolo1: {
+    Fiabe: {
       screen: props => <Fiabe {...props} inizio={0} />
-    },
-    Capitolo2: {
-      screen: props => <Fiabe {...props} inizio={3} />
     }
   },
   {
