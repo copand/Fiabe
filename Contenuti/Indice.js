@@ -27,13 +27,11 @@ export default class MyHomeScreen extends React.Component {
 			)
 	};
 
-	onPress = () => {
-		this.props.capitolo(1);
-		/*
-		console.log(this.props.navigation);
-		this.props.navigation.navigate("Fiaba1")
-		console.log('finito');
-		*/
+	onPress = (fiaba) => {
+		this.props.capitolo(fiaba);
+		//console.log(this.props.navigation);
+		//this.props.navigation.navigate("Fiabe",{fiabe: fiaba})
+		//console.log('finito');
 	}
 
 	render() {
@@ -49,7 +47,7 @@ export default class MyHomeScreen extends React.Component {
 					<View style={styles.container}>
 					<TouchableOpacity
 					style={styles.button}
-					onPress={this.onPress}
+					onPress={() => this.onPress(1)}
 					>
 					 <Text style={styles.grande}>Persone e famiglia</Text>
 					 <Text style={styles.piccolo}>9 filastrocche</Text>

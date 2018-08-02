@@ -17,7 +17,8 @@ import {
   StackNavigator,
   DrawerNavigator,
   DrawerActions,
-  createDrawerNavigator
+  createDrawerNavigator,
+  createStackNavigator
 } from "react-navigation";
 import Sound from "react-native-sound";
 import Swiper from "react-native-swiper";
@@ -33,9 +34,37 @@ const { widthW } = Dimensions.get("window");
 
 
 class Fiabe extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.goToFiaba = this.goToFiaba.bind(this);
+    const navParams = props.navigation.state.params;
+    console.log('costruttore fiabe');
+    console.log(navParams);
+    if(navParams && navParams.fiabe) {
+      console.log('vado alla fiaba');
+      //this.goToFiaba(navParams.fiabe);
+      //TODO da dinamicizzare in ComponentDidMount
+      setTimeout(() => {this.goToFiaba(navParams.fiabe)}, 5000)
+    }
+  }
+
+  goToFiaba(fiaba) {
+    console.log('sono in goToFiaba ' + fiaba);
+    console.log(this.refs);
+    this.refs.sliderX.scrollBy(fiaba);
+  }
+
+  capitolo = capitolo => {
+    //this.props.navigation.navigate("Fiaba1")
+    console.log('salto al capitolo da swyper ' + capitolo);
+  }
+
   render() {
     return (
       <Swiper
+        ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
         showsButtons={true}
@@ -44,6 +73,7 @@ class Fiabe extends React.Component {
           swiperIndexChanged(index);
         }}
       >
+        <MyHomeScreen capitolo={this.goToFiaba} />
         <View style={styles.slide1}>
           <Text>CAPITOLO UNO</Text>
         </View>
@@ -143,6 +173,29 @@ capitolo = capitolo => {
   //console.log('salto al capitolo ' + capitolo);
 }
 
+const InnerNavigator = DrawerNavigator ({
+   Landing: { screen: Intro},
+    Fiabe: {
+      screen: props => <Fiabe {...props} inizio={0} />
+    }
+});
+
+const SimpleApp = StackNavigator({  
+   Indice: {screen: InnerNavigator}
+});
+
+/*
+const AppCop = createStackNavigator({
+
+    Home: {
+      screen: props => <MyHomeScreen {...props} capitolo={this.capitolo} />
+    },
+    Fiabe: {
+      screen: props => <Fiabe {...props} inizio={0} />
+    }
+});
+
+
 const CopDrawer = DrawerNavigator(
   {
     Intro: {
@@ -150,9 +203,6 @@ const CopDrawer = DrawerNavigator(
     },
     Home: {
       screen: props => <MyHomeScreen {...props} capitolo={this.capitolo} />
-    },
-    Fiabe: {
-      screen: props => <Fiabe {...props} inizio={0} />
     }
   },
   {
@@ -175,10 +225,10 @@ const CopDrawer = DrawerNavigator(
     }
   }
 );
-
+*/
 export default class CopContainer extends React.Component {
   render() {
-    return <CopDrawer />;
+    return <SimpleApp />;
   }
 }
 
