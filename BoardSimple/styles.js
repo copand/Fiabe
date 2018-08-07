@@ -5,12 +5,11 @@ const PAGE_HEIGHT = Dimensions.get('window').height;
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(239, 78, 78, 1)',
   },
   background: {
     width: PAGE_WIDTH,
-    resizeMode: 'contain',
-    opacity: 0.7,
+    resizeMode: 'cover',
+    opacity: 0.9,
     position: 'absolute'
   },
   title: {
@@ -20,11 +19,60 @@ export default StyleSheet.create({
     letterSpacing: 0.5,
     textAlign: 'center',
   },
-  desc: {
+  vai: {
     fontSize: PAGE_WIDTH / 20,
-    color: 'rgba(255, 255, 255, 1)',
+    color: '#3f77ba',
+    backgroundColor: 'transparent',
+    marginTop: 120,
+    lineHeight: 25,
+  },
+  desc: {
+    fontSize: PAGE_WIDTH / 17,
+    color: '#3f77ba',
+    backgroundColor: 'transparent',
+    marginTop: 60,
+    lineHeight: 25,
+  },
+  desc1: {
+    fontSize: PAGE_WIDTH / 20,
+    color: '#3f77ba',
     backgroundColor: 'transparent',
     marginTop: 20,
+    lineHeight: 25,
+  },
+  desc2: {
+    fontSize: PAGE_WIDTH / 17,
+    color: '#000000',
+    backgroundColor: 'transparent',
+    marginTop: 20,
+    lineHeight: 25,
+  },
+  desc3: {
+    fontSize: PAGE_WIDTH / 25,
+    color: '#000000',
+    backgroundColor: 'transparent',
+    marginTop: 20,
+    lineHeight: 25,
+  },
+  desc4: {
+    fontSize: PAGE_WIDTH / 17,
+    color: '#3f77ba',
+    backgroundColor: 'transparent',
+    marginTop: 20,
+    lineHeight: 25,
+  },
+  desc5: {
+    fontSize: PAGE_WIDTH / 25,
+    color: '#000000',
+    backgroundColor: 'transparent',
+    marginTop: 20,
+    lineHeight: 25,
+  },
+  desc6: {
+    fontSize: PAGE_WIDTH / 17,
+    color: '#000000',
+    backgroundColor: 'transparent',
+    marginTop: 10,
     lineHeight: 25,
   },
   page: {
@@ -37,13 +85,19 @@ export default StyleSheet.create({
   },
   footer: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 50,
     right: 50
   },
   icon: {
     position: 'absolute',
-    top: 100,
-    width: 40 * PAGE_WIDTH / 100,
+    top: 150,
+    width: 80 * PAGE_WIDTH / 100,
+    resizeMode: 'contain',
+  },
+  icon1: {
+    position: 'absolute',
+    top: 250,
+    width: 50 * PAGE_WIDTH / 100,
     resizeMode: 'contain',
   },
   dot: {

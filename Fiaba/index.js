@@ -44,7 +44,7 @@ export default class Fiaba extends React.Component {
 								this.props.mynavigation.dispatch(
 									DrawerActions.openDrawer()
 								)}>
-				 	   <Icon name="bars" size={50} style={{color:'black', marginLeft:10}} />
+				 	   <Icon name="bars" size={40} style={{color:'gray', marginLeft:10, marginTop:10}} />
 				 	</TouchableOpacity>
 					</View>
 					<View
@@ -54,7 +54,7 @@ export default class Fiaba extends React.Component {
 						}}
 					>
 					<TouchableOpacity onPress={() => playSound(idf)}>
-				 	   <Icon name="volume-up" size={50} style={{color:'black', marginLeft:10}} />
+				 	   <Icon name="volume-up" size={40} style={{color:'gray', marginRight:10, marginTop:10}} />
 				 	</TouchableOpacity>
 					</View>
 				</View>
@@ -100,10 +100,13 @@ export default class Fiaba extends React.Component {
 const styles = StyleSheet.create({
 	imagemc: {
 		alignSelf: "center",
-		height: 150,
-		width: 150,
-		borderWidth: 1,
-		borderRadius: 75
+		marginBottom: 30,
+		width: width * 0.9,
+	},
+	imageoc: {
+		alignSelf: "center",
+		marginBottom: 30,
+		width: width * 0.9,
 	},
 	imagemr: {
 		alignSelf: "flex-end",
@@ -111,6 +114,22 @@ const styles = StyleSheet.create({
 		width: 150,
 		borderWidth: 1,
 		borderRadius: 75
+	},
+	testomt:{
+		marginTop: 25,
+		fontFamily: 'sans-serif',
+		fontSize: 20,
+		fontStyle:'italic',
+		fontWeight: '200',
+		letterSpacing: 2,
+	},
+	testomb:{
+		marginBottom: 25,
+		fontFamily: 'sans-serif',
+		fontSize: 20,
+		fontStyle:'italic',
+		fontWeight: '200',
+		letterSpacing: 2,
 	},
 	test: {
 		fontFamily: 'sans-serif',
@@ -139,7 +158,7 @@ const styles = StyleSheet.create({
 		color: "#FF3366" // make links coloured pink
 	},
 	contenuto: {
-		paddingTop: height * 0.1,
+		paddingTop: height * 0.05,
 		justifyContent: 'center', 
 		alignItems: 'center' 
 	}

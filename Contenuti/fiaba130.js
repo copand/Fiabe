@@ -1,0 +1,28 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/130_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "Per la vallata senza bauli",
+      type:  "text"},
+    2 :{  value: "passa uno rosso sopra un bue.",
+      type:  "text"},
+    3 :{  value: "Quando lui sale sul monte grosso,",
+      type:  "text", classe: "test"},
+    4 :{  value: "vede un altro uomo rosso:",
+      type:  "text"},
+    5 :{  value: "“Come la barba hai colorato?”",
+      type:  "text"},
+    6 :{  value: require("../Images/fiabe/130_02-img.jpg"),
+      type:  "image", classe: 'imagemc'},
+    7 :{  value: "“Né tinta né altro ho usato,",
+      type:  "text"},
+    8 :{  value: "sotto il sole stavo sdraiato,",
+      type:  "text"},
+    9 :{  value: "la barba su’ avevo tirato!",
+      type:  "text", classe: "test"},
+    10 :{  value: "Quando il sole si è alzato",
+      type:  "text"},
+    11 :{  value: "la barba mia mi ha bruciato”.",
+      type:  "text"},
+  }
+
+export default contenuto

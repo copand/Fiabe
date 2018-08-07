@@ -44,6 +44,7 @@ export default class MyHomeScreen extends React.Component {
 					style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
 					source={require("../Images/bg_01.jpg")}
 					>
+					<View style={styles.container1}>
 					<View style={styles.container}>
 					<TouchableOpacity
 					style={styles.button}
@@ -53,6 +54,52 @@ export default class MyHomeScreen extends React.Component {
 					 <Text style={styles.piccolo}>9 filastrocche</Text>
        				</TouchableOpacity>
 					</View>
+
+
+					<View style={styles.container}>
+					<TouchableOpacity
+					style={styles.button}
+					onPress={() => this.onPress(4)}
+					>
+					 <Text style={styles.grande}>Animali</Text>
+					 <Text style={styles.piccolo}>15 filastrocche</Text>
+       				</TouchableOpacity>
+					</View>
+
+					<View style={styles.container}>
+					<TouchableOpacity
+					style={styles.button}
+					onPress={() => this.onPress(4)}
+					>
+					 <Text style={styles.grande}>Giochi da cortile, conti e ricami</Text>
+					 <Text style={styles.piccolo}>10 filastrocche</Text>
+       				</TouchableOpacity>
+					</View>
+
+
+					<View style={styles.container}>
+					<TouchableOpacity
+					style={styles.button}
+					onPress={() => this.onPress(4)}
+					>
+					 <Text style={styles.grande}>Buona notte, baiu bai</Text>
+					 <Text style={styles.piccolo}>8 filastrocche</Text>
+       				</TouchableOpacity>
+					</View>
+
+					<View style={styles.container}>
+					<TouchableOpacity
+					style={styles.button}
+					onPress={() => this.onPress(4)}
+					>
+					 <Text style={styles.grande}>Frottole</Text>
+					 <Text style={styles.piccolo}>7 filastrocche</Text>
+       				</TouchableOpacity>
+					</View>
+
+					</View>
+
+
 					</ImageBackground>
 					</View>
 					);
@@ -60,6 +107,13 @@ export default class MyHomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		marginTop:10
+	},
+	container1: {
+		marginTop:80,
+		marginLeft:20
+	},
 	icon: {
 		width: 24,
 		height: 24

@@ -1,0 +1,33 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/218_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "La figliola ha da fare",
+      type:  "text"},
+    2 :{  value: "e in casa aiutare:",
+      type:  "text"},
+    3 :{  value: "lì c’è il pozzo, qui c’è il secchio,",
+      type:  "text", classe: "test"},
+    4 :{  value: "ma è grande lui parecchio.",
+      type:  "text"},
+    5 :{  value: "“Per andar così lontano",
+      type:  "text", classe: "testomt"},
+    6 :{  value: "e portarmelo in mano",
+      type:  "text"},
+    7 :{  value: "devo crescere ancora,",
+      type:  "text"},
+    8 :{  value: "non lo posso fare ora”.",
+      type:  "text", classe: "testomb"},
+    9 :{  value: "Quando nostra Katia cresce,",
+      type:  "text"},
+    10 :{  value: "a portarselo riesce,",
+      type:  "text"},
+    11 :{  value: "lei dal pozzo può andare",
+      type:  "text"},
+    12 :{  value: "e dell’acqua qui portare.",
+      type:  "text"},
+    13 :{  value: require("../Images/fiabe/218_02-img.png"),
+      type:  "image", classe: 'imagemc'},
+
+  }
+
+export default contenuto

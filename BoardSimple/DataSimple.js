@@ -1,28 +1,16 @@
 export default [
   {
-    title: 'Lorem Ipsum',
-    description: "Cop4353 Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    iconImage: require('@images/intro/flower-pot.png'),
+    title: 'filastrocche russe',
+    description: "filastrocche russe",
+    iconImage: require('../Images/cuc-logo.png'),
+    iconImage1: require('../Images/fiore_bg_01.png'),
   },
   {
     title: 'Consectetur',
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    iconImage: require('@images/intro/footprints.png'),
-  },
-  {
-    title: 'Adipisicing elitt',
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    iconImage: require('@images/intro/happy-sun.png'),
-  },
-
-  {
-    title: 'sit amet',
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    iconImage: require('@images/intro/holly.png'),
-  },
-  {
-    title: 'Sed do eiusmod',
-    description: "Cop122 Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-    iconImage: require('@images/intro/kite.png'),
+    description2: "Folclore russo per bambini",
+    description3: "in lingua italiana",
+    description4: "- PARTE DUE -",
+    description5: "Traduttrice:",
+    description6: "ZAKHAROVA VIKTORIYA",
   },
 ]
