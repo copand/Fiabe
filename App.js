@@ -38,6 +38,7 @@ import fiaba_230 from "./Contenuti/fiaba230.js";
 import MyHomeScreen from "./Contenuti/Indice.js";
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
+var globalIndex = -1;
 var playing = false;
 var whoosh = null;
 const { widthW } = Dimensions.get("window");
@@ -47,6 +48,7 @@ class Fiabe extends React.Component {
     super(props);
     this.state = {};
     this.goToFiaba = this.goToFiaba.bind(this);
+    this.goToIndice = this.goToIndice.bind(this);
     const navParams = props.navigation.state.params;
     console.log("costruttore fiabe");
     console.log(navParams);
@@ -62,8 +64,14 @@ class Fiabe extends React.Component {
 
   goToFiaba(fiaba) {
     console.log("sono in goToFiaba " + fiaba);
-    console.log(this.refs);
     this.refs.sliderX.scrollBy(fiaba, false);
+  }
+
+
+  goToIndice() {
+    console.log('eccolo');
+    console.log(globalIndex);
+    this.refs.sliderX.scrollBy( -globalIndex, false);
   }
 
   capitolo = capitolo => {
@@ -84,9 +92,14 @@ class Fiabe extends React.Component {
           swiperIndexChanged(index);
         }}
       >
-        <MyHomeScreen capitolo={this.goToFiaba} />
+        <MyHomeScreen 
+        goToIndice={this.goToIndice}
+        capitolo={this.goToFiaba} 
+        />
         <View>
           <Fiaba
+            slider={this.refs.sliderX}
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_97}
             idf="97"
@@ -95,6 +108,7 @@ class Fiabe extends React.Component {
         </View>
         <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_116}
             idf="116"
@@ -103,6 +117,7 @@ class Fiabe extends React.Component {
         </View>
         <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_130}
             idf="130"
@@ -111,6 +126,7 @@ class Fiabe extends React.Component {
         </View>
        <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_132}
             idf="132"
@@ -119,6 +135,7 @@ class Fiabe extends React.Component {
         </View>
         <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_160}
             idf="160"
@@ -127,6 +144,7 @@ class Fiabe extends React.Component {
         </View>
       <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_161}
             idf="161"
@@ -135,6 +153,7 @@ class Fiabe extends React.Component {
       </View>
       <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_213}
             idf="213"
@@ -143,6 +162,7 @@ class Fiabe extends React.Component {
       </View>
       <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_218}
             idf="218"
@@ -151,6 +171,7 @@ class Fiabe extends React.Component {
       </View>
       <View>
           <Fiaba
+            goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_230}
             idf="230"
@@ -172,7 +193,8 @@ playSound = idf => {
   console.log("playSound fiaba " + idf);
   // Load the sound file 'whoosh.mp3' from the app bundle
   // See notes below about preloading sounds within initialization code below.
-  $sound = idf == 0 ? "genoa.mp3" : "elevator.mp3";
+  $sound = idf == 0 ? "loop.mp3" : "genoa.mp3";
+  //$sound = idf == 0 ? "loop.mp3" : idf+".mp3";
   whoosh = new Sound($sound, Sound.MAIN_BUNDLE, error => {
     if (error) {
       console.log("failed to load the sound", error);
@@ -201,6 +223,9 @@ playSound = idf => {
 
 swiperIndexChanged = index => {
   console.log("swiperIndexChanged", "index", index);
+  this.currentSlideIndex = index;
+  globalIndex = index;
+  console.log(this.currentSlideIndex);
   //stoppiamo suono se attivo
   playSound(index);
 };
