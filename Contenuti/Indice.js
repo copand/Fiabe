@@ -12,13 +12,22 @@ import {
 	Text,
 	Animated,
 	Easing,
-	SectionList
+	SectionList,
+	Switch
 } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
 const { width, height } = Dimensions.get("window");
 
 export default class MyHomeScreen extends React.Component {
+
+	constructor() {
+		super();
+		this.state = {
+			switchValue: false
+		};
+	}
+
 	onPress = fiaba => {
 		this.props.capitolo(fiaba);
 		//console.log(this.props.navigation);
@@ -27,10 +36,22 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	playAll = () => {
-		playSound(0);
+		this.props.capitolo(-1);
 		//console.log(this.props.navigation);
 		//this.props.navigation.navigate("Fiabe",{fiabe: fiaba})
 		//console.log('finito');
+	};
+
+	toggleSwitch = value => {
+		console.log("Switch is: " + value);
+		this.setState({ switchValue: value });
+		if(value == true){
+			//playSound(-1);
+			this.props.capitolo(1);
+		}
+		else if(value == false){
+			playSound(-1);
+		}
 	};
 
 	render() {
@@ -112,13 +133,28 @@ export default class MyHomeScreen extends React.Component {
 					</View>
 
 					<View style={styles.audio}>
-						<TouchableOpacity onPress={() => this.playAll()}>
+					<TouchableOpacity onPress={() => this.playAll()}>
 							<View style={styles.button1}>
-								<Icon style={{flex:1}} name="headphones" size={40} />
-								<Text style={{flex:1}} >Ascolta tutte le fiabe</Text>
+								<Icon
+									style={{ flex: 1 }}
+									name="headphones"
+									size={40}
+								/>
+								<Text style={{ flex: 1 }}>
+									Ascolta tutte le fiabe
+								</Text>
 							</View>
-						</TouchableOpacity>
+					</TouchableOpacity>
+					
 					</View>
+					{/*
+					<View style={styles.switch}>
+						<Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
+						<Text style={{ flex: 1 }}>
+									Ascolta tutte le fiabe
+						</Text>
+					</View>
+					*/}
 				</ImageBackground>
 			</View>
 		);
@@ -126,16 +162,21 @@ export default class MyHomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	switch: {
+		flex: 1,
+		alignItems: "center",
+		marginTop: 100
+	},
 	audio: {
-		flex:1,
+		flex: 1,
 		position: "absolute",
 		bottom: 30,
-		width:'100%'
+		width: "100%"
 	},
 	button1: {
 		flexDirection: "column",
-		justifyContent: 'center',
-        alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	container: {
 		marginTop: 10

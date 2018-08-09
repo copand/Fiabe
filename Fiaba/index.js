@@ -74,6 +74,25 @@ export default class Fiaba extends React.Component {
 							<View
 								style={{
 									flex: 1,
+									alignItems: "center"
+								}}
+							>
+								<TouchableOpacity
+									onPress={() => this.indice()}
+								>
+									<Icon
+										name="home"
+										size={40}
+										style={{
+											color: "gray",
+											marginTop: 10
+										}}
+									/>
+								</TouchableOpacity>
+							</View>
+							<View
+								style={{
+									flex: 1,
 									alignItems: "flex-end"
 								}}
 							>
@@ -116,12 +135,15 @@ export default class Fiaba extends React.Component {
 								}
 							})}
 						</View>
-
+						<View style={styles.footer}>
+						</View>
+						{/*
 						<View style={styles.indice}>
 							<TouchableOpacity onPress={() => this.indice()}>
 								<Text style={styles.grande}>Indice</Text>
 							</TouchableOpacity>
 						</View>
+						*/}
 					</ScrollView>
 				</ImageBackground>
 			</View>
@@ -132,13 +154,13 @@ export default class Fiaba extends React.Component {
 const styles = StyleSheet.create({
 	imagemc: {
 		alignSelf: "center",
-		marginBottom: 30,
-		width: width * 0.9
+		marginBottom: 20,
+		width: width * 0.85
 	},
 	imageoc: {
 		alignSelf: "center",
-		marginBottom: 30,
-		width: width * 0.9
+		marginBottom: 20,
+		width: width * 0.85
 	},
 	imagemr: {
 		alignSelf: "flex-end",
@@ -195,6 +217,9 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	indice: {
+		marginBottom: 50,
+	},
+	footer: {
 		marginBottom: 50,
 	}
 });

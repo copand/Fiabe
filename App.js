@@ -36,9 +36,11 @@ import fiaba_218 from "./Contenuti/fiaba218.js";
 import fiaba_230 from "./Contenuti/fiaba230.js";
 // capitolo2
 import MyHomeScreen from "./Contenuti/Indice.js";
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 
+var indexTOIDF = [0,97,116,130,132,160,161,213,218,230];
 var globalIndex = -1;
+var globalAudio = false;
 var playing = false;
 var whoosh = null;
 const { widthW } = Dimensions.get("window");
@@ -67,16 +69,22 @@ class Fiabe extends React.Component {
     this.refs.sliderX.scrollBy(fiaba, false);
   }
 
-
   goToIndice() {
-    console.log('eccolo');
+    console.log("eccolo");
     console.log(globalIndex);
-    this.refs.sliderX.scrollBy( -globalIndex, false);
+    this.refs.sliderX.scrollBy(-globalIndex, false);
   }
 
   capitolo = capitolo => {
-    //this.props.navigation.navigate("Fiaba1")
-    console.log("salto al capitolo da swyper " + capitolo);
+    if (capitolo == -1) {
+      //this.props.navigation.navigate("Fiaba1")
+      globalAudio = true;
+      console.log("capitolo globalAudio");
+      console.log(globalAudio);
+      playSound(-1);
+    }
+    this.refs.sliderX.scrollBy(1, false);
+    //qui inizia col playall, mettiamo un flag per inibire audio singole fiabe
   };
 
   render() {
@@ -92,10 +100,7 @@ class Fiabe extends React.Component {
           swiperIndexChanged(index);
         }}
       >
-        <MyHomeScreen 
-        goToIndice={this.goToIndice}
-        capitolo={this.goToFiaba} 
-        />
+        <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} />
         <View>
           <Fiaba
             slider={this.refs.sliderX}
@@ -124,7 +129,7 @@ class Fiabe extends React.Component {
             sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
-       <View>
+        <View>
           <Fiaba
             goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
@@ -142,7 +147,7 @@ class Fiabe extends React.Component {
             sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
-      <View>
+        <View>
           <Fiaba
             goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
@@ -150,8 +155,8 @@ class Fiabe extends React.Component {
             idf="161"
             sfondo={require("./Images/bg_01.jpg")}
           />
-      </View>
-      <View>
+        </View>
+        <View>
           <Fiaba
             goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
@@ -159,8 +164,8 @@ class Fiabe extends React.Component {
             idf="213"
             sfondo={require("./Images/bg_01.jpg")}
           />
-      </View>
-      <View>
+        </View>
+        <View>
           <Fiaba
             goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
@@ -168,8 +173,8 @@ class Fiabe extends React.Component {
             idf="218"
             sfondo={require("./Images/bg_01.jpg")}
           />
-      </View>
-      <View>
+        </View>
+        <View>
           <Fiaba
             goToIndice={this.goToIndice}
             mynavigation={this.props.navigation}
@@ -177,8 +182,7 @@ class Fiabe extends React.Component {
             idf="230"
             sfondo={require("./Images/bg_01.jpg")}
           />
-      </View>
- 
+        </View>
       </Swiper>
     );
   }
@@ -186,14 +190,19 @@ class Fiabe extends React.Component {
 
 playSound = idf => {
   // Enable playback in silence mode
-  if (playing) {
+  if (playing && idf == -1) {
+    console.log("entro");
     whoosh.stop();
-  }
+    globalAudio = false;
+    playing = false;
+    return;
+  } else if (playing) whoosh.stop();
   Sound.setCategory("Playback");
   console.log("playSound fiaba " + idf);
   // Load the sound file 'whoosh.mp3' from the app bundle
   // See notes below about preloading sounds within initialization code below.
-  $sound = idf == 0 ? "loop.mp3" : "genoa.mp3";
+  $sound = idf == -1 ? "loop.mp3" : "f" + idf + ".mp3";
+  console.log("playSound fiaba " + $sound);
   //$sound = idf == 0 ? "loop.mp3" : idf+".mp3";
   whoosh = new Sound($sound, Sound.MAIN_BUNDLE, error => {
     if (error) {
@@ -225,14 +234,12 @@ swiperIndexChanged = index => {
   console.log("swiperIndexChanged", "index", index);
   this.currentSlideIndex = index;
   globalIndex = index;
-  console.log(this.currentSlideIndex);
-  //stoppiamo suono se attivo
-  playSound(index);
-};
-
-capitolo = capitolo => {
-  //this.props.navigation.navigate("Fiaba1")
-  //console.log('salto al capitolo ' + capitolo);
+  let idf = indexTOIDF[index];
+  //se non è attivo globalAudio play singola fiaba
+  console.log("globalAudio");
+  console.log(globalAudio);
+  if (!globalAudio) 
+    playSound(idf);
 };
 
 const InnerNavigator = DrawerNavigator(
@@ -240,8 +247,12 @@ const InnerNavigator = DrawerNavigator(
     Intro: {
       screen: Intro,
       navigationOptions: {
-        drawerIcon: ({tintColor}) => (
-             <Icon name="home" size={25} style={{color:tintColor,marginLeft:0}} />
+        drawerIcon: ({ tintColor }) => (
+          <Icon
+            name="home"
+            size={25}
+            style={{ color: tintColor, marginLeft: 0 }}
+          />
         )
       }
     },
@@ -249,7 +260,11 @@ const InnerNavigator = DrawerNavigator(
       screen: props => <Fiabe {...props} inizio={0} />,
       navigationOptions: {
         drawerIcon: ({ tintColor }) => (
-             <Icon name="bars" size={25} style={{color:tintColor,marginLeft:0}} />
+          <Icon
+            name="bars"
+            size={25}
+            style={{ color: tintColor, marginLeft: 0 }}
+          />
         )
       }
     }
