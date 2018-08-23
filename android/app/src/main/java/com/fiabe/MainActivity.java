@@ -1,4 +1,4 @@
-package com.fiabe;
+package it.netkomgroup.fiabe;
 
 import com.facebook.react.ReactActivity;
 
