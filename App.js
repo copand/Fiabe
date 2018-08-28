@@ -35,10 +35,27 @@ import fiaba_213 from "./Contenuti/fiaba213.js";
 import fiaba_218 from "./Contenuti/fiaba218.js";
 import fiaba_230 from "./Contenuti/fiaba230.js";
 // capitolo2
+import fiaba_111 from "./Contenuti/fiaba111.js";
+import fiaba_118 from "./Contenuti/fiaba118.js";
+import fiaba_121 from "./Contenuti/fiaba121.js";
+import fiaba_134 from "./Contenuti/fiaba134.js";
+import fiaba_162 from "./Contenuti/fiaba162.js";
+import fiaba_163 from "./Contenuti/fiaba163.js";
+import fiaba_164 from "./Contenuti/fiaba164.js";
+import fiaba_169 from "./Contenuti/fiaba169.js";
+import fiaba_178 from "./Contenuti/fiaba178.js";
+import fiaba_184 from "./Contenuti/fiaba184.js";
+import fiaba_234 from "./Contenuti/fiaba234.js";
+import fiaba_239 from "./Contenuti/fiaba239.js";
+import fiaba_243 from "./Contenuti/fiaba243.js";
+import fiaba_252 from "./Contenuti/fiaba252.js";
+import fiaba_270 from "./Contenuti/fiaba270.js";
+
+
 import MyHomeScreen from "./Contenuti/Indice.js";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
-var indexTOIDF = [0,97,116,130,132,160,161,213,218,230];
+var indexTOIDF = [0,97,116,130,132,160,161,213,218,230,111,118,121,134,162,163,164,169,178,184,234,239,243,252,270];
 var globalIndex = -1;
 var globalAudio = false;
 var playing = false;
@@ -70,8 +87,6 @@ class Fiabe extends React.Component {
   }
 
   goToIndice() {
-    console.log("eccolo");
-    console.log(globalIndex);
     this.refs.sliderX.scrollBy(-globalIndex, false);
   }
 
@@ -83,7 +98,7 @@ class Fiabe extends React.Component {
       console.log(globalAudio);
       playSound(-1);
     }
-    this.refs.sliderX.scrollBy(1, false);
+    this.refs.sliderX.scrollBy(capitolo, false);
     //qui inizia col playall, mettiamo un flag per inibire audio singole fiabe
   };
 
@@ -183,6 +198,141 @@ class Fiabe extends React.Component {
             sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_111}
+            idf="111"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+         <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_118}
+            idf="118"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_121}
+            idf="121"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_134}
+            idf="134"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_162}
+            idf="162"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+         <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_163}
+            idf="163"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+       <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_164}
+            idf="164"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+       <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_169}
+            idf="169"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_178}
+            idf="178"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_184}
+            idf="184"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_234}
+            idf="234"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_239}
+            idf="239"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_243}
+            idf="243"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_252}
+            idf="252"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_270}
+            idf="270"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
       </Swiper>
     );
   }
@@ -235,6 +385,7 @@ swiperIndexChanged = index => {
   this.currentSlideIndex = index;
   globalIndex = index;
   let idf = indexTOIDF[index];
+  console.log('idf', idf);
   //se non è attivo globalAudio play singola fiaba
   console.log("globalAudio");
   console.log(globalAudio);

@@ -1,0 +1,28 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/134_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "Dal signore lavoravo,",
+      type:  "text"},
+    2 :{  value: "poco, poco guadagnavo,",
+      type:  "text"},
+    3 :{  value: "ma avevo uno scopo,",
+      type:  "text", classe: "test"},
+    4 :{  value: "preso una slitta dopo.",
+      type:  "text"},
+    5 :{  value: "Slitta mia va da sola,",
+      type:  "text"},
+    6 :{  value: "va veloce, quasi vola;",
+      type:  "text"},
+    7 :{  value: "con la coda il vitello",
+      type:  "text"},
+    8 :{  value: "fa un girotondo bello;",
+      type:  "text"},
+    9 :{  value: "per il monte il capretto",
+      type:  "text"},
+    10 :{  value: "sale sul sentiero stretto;",
+      type:  "text"},
+    11 :{  value: require("../Images/fiabe/134_02-img.png"),
+      type:  "image", classe: 'imagemc'},
+  }
+
+export default contenuto

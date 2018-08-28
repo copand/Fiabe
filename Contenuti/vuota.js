@@ -12,7 +12,15 @@ const contenuto = {
     5 :{  value: "",
       type:  "text"},
     6 :{  value: "",
-      type:  "text"}
+      type:  "text"},
+    7 :{  value: "",
+      type:  "text"},
+    8 :{  value: "",
+      type:  "text"},
+    9 :{  value: "",
+      type:  "text"},
+    10 :{  value: require("../Images/fiabe/130_01-img.png"),
+      type:  "image", classe: 'imagemc'},
   }
 
 export default contenuto

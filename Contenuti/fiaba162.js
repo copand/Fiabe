@@ -1,0 +1,28 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/162_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "Jacopino, Jacopino,",
+      type:  "text"},
+    2 :{  value: "condividi il panino,",
+      type:  "text"},
+    3 :{  value: "fai mangiare il bestiame,",
+      type:  "text", classe: "test"},
+    4 :{  value: "anche lui gradisce il pane.",
+      type:  "text"},
+    5 :{  value: "Due pezzi ai maialini,",
+      type:  "text"},
+    6 :{  value: "altri due ai caprettini,",
+      type:  "text"},
+    7 :{  value: "dai un po’ ai cavallini,",
+      type:  "text"},
+    8 :{  value: "porta anche ai vitellini,",
+      type:  "text"},
+    9 :{  value: "sbriciola ai gallettini,",
+      type:  "text"},
+    10 :{  value: "non scordarti dei pulcini.",
+      type:  "text"},
+    11 :{  value: require("../Images/fiabe/162_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+  }
+
+export default contenuto

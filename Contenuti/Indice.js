@@ -38,7 +38,7 @@ export default class MyHomeScreen extends React.Component {
 		this.state = {
 			productList: [],
 			receipt: "",
-			ricevuta: "",
+			ricevuta: false,
 			availableItemsMessage: "",
 			switchValue: false
 		};
@@ -63,6 +63,8 @@ export default class MyHomeScreen extends React.Component {
 			console.log("products", products);
 			this.getAvailablePurchases();
 			//this.getPurchaseHistory();
+			//TODO da togliere, solo per debug
+			this.state.ricevuta = "OK";
 		} catch (err) {
 			console.warn(err.code, err.message);
 		}
@@ -199,7 +201,10 @@ export default class MyHomeScreen extends React.Component {
 		if (fiaba > 1 && !this.state.ricevuta) {
 			Alert.alert("Sblocca tutti i capitoli col pulsante in basso");
 			return;
-		} else this.props.capitolo(fiaba);
+		} else {
+			console.log("vado alla fiaba " + fiaba);
+			this.props.capitolo(fiaba);
+		}
 		//console.log(this.props.navigation);
 		//this.props.navigation.navigate("Fiabe",{fiabe: fiaba})
 		//console.log('finito');
@@ -254,7 +259,7 @@ export default class MyHomeScreen extends React.Component {
 						<View style={styles.container}>
 							<TouchableOpacity
 								style={styles.button}
-								onPress={() => this.onPress(4)}
+								onPress={() => this.onPress(10)}
 							>
 								<Text style={styles.grande}>Animali</Text>
 								<Text style={styles.piccolo}>
@@ -298,14 +303,24 @@ export default class MyHomeScreen extends React.Component {
 							>
 								<Text style={styles.grande}>Frottole</Text>
 								<Text style={styles.piccolo}>
-									7 filastrocche!
+									7 filastrocche
 								</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
+					{/*
+					<View style={styles.container}>
+						<Text style={styles.grande}>
+							Ricevuta locale: {this.state.ricevuta}
+						</Text>
+					</View>
+					*/}
+
+					{!this.state.ricevuta && (
 					<View style={styles.paga}>
 						<TouchableOpacity
-							onPress={() => this.buyItemOrig("android.test.purchased")}
+							//onPress={() => this.buyItemOrig("android.test.purchased")}
+							onPress={() => this.buyItemOrig("capitoli_tutti")}
 						>
 							<View style={styles.button1}>
 								<Icon
@@ -315,11 +330,20 @@ export default class MyHomeScreen extends React.Component {
 									color="gold"
 								/>
 								<Text style={{ flex: 1 }}>
-									Sblocca tutti i capitoli
+									Sblocca tutti i capitoli!!!!!!!
 								</Text>
 							</View>
 						</TouchableOpacity>
 					</View>
+					)}
+					{/*!pagato && 
+					<View style={styles.audio}>
+								<Text style={{ flex: 1 }}>
+									Controllo stato capitoli........
+								</Text>
+					</View>
+					*/}
+					{this.state.ricevuta && (
 						<View style={styles.audio}>
 							<TouchableOpacity onPress={() => this.playAll()}>
 								<View style={styles.button1}>
@@ -334,6 +358,15 @@ export default class MyHomeScreen extends React.Component {
 								</View>
 							</TouchableOpacity>
 						</View>
+					)}
+					{/*
+					<View style={styles.switch}>
+						<Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
+						<Text style={{ flex: 1 }}>
+									Ascolta tutte le fiabe
+						</Text>
+					</View>
+					*/}
 				</ImageBackground>
 			</View>
 		);
