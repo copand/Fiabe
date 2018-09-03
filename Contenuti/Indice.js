@@ -271,7 +271,7 @@ export default class MyHomeScreen extends React.Component {
 						<View style={styles.container}>
 							<TouchableOpacity
 								style={styles.button}
-								onPress={() => this.onPress(4)}
+								onPress={() => this.onPress(25)}
 							>
 								<Text style={styles.grande}>
 									Giochi da cortile, conti e ricami

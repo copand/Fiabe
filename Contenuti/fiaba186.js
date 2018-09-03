@@ -1,0 +1,26 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/186_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "Ninna nanna, baiu-bai,",
+      type:  "text"},
+    2 :{  value: "via, via, te Babai.",
+      type:  "text"},
+    3 :{  value: "Nella stalla ti nascondi",
+      type:  "text", classe: "test"},
+    4 :{  value: "e nel fieno ti affondi.",
+      type:  "text"},
+    5 :{  value: "I cavalli a balzare",
+      type:  "text"},
+    6 :{  value: "e il bimbo a guardare",
+      type:  "text"},
+    7 :{  value: "come il nostro piccolino",
+      type:  "text"},
+    8 :{  value: "mette il suo pigiamino.",
+      type:  "text"},
+    9 :{  value: require("../Images/fiabe/186_02-img.png"),
+      type:  "image", classe: 'imagemc'},
+    10 :{  value: "Babai è lo spirito della notte nel folclore russo che si potrebbe paragonare all’”Uomo nero”",
+      type:  "text", classe: "spiegazione"},
+  }
+
+export default contenuto

@@ -25,7 +25,6 @@ export default class Fiaba extends React.Component {
 		super(props);
 		this.state = {};
 		this.indice = this.indice.bind(this);
-		console.log("costruttore fiaba");
 	}
 
 	indice = () => {
@@ -170,6 +169,7 @@ const styles = StyleSheet.create({
 		borderRadius: 75
 	},
 	testomt: {
+		textAlign: 'center',
 		marginTop: 25,
 		fontFamily: "sans-serif",
 		fontSize: 20,
@@ -186,13 +186,22 @@ const styles = StyleSheet.create({
 		letterSpacing: 2
 	},
 	test: {
+		textAlign: 'center',
 		fontFamily: "sans-serif",
 		fontSize: 20,
 		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	},
+	spiegazione: {
+		textAlign: 'center',
+		marginTop:25,
+		fontSize: 17,
+		fontWeight: "200",
+		letterSpacing: 2
+	},
 	normale: {
+		textAlign: 'center',
 		fontFamily: "sans-serif",
 		fontSize: 20,
 		fontStyle: "italic",
