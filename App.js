@@ -51,24 +51,56 @@ import fiaba_243 from "./Contenuti/fiaba243.js";
 import fiaba_252 from "./Contenuti/fiaba252.js";
 import fiaba_270 from "./Contenuti/fiaba270.js";
 //capitolo 3
-import fiaba_39  from "./Contenuti/fiaba39.js";
-//capitolo 4 
-import fiaba_89  from "./Contenuti/fiaba89.js";
-import fiaba_90  from "./Contenuti/fiaba90.js";
-import fiaba_151  from "./Contenuti/fiaba151.js";
-import fiaba_154  from "./Contenuti/fiaba154.js";
-import fiaba_157  from "./Contenuti/fiaba157.js";
-import fiaba_174  from "./Contenuti/fiaba174.js";
-import fiaba_186  from "./Contenuti/fiaba186.js";
-import fiaba_248  from "./Contenuti/fiaba248.js";
-
-
+import fiaba_39 from "./Contenuti/fiaba39.js";
+//capitolo 4
+import fiaba_89 from "./Contenuti/fiaba89.js";
+import fiaba_90 from "./Contenuti/fiaba90.js";
+import fiaba_151 from "./Contenuti/fiaba151.js";
+import fiaba_154 from "./Contenuti/fiaba154.js";
+import fiaba_157 from "./Contenuti/fiaba157.js";
+import fiaba_174 from "./Contenuti/fiaba174.js";
+import fiaba_186 from "./Contenuti/fiaba186.js";
+import fiaba_248 from "./Contenuti/fiaba248.js";
+import Spinner from "react-native-spinkit";
 
 import MyHomeScreen from "./Contenuti/Indice.js";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
-var indexTOIDF = [0,97,116,130,132,160,161,213,218,230,111,118,121,134,162,163,164,169,178,184,234,239,243,252,270,39,89,90,151,154,
-157,174,186,248];
+var indexTOIDF = [
+  97,
+  116,
+  130,
+  132,
+  160,
+  161,
+  213,
+  218,
+  230,
+  111,
+  118,
+  121,
+  134,
+  162,
+  163,
+  164,
+  169,
+  178,
+  184,
+  234,
+  239,
+  243,
+  252,
+  270,
+  39,
+  89,
+  90,
+  151,
+  154,
+  157,
+  174,
+  186,
+  248
+];
 var globalIndex = -1;
 var globalAudio = false;
 var playing = false;
@@ -78,7 +110,7 @@ const { widthW } = Dimensions.get("window");
 class Fiabe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { capitolo:0, showSwiper: false, isVisible: true };
     this.goToFiaba = this.goToFiaba.bind(this);
     this.goToIndice = this.goToIndice.bind(this);
     const navParams = props.navigation.state.params;
@@ -94,6 +126,16 @@ class Fiabe extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // Must use this 100-ms delayed swiper workaround to render on Android properly
+    setTimeout(() => {
+      this.setState({ showSwiper: true });
+    }, 100);
+    setTimeout(() => {
+      this.setState({ isVisible: false });
+    }, 500);
+  }
+
   goToFiaba(fiaba) {
     console.log("sono in goToFiaba " + fiaba);
     this.refs.sliderX.scrollBy(fiaba, false);
@@ -107,328 +149,143 @@ class Fiabe extends React.Component {
     if (capitolo == -1) {
       //this.props.navigation.navigate("Fiaba1")
       globalAudio = true;
-      console.log("capitolo globalAudio");
+      console.log("capitolo globalAudio " +  capitolo);
       console.log(globalAudio);
       playSound(-1);
     }
-    this.refs.sliderX.scrollBy(capitolo, false);
+    //this.refs.sliderX.scrollBy(capitolo, false);
+    this.setState({capitolo:capitolo});
+
     //qui inizia col playall, mettiamo un flag per inibire audio singole fiabe
   };
 
   render() {
-    return (
-      <Swiper
-        ref="sliderX"
-        index={this.props.inizio}
-        style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
-        loop={false}
-        onIndexChanged={index => {
-          swiperIndexChanged(index);
-        }}
-      >
-        <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} />
+    var type = "ChasingDots";
+    var color = "#3f77ba";
+    var size = 100;
+    if (this.state.capitolo == 0)
+      return (
         <View>
-          <Fiaba
-            slider={this.refs.sliderX}
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_97}
-            idf="97"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
+            <MyHomeScreen
+              goToIndice={this.goToIndice}
+              capitolo={this.capitolo}
+            />
         </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_116}
-            idf="116"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_130}
-            idf="130"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_132}
-            idf="132"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_160}
-            idf="160"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_161}
-            idf="161"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_213}
-            idf="213"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_218}
-            idf="218"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_230}
-            idf="230"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_111}
-            idf="111"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-         <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_118}
-            idf="118"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_121}
-            idf="121"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_134}
-            idf="134"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_162}
-            idf="162"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-         <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_163}
-            idf="163"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-       <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_164}
-            idf="164"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-       <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_169}
-            idf="169"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_178}
-            idf="178"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_184}
-            idf="184"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_234}
-            idf="234"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_239}
-            idf="239"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_243}
-            idf="243"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_252}
-            idf="252"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_270}
-            idf="270"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-      <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_39}
-            idf="39"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_89}
-            idf="89"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_90}
-            idf="90"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_151}
-            idf="151"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_154}
-            idf="154"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_157}
-            idf="157"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_174}
-            idf="174"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_186}
-            idf="186"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_248}
-            idf="248"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-      </Swiper>
-    );
+      );
+    else if(this.state.capitolo == 1)
+      return(
+        <Capitolo1 />
+      );
+    else if(this.state.capitolo == 2)
+      return(
+        <Capitolo2 />
+      );
+    else if(this.state.capitolo == 4)
+      return(
+        <Capitolo4 />
+     );
+    else if(this.state.capitolo == 11 && 0)
+      return (
+        this.state.showSwiper && (
+          <Swiper
+            ref="sliderX"
+            index={this.props.inizio}
+            style={styles.wrapper}
+            showsButtons={true}
+            showsPagination={false}
+            loop={false}
+            onIndexChanged={index => {
+              swiperIndexChanged(index);
+            }}
+          >
+            <MyHomeScreen
+              goToIndice={this.goToIndice}
+              capitolo={this.capitolo}
+            />
+          <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_39}
+                idf="39"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_89}
+                idf="89"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_90}
+                idf="90"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_151}
+                idf="151"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_154}
+                idf="154"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_157}
+                idf="157"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_174}
+                idf="174"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_186}
+                idf="186"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_248}
+                idf="248"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+          </Swiper>
+        )
+      );
   }
 }
 
@@ -479,12 +336,11 @@ swiperIndexChanged = index => {
   this.currentSlideIndex = index;
   globalIndex = index;
   let idf = indexTOIDF[index];
-  console.log('idf', idf);
+  console.log("non suono fiaba idf", idf);
   //se non è attivo globalAudio play singola fiaba
-  console.log("globalAudio");
-  console.log(globalAudio);
-  if (!globalAudio) 
-    playSound(idf);
+  //console.log("globalAudio");
+  //console.log(globalAudio);
+  //if (!globalAudio) playSound(idf);
 };
 
 const InnerNavigator = DrawerNavigator(
@@ -571,6 +427,354 @@ const SimpleApp = StackNavigator(
     })
   }
 );
+
+
+class Capitolo1 extends React.Component {
+    render () {
+        return (
+        <Swiper
+            ref="sliderX"
+            index={this.props.inizio}
+            style={styles.wrapper}
+            showsButtons={true}
+            showsPagination={false}
+            loop={false}
+            onIndexChanged={index => {
+              swiperIndexChanged(index);
+            }}
+          >
+            <View>
+              <Fiaba
+                slider={this.refs.sliderX}
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_97}
+                idf="97"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_116}
+                idf="116"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_130}
+                idf="130"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_132}
+                idf="132"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_160}
+                idf="160"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_161}
+                idf="161"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_213}
+                idf="213"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_218}
+                idf="218"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_230}
+                idf="230"
+                sfondo={require("./Images/bg_01.jpg")}
+              />
+            </View>
+          </Swiper>
+        )
+    }
+}
+
+class Capitolo2 extends React.Component {
+    render () {
+        return (
+        <Swiper
+            ref="sliderX"
+            index={this.props.inizio}
+            style={styles.wrapper}
+            showsButtons={true}
+            showsPagination={false}
+            loop={false}
+            onIndexChanged={index => {
+              swiperIndexChanged(index);
+            }}
+          >
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_111}
+                idf="111"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_118}
+                idf="118"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_121}
+                idf="121"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_134}
+                idf="134"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_162}
+                idf="162"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_163}
+                idf="163"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_164}
+                idf="164"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_169}
+                idf="169"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_178}
+                idf="178"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_184}
+                idf="184"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_234}
+                idf="234"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_239}
+                idf="239"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_243}
+                idf="243"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_252}
+                idf="252"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_270}
+                idf="270"
+                sfondo={require("./Images/bg_02.jpg")}
+              />
+            </View>
+   
+          </Swiper>
+        )
+    }
+}
+
+class Capitolo4 extends React.Component {
+    render () {
+        return (
+        <Swiper
+            ref="sliderX"
+            index={this.props.inizio}
+            style={styles.wrapper}
+            showsButtons={true}
+            showsPagination={false}
+            loop={false}
+            onIndexChanged={index => {
+              swiperIndexChanged(index);
+            }}
+          >
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_89}
+                idf="89"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_90}
+                idf="90"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_151}
+                idf="151"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_154}
+                idf="154"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_157}
+                idf="157"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_174}
+                idf="174"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_186}
+                idf="186"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+            <View>
+              <Fiaba
+                goToIndice={this.goToIndice}
+                mynavigation={this.props.navigation}
+                htmlContent={fiaba_248}
+                idf="248"
+                sfondo={require("./Images/bg_03.jpg")}
+              />
+            </View>
+          </Swiper>
+        )
+    }
+}
 
 /*
 const AppCop = createStackNavigator({
@@ -678,5 +882,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold"
+  },
+  spinner: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "45%"
   }
 });

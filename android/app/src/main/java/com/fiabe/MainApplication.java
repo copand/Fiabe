@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import com.dooboolab.RNIap.RNIapPackage;
 import java.util.Arrays;
 import java.util.List;
+import com.react.rnspinkit.RNSpinkitPackage;    
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new VectorIconsPackage(),
             new RNSoundPackage(),
-            new RNIapPackage()
+            new RNIapPackage(),
+            new RNSpinkitPackage()    
       );
     }
 

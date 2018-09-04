@@ -202,7 +202,7 @@ export default class MyHomeScreen extends React.Component {
 			Alert.alert("Sblocca tutti i capitoli col pulsante in basso");
 			return;
 		} else {
-			console.log("vado alla fiaba " + fiaba);
+			console.log("vado al  capitolo" + fiaba);
 			this.props.capitolo(fiaba);
 		}
 		//console.log(this.props.navigation);
@@ -295,11 +295,23 @@ export default class MyHomeScreen extends React.Component {
 								</Text>
 							</TouchableOpacity>
 						</View>
-
 						<View style={styles.container}>
 							<TouchableOpacity
 								style={styles.button}
-								onPress={() => this.onPress(4)}
+								onPress={() => this.onPress(5)}
+							>
+								<Text style={styles.grande}>
+									Le stagioni
+								</Text>
+								<Text style={styles.piccolo}>
+									11 filastrocche
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={styles.container}>
+							<TouchableOpacity
+								style={styles.button}
+								onPress={() => this.onPress(6)}
 							>
 								<Text style={styles.grande}>Frottole</Text>
 								<Text style={styles.piccolo}>
