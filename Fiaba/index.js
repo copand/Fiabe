@@ -25,10 +25,17 @@ export default class Fiaba extends React.Component {
 		super(props);
 		this.state = {};
 		this.indice = this.indice.bind(this);
+		this.finale = this.finale.bind(this);
+		console.log('capitolo', this.props.finale);
+		console.log('indice', this.props.goToIndice);
 	}
 
 	indice = () => {
 		this.props.goToIndice();
+	};
+
+	finale = (capitolo) => {
+		this.props.finale(capitolo);
 	};
 
 	render() {
@@ -136,13 +143,21 @@ export default class Fiaba extends React.Component {
 						</View>
 						<View style={styles.footer}>
 						</View>
-						{/*
-						<View style={styles.indice}>
-							<TouchableOpacity onPress={() => this.indice()}>
-								<Text style={styles.grande}>Indice</Text>
+						{this.props.finale &&	
+						<View style={styles.footer}>
+							<TouchableOpacity onPress={() => this.finale(2)}>
+								<Text style={styles.finale}>Vai al prossimo capitolo: {this.props.capTitolo}</Text>
+								<Icon
+										name="arrow-circle-right"
+										size={40}
+										style={{
+											color: "green",
+											textAlign: "center"
+										}}
+									/>
 							</TouchableOpacity>
 						</View>
-						*/}
+						}	
 					</ScrollView>
 				</ImageBackground>
 			</View>
@@ -230,5 +245,13 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		marginBottom: 50,
+	},
+	finale: {
+		textAlign: 'center',
+		fontFamily: "sans-serif",
+		fontSize: 20,
+		fontStyle: "italic",
+		fontWeight: "200",
+		letterSpacing: 2
 	}
 });

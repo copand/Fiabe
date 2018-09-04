@@ -1,0 +1,28 @@
+const contenuto = {
+    0 :{  value: require("../Images/fiabe/285_01-img.png"),
+      type:  "image", classe: 'imagemc'},
+    1 :{  value: "L’orso bruno raccontava,",
+      type:  "text"},
+    2 :{  value: "che nel cielo lui volava,",
+      type:  "text"},
+    3 :{  value: "lui la coda dimenava,",
+      type:  "text", classe: "test"},
+    4 :{  value: "da lassù lui osservava",
+      type:  "text"},
+    5 :{  value: "come sopra un pino alto",
+      type:  "text"},
+    6 :{  value: "un maiale ha fatto un salto,",
+      type:  "text"},
+    7 :{  value: "e dietro i porcellini",
+      type:  "text"},
+    8 :{  value: "hanno fatto i saltini.",
+      type:  "text"},
+    9 :{  value: "Ora sui rami stanno",
+      type:  "text"},
+    10 :{  value: "finché ali cresceranno.",
+      type:  "text"},
+    11 :{  value: require("../Images/fiabe/285_02-img.png"),
+      type:  "image", classe: 'imagemc'},
+  }
+
+export default contenuto
