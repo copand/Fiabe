@@ -26,8 +26,6 @@ export default class Fiaba extends React.Component {
 		this.state = {};
 		this.indice = this.indice.bind(this);
 		this.finale = this.finale.bind(this);
-		console.log('capitolo', this.props.finale);
-		console.log('indice', this.props.goToIndice);
 	}
 
 	indice = () => {
@@ -77,6 +75,7 @@ export default class Fiaba extends React.Component {
 									/>
 								</TouchableOpacity>
 							</View>
+							{/*
 							<View
 								style={{
 									flex: 1,
@@ -96,6 +95,7 @@ export default class Fiaba extends React.Component {
 									/>
 								</TouchableOpacity>
 							</View>
+							*/}
 							<View
 								style={{
 									flex: 1,

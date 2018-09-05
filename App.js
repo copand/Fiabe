@@ -23,6 +23,7 @@ import {
 import Sound from "react-native-sound";
 import Swiper from "react-native-swiper";
 import Intro from "./BoardSimple";
+import Credits from "./Credits";
 import Fiaba from "./Fiaba";
 import SideMenu from './SideMenu';
 import EventEmitter from "react-native-eventemitter";
@@ -135,7 +136,7 @@ class Fiabe extends React.Component {
     super(props);
     console.log('navigation params');
     this.props.navigation.getParam
-    this.state = { capitolo: 0, showSwiper: false, isVisible: true };
+    this.state = { capitolo: 0, showSwiper: false, isVisible: false };
     this.goToFiaba = this.goToFiaba.bind(this);
     this.callback = this.callback.bind(this);
     this.capitolo = this.capitolo.bind(this);
@@ -170,13 +171,15 @@ class Fiabe extends React.Component {
 
 
   componentDidMount() {
+    /*
     // Must use this 100-ms delayed swiper workaround to render on Android properly
     setTimeout(() => {
       this.setState({ showSwiper: true });
     }, 100);
     setTimeout(() => {
-      this.setState({ isVisible: false });
+      this.setState({ isVisible: true });
     }, 500);
+    */
   }
 
   goToFiaba(fiaba) {
@@ -200,7 +203,12 @@ class Fiabe extends React.Component {
     }
     //this.refs.sliderX.scrollBy(capitolo, false);
     this.setState({ capitolo: capitolo });
-
+    /*
+    this.setState({isVisible: true});
+    setTimeout(() => {
+      this.setState({ isVisible: false });
+    }, 1000);
+    */
     //qui inizia col playall, mettiamo un flag per inibire audio singole fiabe
   };
 
@@ -211,21 +219,23 @@ class Fiabe extends React.Component {
     if (this.state.capitolo == 0)
       return (
         <View>
+          {this.state.isVisible && 
+            <Spinner style={styles.spinner} isVisible={this.state.isVisible} size={this.state.size} type={type} color={this.state.color}/>}
           <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} />
         </View>
       );
     else if (this.state.capitolo == 1)
-      return <Capitolo1 goToIndice={this.goToIndice} capitolo={this.capitolo} />;
+      return <Capitolo1 goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation}/>;
     else if (this.state.capitolo == 2)
-      return <Capitolo2 goToIndice={this.goToIndice} />;
+      return <Capitolo2 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
     else if (this.state.capitolo == 3)
-      return <Capitolo3 goToIndice={this.goToIndice} />;
+      return <Capitolo3 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
     else if (this.state.capitolo == 4)
-      return <Capitolo4 goToIndice={this.goToIndice} />;
+      return <Capitolo4 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
     else if (this.state.capitolo == 5)
-      return <Capitolo5 goToIndice={this.goToIndice} />;
+      return <Capitolo5 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
     else if (this.state.capitolo == 6)
-      return <Capitolo6 goToIndice={this.goToIndice} />;
+      return <Capitolo6 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
   }
 }
 
@@ -237,7 +247,11 @@ playSound = idf => {
     globalAudio = false;
     playing = false;
     return;
-  } else if (playing) whoosh.stop();
+  } else if (playing){ 
+    whoosh.stop();
+    playing = false;
+    return;
+  }
   Sound.setCategory("Playback");
   console.log("playSound fiaba " + idf);
   // Load the sound file 'whoosh.mp3' from the app bundle
@@ -300,6 +314,18 @@ const InnerNavigator = DrawerNavigator(
     },
     Capitoli: {
       screen: props => <Fiabe {...props} inizio={0} />,
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Icon
+            name="bars"
+            size={25}
+            style={{ color: tintColor, marginLeft: 0 }}
+          />
+        )
+      }
+    },
+    Credits: {
+      screen: Credits,
       navigationOptions: {
         drawerIcon: ({ tintColor }) => (
           <Icon
@@ -403,6 +429,8 @@ class Capitolo1 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {5}
       >
         <View>
           <Fiaba
@@ -506,6 +534,8 @@ class Capitolo2 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {3}
       >
         <View>
           <Fiaba
@@ -779,6 +809,8 @@ class Capitolo5 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {3}
       >
       <View>
           <Fiaba
@@ -1064,8 +1096,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   spinner: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "45%"
+    position:'absolute',
+    zIndex:10000,
+    top: '50%'
   }
 });
