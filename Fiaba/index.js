@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
 	imagemc: {
 		alignSelf: "center",
 		marginBottom: 20,
+		//marginTop: -30,
 		width: width * 0.85
 	},
 	imageoc: {
@@ -200,14 +201,6 @@ const styles = StyleSheet.create({
 		fontWeight: "200",
 		letterSpacing: 2
 	},
-	test: {
-		textAlign: 'center',
-		fontFamily: "sans-serif",
-		fontSize: 20,
-		fontStyle: "italic",
-		fontWeight: "200",
-		letterSpacing: 2
-	},
 	spiegazione: {
 		textAlign: 'center',
 		marginTop:25,
@@ -216,7 +209,21 @@ const styles = StyleSheet.create({
 		letterSpacing: 2
 	},
 	normale: {
-		textAlign: 'center',
+		marginLeft: width *0.1,
+		marginRight: width * 0.1,
+		textAlign: 'left',
+		alignSelf: 'flex-start',
+		fontFamily: "sans-serif",
+		fontSize: 20,
+		fontStyle: "italic",
+		fontWeight: "200",
+		letterSpacing: 2
+	},
+	test: {
+		marginLeft: width *0.1,
+		marginRight: width * 0.1,
+		textAlign: 'left',
+		alignSelf: 'flex-start',
 		fontFamily: "sans-serif",
 		fontSize: 20,
 		fontStyle: "italic",
@@ -236,7 +243,7 @@ const styles = StyleSheet.create({
 		color: "#FF3366" // make links coloured pink
 	},
 	contenuto: {
-		paddingTop: height * 0.05,
+		//paddingTop: height * 0.05,
 		justifyContent: "center",
 		alignItems: "center"
 	},

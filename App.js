@@ -725,7 +725,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_89}
             idf="89"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -734,7 +734,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_90}
             idf="90"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -743,7 +743,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_151}
             idf="151"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -752,7 +752,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_154}
             idf="154"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -761,7 +761,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_157}
             idf="157"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -770,7 +770,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_174}
             idf="174"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -779,7 +779,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_186}
             idf="186"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
         <View>
@@ -788,7 +788,7 @@ class Capitolo4 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_248}
             idf="248"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
       </Swiper>
@@ -818,7 +818,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_189}
             idf="189"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -827,7 +827,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_192}
             idf="192"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -836,7 +836,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_195}
             idf="195"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -845,7 +845,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_200}
             idf="200"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -854,7 +854,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_203}
             idf="203"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -863,7 +863,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_210}
             idf="210"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -872,7 +872,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_219}
             idf="219"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -881,7 +881,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_224}
             idf="224"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -890,7 +890,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_226}
             idf="226"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -899,7 +899,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_228}
             idf="228"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
         <View>
@@ -908,7 +908,7 @@ class Capitolo5 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_241}
             idf="241"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
       </Swiper>
@@ -936,7 +936,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_122}
             idf="122"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
         <View>
@@ -945,7 +945,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_244}
             idf="244"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
         <View>
@@ -954,7 +954,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_274}
             idf="274"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
         <View>
@@ -963,7 +963,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_285}
             idf="285"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
         <View>
@@ -972,7 +972,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_288}
             idf="288"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
         <View>
@@ -981,7 +981,7 @@ class Capitolo6 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_296}
             idf="296"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
       </Swiper>
