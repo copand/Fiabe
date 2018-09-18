@@ -222,7 +222,7 @@ export default class MyHomeScreen extends React.Component {
 		this.setState({ switchValue: value });
 		if (value == true) {
 			//playSound(-1);
-			this.props.capitolo(1);
+			this.props.capitolo(-1);
 		} else if (value == false) {
 			playSound(-1);
 		}
@@ -371,14 +371,14 @@ export default class MyHomeScreen extends React.Component {
 							</TouchableOpacity>
 						</View>
 					)}
-					{/*
+					
 					<View style={styles.switch}>
 						<Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 						<Text style={{ flex: 1 }}>
 									Ascolta tutte le fiabe
 						</Text>
 					</View>
-					*/}
+					
 				</ImageBackground>
 			</View>
 		);

@@ -9,7 +9,8 @@ import {
   Button,
   Text,
   Animated,
-  Easing
+  Easing,
+  AppState
 } from "react-native";
 //import HTMLView from "react-native-htmlview";
 import {
@@ -57,6 +58,15 @@ import fiaba_252 from "./Contenuti/fiaba252.js";
 import fiaba_270 from "./Contenuti/fiaba270.js";
 //capitolo 3
 import fiaba_39 from "./Contenuti/fiaba39.js";
+import fiaba_135 from "./Contenuti/fiaba135.js";
+import fiaba_137 from "./Contenuti/fiaba137.js";
+import fiaba_140 from "./Contenuti/fiaba140.js";
+import fiaba_142 from "./Contenuti/fiaba142.js";
+import fiaba_145 from "./Contenuti/fiaba145.js";
+import fiaba_146 from "./Contenuti/fiaba146.js";
+import fiaba_175 from "./Contenuti/fiaba175.js";
+import fiaba_176 from "./Contenuti/fiaba176.js";
+import fiaba_220 from "./Contenuti/fiaba220.js";
 //capitolo 4
 import fiaba_89 from "./Contenuti/fiaba89.js";
 import fiaba_90 from "./Contenuti/fiaba90.js";
@@ -158,11 +168,22 @@ class Fiabe extends React.Component {
     if(value == "vai"){
       console.log("indice callback", value);
       this.setState({capitolo:0});
+      this.props.navigation.dispatch(
+        DrawerActions.closeDrawer()
+        )
     }
   } 
 
   componentWillMount() {
     EventEmitter.on("indice",  this.callback);
+    AppState.addEventListener('change', (state) => {
+      if(state === 'background'){
+        whoosh.stop();
+        whoosh.release()
+        globalAudio = false;
+        playing = false;
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -199,7 +220,8 @@ class Fiabe extends React.Component {
       globalAudio = true;
       console.log("capitolo globalAudio " + capitolo);
       console.log(globalAudio);
-      playSound(-1);
+      playSound(0);
+      capitolo = 1;
     }
     //this.refs.sliderX.scrollBy(capitolo, false);
     this.setState({ capitolo: capitolo });
@@ -244,11 +266,13 @@ playSound = idf => {
   if (playing && idf == -1) {
     console.log("entro");
     whoosh.stop();
+    whoosh.release()
     globalAudio = false;
     playing = false;
     return;
   } else if (playing){ 
     whoosh.stop();
+    whoosh.release()
     playing = false;
     return;
   }
@@ -256,7 +280,7 @@ playSound = idf => {
   console.log("playSound fiaba " + idf);
   // Load the sound file 'whoosh.mp3' from the app bundle
   // See notes below about preloading sounds within initialization code below.
-  $sound = idf == -1 ? "loop.mp3" : "f" + idf + ".mp3";
+  $sound = idf == 0 ? "loop.mp3" : "f" + idf + ".mp3";
   console.log("playSound fiaba " + $sound);
   //$sound = idf == 0 ? "loop.mp3" : idf+".mp3";
   whoosh = new Sound($sound, Sound.MAIN_BUNDLE, error => {
@@ -690,6 +714,8 @@ class Capitolo3 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {3}
       >
         <View>
           <Fiaba
@@ -697,6 +723,87 @@ class Capitolo3 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_39}
             idf="39"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_135}
+            idf="135"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_137}
+            idf="137"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_140}
+            idf="140"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_142}
+            idf="142"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_145}
+            idf="145"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_146}
+            idf="146"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_175}
+            idf="175"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_176}
+            idf="176"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_220}
+            idf="220"
             sfondo={require("./Images/bg_03.jpg")}
           />
         </View>
@@ -718,6 +825,8 @@ class Capitolo4 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {3}
       >
         <View>
           <Fiaba
@@ -929,6 +1038,8 @@ class Capitolo6 extends React.Component {
         onIndexChanged={index => {
           swiperIndexChanged(index);
         }}
+        loadMinimal = {true}
+        loadMinimalSize = {3}
       >
       <View>
           <Fiaba

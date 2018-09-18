@@ -23,7 +23,7 @@ export default class Fiaba extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {playing:false};
 		this.indice = this.indice.bind(this);
 		this.finale = this.finale.bind(this);
 	}
@@ -40,6 +40,7 @@ export default class Fiaba extends React.Component {
 		const idf = this.props.idf;
 		const content = this.props.htmlContent;
 		const resizeMode = "cover";
+		const playing = this.state.playing;
 		return (
 			<View
 				style={{ flex: 1, flexDirection: "column", minHeight: height }}
@@ -103,9 +104,13 @@ export default class Fiaba extends React.Component {
 								}}
 							>
 								<TouchableOpacity
-									onPress={() => playSound(idf)}
+									onPress={() => {
+										let myvar = playing == true ? false : true;
+										playSound(idf); 
+										this.setState({playing:myvar})}
+									}
 								>
-									<Icon
+								{!playing &&	<Icon
 										name="volume-up"
 										size={40}
 										style={{
@@ -114,6 +119,17 @@ export default class Fiaba extends React.Component {
 											marginTop: 10
 										}}
 									/>
+								}
+								{playing &&	<Icon
+										name="volume-off"
+										size={40}
+										style={{
+											color: "gray",
+											marginRight: 10,
+											marginTop: 10
+										}}
+									/>
+								}
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -133,11 +149,20 @@ export default class Fiaba extends React.Component {
 										/>
 									);
 								} else if (content[key].type == "text") {
-									return (
+									if(classe == "box")
+										return (
+										<View key={key} style={styles['box']}>
+											<Text key={key} style={styles['boxTesto']}>
+												{content[key].value}
+											</Text>
+										</View>
+										);
+									else
+										return (
 										<Text key={key} style={styles[classe]}>
 											{content[key].value}
 										</Text>
-									);
+										);
 								}
 							})}
 						</View>
@@ -229,6 +254,25 @@ const styles = StyleSheet.create({
 		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
+	},
+	boxTesto: {
+		marginLeft: width *0.1,
+		marginRight: width * 0.1,
+		textAlign: 'left',
+		alignSelf: 'flex-start',
+		fontFamily: "Arial",
+		fontSize: 17,
+		fontWeight: "200",
+		letterSpacing: 2
+	},
+	box:{
+		//marginLeft:width*0.05,
+		//marginRight: width * 0.05,
+		borderColor: 'lightgray',
+		borderStyle: 'solid',
+		borderWidth: 3,
+		marginBottom:width*0.05,
+		marginTop:width*0.05
 	},
 	backgroundImage: {
 		flex: 1,
