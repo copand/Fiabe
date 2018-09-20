@@ -25,6 +25,7 @@ import Sound from "react-native-sound";
 import Swiper from "react-native-swiper";
 import Intro from "./BoardSimple";
 import Credits from "./Credits";
+import LoopMp3 from "./LoopMp3";
 import Fiaba from "./Fiaba";
 import SideMenu from './SideMenu';
 import EventEmitter from "react-native-eventemitter";
@@ -95,6 +96,7 @@ import fiaba_274 from "./Contenuti/fiaba274.js";
 import fiaba_285 from "./Contenuti/fiaba285.js";
 import fiaba_288 from "./Contenuti/fiaba288.js";
 import fiaba_296 from "./Contenuti/fiaba296.js";
+import fiaba_298 from "./Contenuti/fiaba298.js";
 
 import Spinner from "react-native-spinkit";
 import MyHomeScreen from "./Contenuti/Indice.js";
@@ -146,9 +148,10 @@ class Fiabe extends React.Component {
     super(props);
     console.log('navigation params');
     this.props.navigation.getParam
-    this.state = { capitolo: 0, showSwiper: false, isVisible: false };
+    this.state = { capitolo: 0, showSwiper: false, isVisible: false, isLoopPlaying:false };
     this.goToFiaba = this.goToFiaba.bind(this);
     this.callback = this.callback.bind(this);
+    this.callbackLoop = this.callbackLoop.bind(this);
     this.capitolo = this.capitolo.bind(this);
     this.goToIndice = this.goToIndice.bind(this);
     const navParams = props.navigation.state.params;
@@ -174,10 +177,33 @@ class Fiabe extends React.Component {
     }
   } 
 
+  callbackLoop(value) {
+    console.log('callbackLoop');
+    if(value == "toggle"){
+      console.log("loopmp3 callback", value);
+
+      this.props.navigation.dispatch(
+        DrawerActions.closeDrawer()
+      )
+    }
+    else if(value == "pause"){
+      console.log("loopmp3 callback", value);
+      if(whoosh)
+       whoosh.pause();
+    }
+    else if(value == "play"){
+      console.log("loopmp3 callback", value);
+      if(whoosh)
+       whoosh.play();
+    }
+  } 
+
   componentWillMount() {
     EventEmitter.on("indice",  this.callback);
+    EventEmitter.on("loopmp3",  this.callbackLoop);
+    this.setState({isLoopPlaying:playing});
     AppState.addEventListener('change', (state) => {
-      if(state === 'background'){
+      if(state === 'background' && whoosh){
         whoosh.stop();
         whoosh.release()
         globalAudio = false;
@@ -188,6 +214,7 @@ class Fiabe extends React.Component {
 
   componentWillUnmount() {
      EventEmitter.removeListener("indice", this.callback);
+     EventEmitter.removeListener("loopmp3", this.callbackLoop);
   }
 
 
@@ -217,11 +244,13 @@ class Fiabe extends React.Component {
   capitolo(capitolo) {
     if (capitolo == -1) {
       //this.props.navigation.navigate("Fiaba1")
-      globalAudio = true;
-      console.log("capitolo globalAudio " + capitolo);
-      console.log(globalAudio);
+      let myvar = this.state.isLoopPlaying == true ? false : true;
+      if(myvar)
+        this.setState({ capitolo: 1, isLoopPlaying:myvar });
+      else
+        this.setState({ capitolo: 0, isLoopPlaying:myvar });
       playSound(0);
-      capitolo = 1;
+      return;
     }
     //this.refs.sliderX.scrollBy(capitolo, false);
     this.setState({ capitolo: capitolo });
@@ -243,21 +272,37 @@ class Fiabe extends React.Component {
         <View>
           {this.state.isVisible && 
             <Spinner style={styles.spinner} isVisible={this.state.isVisible} size={this.state.size} type={type} color={this.state.color}/>}
-          <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} />
+          <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />
         </View>
       );
     else if (this.state.capitolo == 1)
-      return <Capitolo1 goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation}/>;
+      return <Capitolo1 goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 2)
-      return <Capitolo2 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
+      return <Capitolo2 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 3)
-      return <Capitolo3 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
+      return <Capitolo3 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 4)
-      return <Capitolo4 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
+      return <Capitolo4 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 5)
-      return <Capitolo5 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
+      return <Capitolo5 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 6)
-      return <Capitolo6 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation}/>;
+      return <Capitolo6 goToIndice={this.goToIndice} capitolo={this.capitolo}  navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
+  }
+}
+
+pauseSoundLoop = status => {
+  if(status == "pause")
+    whoosh.pause();
+  else if(status == "play")
+    whoosh.play()
+}
+
+stopSoundLoop = () => {
+  if (playing) {
+    whoosh.stop();
+    whoosh.release()
+    globalAudio = false;
+    playing = false;
   }
 }
 
@@ -359,6 +404,18 @@ const InnerNavigator = DrawerNavigator(
           />
         )
       }
+    },
+    LoopMp3: {
+      screen: LoopMp3,
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Icon
+            name="volume-up"
+            size={25}
+            style={{ color: tintColor, marginLeft: 0 }}
+          />
+        )
+      }
     }
   },
   {
@@ -447,8 +504,9 @@ class Capitolo1 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        activeDotColor={'orange'}
+        showsPagination={true}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -462,6 +520,7 @@ class Capitolo1 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_97}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="97"
             sfondo={require("./Images/bg_01.jpg")}
           />
@@ -470,7 +529,18 @@ class Capitolo1 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_218}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="218"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_116}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="116"
             sfondo={require("./Images/bg_01.jpg")}
           />
@@ -480,6 +550,7 @@ class Capitolo1 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_130}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="130"
             sfondo={require("./Images/bg_01.jpg")}
           />
@@ -489,43 +560,8 @@ class Capitolo1 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_132}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="132"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_160}
-            idf="160"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_161}
-            idf="161"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_213}
-            idf="213"
-            sfondo={require("./Images/bg_01.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_218}
-            idf="218"
             sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
@@ -536,7 +572,38 @@ class Capitolo1 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_230}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="230"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_213}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="213"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_160}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="160"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_161}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="161"
             sfondo={require("./Images/bg_01.jpg")}
           />
         </View>
@@ -552,8 +619,9 @@ class Capitolo2 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        showsPagination={true}
+        activeDotColor={'orange'}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -565,34 +633,8 @@ class Capitolo2 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_111}
-            idf="111"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_118}
-            idf="118"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_121}
-            idf="121"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_134}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="134"
             sfondo={require("./Images/bg_02.jpg")}
           />
@@ -601,70 +643,8 @@ class Capitolo2 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_162}
-            idf="162"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_163}
-            idf="163"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_164}
-            idf="164"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_169}
-            idf="169"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_178}
-            idf="178"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_184}
-            idf="184"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_234}
-            idf="234"
-            sfondo={require("./Images/bg_02.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_239}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="239"
             sfondo={require("./Images/bg_02.jpg")}
           />
@@ -674,6 +654,7 @@ class Capitolo2 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_243}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="243"
             sfondo={require("./Images/bg_02.jpg")}
           />
@@ -682,8 +663,9 @@ class Capitolo2 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_252}
-            idf="252"
+            htmlContent={fiaba_111}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="111"
             sfondo={require("./Images/bg_02.jpg")}
           />
         </View>
@@ -692,10 +674,112 @@ class Capitolo2 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_270}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="270"
             sfondo={require("./Images/bg_02.jpg")}
           />
         </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_118}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="118"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_234}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="234"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_121}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="121"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_164}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="164"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>       
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_162}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="162"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_163}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="163"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_169}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="169"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_178}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="178"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_184}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="184"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_252}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="252"
+            sfondo={require("./Images/bg_02.jpg")}
+          />
+        </View>
+        
       </Swiper>
     );
   }
@@ -708,8 +792,9 @@ class Capitolo3 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        showsPagination={true}
+        activeDotColor={'orange'}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -721,16 +806,8 @@ class Capitolo3 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_39}
-            idf="39"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_135}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="135"
             sfondo={require("./Images/bg_03.jpg")}
           />
@@ -740,6 +817,7 @@ class Capitolo3 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_137}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="137"
             sfondo={require("./Images/bg_03.jpg")}
           />
@@ -750,33 +828,7 @@ class Capitolo3 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_140}
             idf="140"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_142}
-            idf="142"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_145}
-            idf="145"
-            sfondo={require("./Images/bg_03.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_146}
-            idf="146"
+            isLoopPlaying={this.props.isLoopPlaying}
             sfondo={require("./Images/bg_03.jpg")}
           />
         </View>
@@ -786,6 +838,7 @@ class Capitolo3 extends React.Component {
             mynavigation={this.props.navigation}
             htmlContent={fiaba_175}
             idf="175"
+            isLoopPlaying={this.props.isLoopPlaying}
             sfondo={require("./Images/bg_03.jpg")}
           />
         </View>
@@ -793,7 +846,39 @@ class Capitolo3 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_142}
+            idf="142"
+            isLoopPlaying={this.props.isLoopPlaying}
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_145}
+            idf="145"
+            isLoopPlaying={this.props.isLoopPlaying}
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_146}
+            idf="146"
+            isLoopPlaying={this.props.isLoopPlaying}
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_176}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="176"
             sfondo={require("./Images/bg_03.jpg")}
           />
@@ -802,7 +887,18 @@ class Capitolo3 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_39}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="39"
+            sfondo={require("./Images/bg_03.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_220}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="220"
             sfondo={require("./Images/bg_03.jpg")}
           />
@@ -819,8 +915,9 @@ class Capitolo4 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        showsPagination={true}
+        activeDotColor={'orange'}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -832,43 +929,8 @@ class Capitolo4 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_89}
-            idf="89"
-            sfondo={require("./Images/bg_04.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_90}
-            idf="90"
-            sfondo={require("./Images/bg_04.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_151}
-            idf="151"
-            sfondo={require("./Images/bg_04.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_154}
-            idf="154"
-            sfondo={require("./Images/bg_04.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_157}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="157"
             sfondo={require("./Images/bg_04.jpg")}
           />
@@ -877,7 +939,28 @@ class Capitolo4 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_90}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="90"
+            sfondo={require("./Images/bg_04.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_154}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="154"
+            sfondo={require("./Images/bg_04.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_174}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="174"
             sfondo={require("./Images/bg_04.jpg")}
           />
@@ -887,6 +970,7 @@ class Capitolo4 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_186}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="186"
             sfondo={require("./Images/bg_04.jpg")}
           />
@@ -896,7 +980,28 @@ class Capitolo4 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_248}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="248"
+            sfondo={require("./Images/bg_04.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_151}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="151"
+            sfondo={require("./Images/bg_04.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_89}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="89"
             sfondo={require("./Images/bg_04.jpg")}
           />
         </View>
@@ -912,8 +1017,9 @@ class Capitolo5 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        showsPagination={true}
+        activeDotColor={'orange'}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -922,10 +1028,21 @@ class Capitolo5 extends React.Component {
         loadMinimalSize = {3}
       >
       <View>
+      <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_195}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="195"
+            sfondo={require("./Images/bg_05.jpg")}
+          />
+        </View>
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_189}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="189"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -935,6 +1052,7 @@ class Capitolo5 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_192}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="192"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -943,16 +1061,8 @@ class Capitolo5 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_195}
-            idf="195"
-            sfondo={require("./Images/bg_05.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_200}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="200"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -962,6 +1072,7 @@ class Capitolo5 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_203}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="203"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -970,7 +1081,38 @@ class Capitolo5 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_226}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="226"
+            sfondo={require("./Images/bg_05.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_224}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="224"
+            sfondo={require("./Images/bg_05.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_228}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="228"
+            sfondo={require("./Images/bg_05.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_210}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="210"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -980,6 +1122,7 @@ class Capitolo5 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_219}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="219"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -988,34 +1131,8 @@ class Capitolo5 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_224}
-            idf="224"
-            sfondo={require("./Images/bg_05.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_226}
-            idf="226"
-            sfondo={require("./Images/bg_05.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_228}
-            idf="228"
-            sfondo={require("./Images/bg_05.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_241}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="241"
             sfondo={require("./Images/bg_05.jpg")}
           />
@@ -1032,8 +1149,9 @@ class Capitolo6 extends React.Component {
         ref="sliderX"
         index={this.props.inizio}
         style={styles.wrapper}
-        showsButtons={true}
-        showsPagination={false}
+        showsButtons={false}
+        showsPagination={true}
+        activeDotColor={'orange'}
         loop={false}
         onIndexChanged={index => {
           swiperIndexChanged(index);
@@ -1045,7 +1163,28 @@ class Capitolo6 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
+            htmlContent={fiaba_274}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="274"
+            sfondo={require("./Images/bg_06.jpg")}
+          />
+      </View>
+      <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_244}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="244"
+            sfondo={require("./Images/bg_06.jpg")}
+          />
+        </View>
+      <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
             htmlContent={fiaba_122}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="122"
             sfondo={require("./Images/bg_06.jpg")}
           />
@@ -1054,26 +1193,19 @@ class Capitolo6 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_244}
-            idf="244"
-            sfondo={require("./Images/bg_06.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
-            htmlContent={fiaba_274}
-            idf="274"
-            sfondo={require("./Images/bg_06.jpg")}
-          />
-        </View>
-        <View>
-          <Fiaba
-            goToIndice={this.props.goToIndice}
-            mynavigation={this.props.navigation}
             htmlContent={fiaba_285}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="285"
+            sfondo={require("./Images/bg_06.jpg")}
+          />
+        </View>
+       <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_296}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="296"
             sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
@@ -1082,6 +1214,7 @@ class Capitolo6 extends React.Component {
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_288}
+            isLoopPlaying={this.props.isLoopPlaying}
             idf="288"
             sfondo={require("./Images/bg_06.jpg")}
           />
@@ -1090,11 +1223,13 @@ class Capitolo6 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_296}
-            idf="296"
+            htmlContent={fiaba_298}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="298"
             sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
+       
       </Swiper>
     );
   }

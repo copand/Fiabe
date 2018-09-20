@@ -9,6 +9,7 @@ import Icon from "react-native-vector-icons/dist/FontAwesome";
 class SideMenu extends Component {
   constructor(props) {
     super(props);
+    this.manageLoop = this.manageLoop.bind(this);
     this.state = { currentScreen: props.navigation.state.routeName };
   }
 
@@ -18,10 +19,16 @@ class SideMenu extends Component {
       params: { cop: "test" }
     });
     this.props.navigation.dispatch(navigateAction);
-    //console.log("rotta " + route);
+    console.log("rotta " + route);
     EventEmitter.emit("indice", "vai");
     this.setState({currentScreen:route});
   };
+
+  manageLoop(){
+    console.log('manage loop');
+    EventEmitter.emit("loopmp3", "toggle");
+    this.navigateToScreen("LoopMp3");
+  }
 
   render() {
     return (
@@ -64,6 +71,19 @@ class SideMenu extends Component {
                 onPress={this.navigateToScreen("Credits")}
               >
                 Credits
+              </Text>
+            </View>
+            <View style={styles.sectionHeadingStyle}>
+              <Icon
+                name="volume-up"
+                size={30}
+                style={(this.state.currentScreen === 'LoopMp3' ? {color:"red", marginRight:10} : {color:'grey', marginRight:10} )}
+              />
+              <Text
+                style={[styles.view, (this.state.currentScreen === 'LoopMp3' ? styles.active : styles.inactive )]}
+                onPress={this.navigateToScreen("LoopMp3")}
+              >
+               Ciclo mp3 
               </Text>
             </View>
         </ScrollView>

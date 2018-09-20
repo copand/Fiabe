@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styles from "./Credits.style";
 import { NavigationActions } from "react-navigation";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import EventEmitter from "react-native-eventemitter";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import { DrawerNavigator, DrawerActions } from "react-navigation";
 
 class Credits extends Component {
   constructor(props) {
+    console.log('Credits constructor');
     super(props);
     this.state = { currentScreen: props.navigation.state.routeName };
   }
@@ -25,7 +27,34 @@ class Credits extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+            <View style={{ flexDirection: "row", zIndex:10000}}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start"
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.dispatch(
+                      DrawerActions.openDrawer()
+                    )
+                  }
+                >
+                  <Icon
+                    name="bars"
+                    size={40}
+                    style={{
+                      color: "gray",
+                      marginLeft: 10,
+                      marginTop: 10
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+          </View>
+ 
         <ScrollView>
             <View style={styles.sectionHeadingStyle}>
               <Icon
@@ -41,9 +70,6 @@ class Credits extends Component {
               </Text>
             </View>
         </ScrollView>
-        <View style={styles.footerContainer}>
-          <Text>© Netkom Group srl</Text>
-        </View>
       </View>
     );
   }

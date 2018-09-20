@@ -20,6 +20,7 @@ import {
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import * as RNIap from "react-native-iap";
 import { AsyncStorage } from "react-native";
+import { DrawerNavigator, DrawerActions } from "react-navigation";
 
 var pagato = false;
 
@@ -49,6 +50,13 @@ export default class MyHomeScreen extends React.Component {
 		RNIap.endConnection();
 	}
 
+	componentWillUpdate(prevProps, prevState) {
+  		// only update chart if the data has changed
+		console.log('componentWillUpdate di INDICE');
+  		console.log(prevProps);
+  		console.log(prevState);
+	}
+
 	async componentDidMount() {
 		try {
 			//await AsyncStorage.removeItem('ricevuta');
@@ -64,7 +72,6 @@ export default class MyHomeScreen extends React.Component {
 			this.getAvailablePurchases();
 			//this.getPurchaseHistory();
 			//TODO da togliere, solo per debug
-			this.state.ricevuta = "OK";
 		} catch (err) {
 			console.warn(err.code, err.message);
 		}
@@ -198,7 +205,7 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	onPress = fiaba => {
-		if (fiaba > 1 && !this.state.ricevuta) {
+		if (fiaba > 1 && !this.state.ricevuta && 0) {
 			Alert.alert("Sblocca tutti i capitoli col pulsante in basso");
 			return;
 		} else {
@@ -231,6 +238,7 @@ export default class MyHomeScreen extends React.Component {
 	render() {
 		const { productList, receipt, availableItemsMessage } = this.state;
 		const receipt100 = receipt.substring(0, 100);
+		const playing = this.props.isLoopPlaying;
 
 		return (
 			<View
@@ -241,6 +249,34 @@ export default class MyHomeScreen extends React.Component {
 					style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
 					source={require("../Images/bg_01.jpg")}
 				>
+
+            <View style={{ flexDirection: "row", zIndex:10000}}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start"
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.dispatch(
+                      DrawerActions.openDrawer()
+                    )
+                  }
+                >
+                  <Icon
+                    name="bars"
+                    size={40}
+                    style={{
+                      color: "gray",
+                      marginLeft: 10,
+                      marginTop: 10
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+          </View>
+ 
 					<View style={styles.container1}>
 						<View style={styles.container}>
 							<TouchableOpacity
@@ -328,7 +364,7 @@ export default class MyHomeScreen extends React.Component {
 					</View>
 					*/}
 
-					{!this.state.ricevuta && (
+					{(!this.state.ricevuta || 1) && (
 					<View style={styles.paga}>
 						<TouchableOpacity
 							//onPress={() => this.buyItemOrig("android.test.purchased")}
@@ -348,22 +384,31 @@ export default class MyHomeScreen extends React.Component {
 						</TouchableOpacity>
 					</View>
 					)}
-					{/*!pagato && 
-					<View style={styles.audio}>
-								<Text style={{ flex: 1 }}>
-									Controllo stato capitoli........
-								</Text>
-					</View>
-					*/}
-					{this.state.ricevuta && (
+					{(!this.state.ricevuta || 1) && (
 						<View style={styles.audio}>
-							<TouchableOpacity onPress={() => this.playAll()}>
+							<TouchableOpacity onPress={() => this.props.navigation.navigate("LoopMp3")}>
 								<View style={styles.button1}>
-									<Icon
-										style={{ flex: 1 }}
-										name="headphones"
+
+								{!playing &&	<Icon
+										name="volume-up"
 										size={40}
+										style={{
+											color: "gray",
+											marginRight: 10,
+											marginTop: 10
+										}}
 									/>
+								}
+								{playing &&	<Icon
+										name="volume-off"
+										size={40}
+										style={{
+											color: "gray",
+											marginRight: 10,
+											marginTop: 10
+										}}
+									/>
+								}
 									<Text style={{ flex: 1 }}>
 										Ascolta tutte le fiabe
 									</Text>
@@ -371,14 +416,14 @@ export default class MyHomeScreen extends React.Component {
 							</TouchableOpacity>
 						</View>
 					)}
-					
+					{/*
 					<View style={styles.switch}>
 						<Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 						<Text style={{ flex: 1 }}>
 									Ascolta tutte le fiabe
 						</Text>
 					</View>
-					
+					*/}	
 				</ImageBackground>
 			</View>
 		);
@@ -412,7 +457,7 @@ const styles = StyleSheet.create({
 		marginTop: 10
 	},
 	container1: {
-		marginTop: 80,
+		marginTop: 10,
 		marginLeft: 20
 	},
 	icon: {

@@ -6,6 +6,7 @@ import styles from "./styles";
 //import {Actions} from "react-native-router-flux";
 import PAGES from "./DataSimple";
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import { DrawerNavigator, DrawerActions } from "react-navigation";
 
 export default class Index extends Component {
 
@@ -39,6 +40,33 @@ export default class Index extends Component {
     const imageAnimate = this.state.animateValue;
     return (
       <View style={styles.container}>
+      <View style={{ flexDirection: "row", zIndex:10000}}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start"
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.dispatch(
+                      DrawerActions.openDrawer()
+                    )
+                  }
+                >
+                  <Icon
+                    name="bars"
+                    size={40}
+                    style={{
+                      color: "gray",
+                      marginLeft: 10,
+                      marginTop: 10
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+          </View>
+ 
         <Animatable.Image
           animation="fadeIn"
           duration={4000}

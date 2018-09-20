@@ -17,13 +17,14 @@ import {
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import Images from "../Constants.js";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import EventEmitter from "react-native-eventemitter";
 const { width, height } = Dimensions.get("window");
 
 export default class Fiaba extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {playing:false};
+		this.state = {playing:false,pause: false};
 		this.indice = this.indice.bind(this);
 		this.finale = this.finale.bind(this);
 	}
@@ -36,11 +37,22 @@ export default class Fiaba extends React.Component {
 		this.props.finale(capitolo);
 	};
 
+	pauseLoop = () => {
+		let myvar = this.state.pause == true ? false : true;
+		this.setState({pause: myvar});
+		if(myvar)
+	    	EventEmitter.emit("loopmp3", "pause");
+		else
+	    	EventEmitter.emit("loopmp3", "play");
+	};
+
 	render() {
 		const idf = this.props.idf;
 		const content = this.props.htmlContent;
 		const resizeMode = "cover";
 		const playing = this.state.playing;
+		let isLoopPlaying = this.props.isLoopPlaying;
+		console.log('isLoopPlaying ' + isLoopPlaying);
 		return (
 			<View
 				style={{ flex: 1, flexDirection: "column", minHeight: height }}
@@ -50,8 +62,7 @@ export default class Fiaba extends React.Component {
 					style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
 					source={this.props.sfondo}
 				>
-					<ScrollView>
-						<View style={{ flexDirection: "row" }}>
+				<View style={{ flexDirection: "row" }}>
 							<View
 								style={{
 									flex: 1,
@@ -76,7 +87,7 @@ export default class Fiaba extends React.Component {
 									/>
 								</TouchableOpacity>
 							</View>
-							{/*
+							
 							<View
 								style={{
 									flex: 1,
@@ -96,7 +107,8 @@ export default class Fiaba extends React.Component {
 									/>
 								</TouchableOpacity>
 							</View>
-							*/}
+						
+							{!!!isLoopPlaying && (
 							<View
 								style={{
 									flex: 1,
@@ -132,7 +144,10 @@ export default class Fiaba extends React.Component {
 								}
 								</TouchableOpacity>
 							</View>
+							)}
 						</View>
+					<ScrollView>
+						
 
 						<View style={styles.contenuto}>
 							{Object.keys(content).map(function(key) {
