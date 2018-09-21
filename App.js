@@ -29,6 +29,7 @@ import LoopMp3 from "./LoopMp3";
 import Fiaba from "./Fiaba";
 import SideMenu from './SideMenu';
 import EventEmitter from "react-native-eventemitter";
+import Splash from "./Splash";
 
 
 // capitolo1
@@ -370,7 +371,7 @@ swiperIndexChanged = index => {
 const InnerNavigator = DrawerNavigator(
   {
     Intro: {
-      screen: Intro,
+      screen: Splash,
       navigationOptions: {
         drawerIcon: ({ tintColor }) => (
           <Icon
@@ -1028,7 +1029,6 @@ class Capitolo5 extends React.Component {
         loadMinimalSize = {3}
       >
       <View>
-      <View>
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
@@ -1038,6 +1038,7 @@ class Capitolo5 extends React.Component {
             sfondo={require("./Images/bg_05.jpg")}
           />
         </View>
+        <View>
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}

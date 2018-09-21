@@ -42,9 +42,9 @@ class SideMenu extends Component {
               />
               <Text
               style={[styles.view, (this.state.currentScreen === 'Intro' ? styles.active : styles.inactive )]}
-                onPress={this.navigateToScreen("Intro")}
+                onPress={this.navigateToScreen("Splash")}
               >
-                Intro
+             Intro
               </Text>
             </View>
             <View style={styles.sectionHeadingStyle}>

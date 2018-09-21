@@ -72,6 +72,7 @@ export default class MyHomeScreen extends React.Component {
 			this.getAvailablePurchases();
 			//this.getPurchaseHistory();
 			//TODO da togliere, solo per debug
+			//this.state.ricevuta = "OK";
 		} catch (err) {
 			console.warn(err.code, err.message);
 		}
