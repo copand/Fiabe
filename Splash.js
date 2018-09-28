@@ -1,15 +1,25 @@
 import React, { Component } from "react";
-import { Animated, Text, View, TouchableOpacity, StyleSheet, Dimensions} from "react-native";
+import {
+  Animated,
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Image,
+  ImageBackground
+} from "react-native";
 import Swiper from "react-native-swiper";
 import * as Animatable from "react-native-animatable";
 //import {Actions} from "react-native-router-flux";
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
-const PAGE_WIDTH = Dimensions.get('window').width;
-const PAGE_HEIGHT = Dimensions.get('window').height;
+import { withNavigation } from 'react-navigation';
 
-export default class Splash extends Component {
+const PAGE_WIDTH = Dimensions.get("window").width;
+const PAGE_HEIGHT = Dimensions.get("window").height;
 
+class Splash extends Component {
   state = {
     iconSize: 120,
     animateValue: new Animated.Value(1)
@@ -51,140 +61,162 @@ export default class Splash extends Component {
           showsPagination={false}
           ref="sliderCop"
         >
-        <View style={{flex:1}}>
+          <View style={styles.contenuto}>
+            <ImageBackground
+              resizeMode={"stretch"} // or cover
+              style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+              source={require("./Images/bg_02.jpg")}
+            >
+              <TouchableOpacity
+                onPress={() => this.refs.sliderCop.scrollBy(1, true)}
+              >
+              <Image
+                      style={{marginTop:'50%'}}
+                      resizeMode="contain"
+                      source={require("./Images/shop7.png")}
+                    />
+              </TouchableOpacity>
+            </ImageBackground>
+          </View>
+          <View style={styles.contenuto}>
           <TouchableOpacity
-                  onPress={() =>
-                    this.refs.sliderCop.scrollBy(1, true)
-                  }
-                >
-        <Text>
-        UnO
-        </Text>
-        </TouchableOpacity>
-        </View>
-        <View>
-        <Text>
-        DuE
-        </Text>
-        </View>
+                onPress={() => this.props.navigation.navigate('Capitoli')}
+              >
+              <Image
+                      style={{}}
+                      resizeMode="contain"
+                      source={require("./Images/shop8.png")}
+                    />
+              </TouchableOpacity>
+   
+          </View>
         </Swiper>
       </View>
     );
   }
 }
+
+export default withNavigation(Splash);
+
 const styles = StyleSheet.create({
-container: {
-    flex: 1,
+  contenuto: {
+    //paddingTop: height * 0.05,
+    justifyContent: "center",
+    alignItems: "center",
+    flex:1
+  },
+  container: {
+    flex: 1
   },
   background: {
     width: PAGE_WIDTH,
-    resizeMode: 'cover',
+    resizeMode: "cover",
     opacity: 0.9,
-    position: 'absolute'
+    position: "absolute"
   },
   title: {
-    color: 'rgba(235, 215, 208, 1)',
+    color: "rgba(235, 215, 208, 1)",
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 0.5,
-    textAlign: 'center',
+    textAlign: "center"
   },
   vai: {
     fontSize: PAGE_WIDTH / 20,
-    color: '#3f77ba',
-    backgroundColor: 'transparent',
+    color: "#3f77ba",
+    backgroundColor: "transparent",
     marginTop: 120,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc: {
     fontSize: PAGE_WIDTH / 17,
-    color: '#3f77ba',
-    backgroundColor: 'transparent',
+    color: "#3f77ba",
+    backgroundColor: "transparent",
     marginTop: 60,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc1: {
     fontSize: PAGE_WIDTH / 20,
-    color: '#3f77ba',
-    backgroundColor: 'transparent',
+    color: "#3f77ba",
+    backgroundColor: "transparent",
     marginTop: 20,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc2: {
     fontSize: PAGE_WIDTH / 17,
-    color: '#000000',
-    backgroundColor: 'transparent',
+    color: "#000000",
+    backgroundColor: "transparent",
     marginTop: 20,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc3: {
     fontSize: PAGE_WIDTH / 25,
-    color: '#000000',
-    backgroundColor: 'transparent',
+    color: "#000000",
+    backgroundColor: "transparent",
     marginTop: 20,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc4: {
     fontSize: PAGE_WIDTH / 17,
-    color: '#3f77ba',
-    backgroundColor: 'transparent',
+    color: "#3f77ba",
+    backgroundColor: "transparent",
     marginTop: 20,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc5: {
     fontSize: PAGE_WIDTH / 25,
-    color: '#000000',
-    backgroundColor: 'transparent',
+    color: "#000000",
+    backgroundColor: "transparent",
     marginTop: 20,
-    lineHeight: 25,
+    lineHeight: 25
   },
   desc6: {
     fontSize: PAGE_WIDTH / 17,
-    color: '#000000',
-    backgroundColor: 'transparent',
+    color: "#000000",
+    backgroundColor: "transparent",
     marginTop: 10,
-    lineHeight: 25,
+    lineHeight: 25
   },
   page: {
     width: PAGE_WIDTH,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 150,
     paddingLeft: 50,
-    paddingRight: 50,
+    paddingRight: 50
   },
   footer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 50,
     right: 50
   },
   icon: {
-    position: 'absolute',
+    position: "absolute",
     top: 150,
     width: 80 * PAGE_WIDTH / 100,
-    resizeMode: 'contain',
+    resizeMode: "contain"
   },
   icon1: {
-    position: 'absolute',
+    position: "absolute",
     top: 250,
     width: 50 * PAGE_WIDTH / 100,
-    resizeMode: 'contain',
+    resizeMode: "contain"
   },
   dot: {
-    backgroundColor: 'rgba(255, 255, 255, .3)',
+    backgroundColor: "rgba(255, 255, 255, .3)",
     width: 6,
     height: 6,
     borderRadius: 4,
     marginLeft: 4,
-    marginRight: 4,
+    marginRight: 4
   },
 
   dotActive: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: "rgba(255, 255, 255, 1)",
     width: 9,
     height: 9,
     borderRadius: 6,
     marginLeft: 4,
-    marginRight: 4,
+    marginRight: 4
   }
 });

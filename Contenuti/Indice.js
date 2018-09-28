@@ -28,9 +28,7 @@ const { width, height } = Dimensions.get("window");
 
 const itemSkus = Platform.select({
 	ios: ["capitoli_tutti"],
-	android: [
-		"capitoli_tutti"
-	]
+	android: ["capitoli_tutti"]
 });
 
 export default class MyHomeScreen extends React.Component {
@@ -51,28 +49,37 @@ export default class MyHomeScreen extends React.Component {
 	}
 
 	componentWillUpdate(prevProps, prevState) {
-  		// only update chart if the data has changed
-		console.log('componentWillUpdate di INDICE');
-  		console.log(prevProps);
-  		console.log(prevState);
+		// only update chart if the data has changed
+		//console.log("componentWillUpdate di INDICE");
+		//console.log(prevProps);
+		//console.log(prevState);
 	}
 
 	async componentDidMount() {
 		try {
+			//per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
-			AsyncStorage.getItem("ricevuta").then(value =>
-				this.setState({ ricevuta: value })
-			);
-			const result = await RNIap.prepare();
-			console.log("result", result);
-			const products = await RNIap.getProducts(itemSkus);
-			this.setState({ productList: products });
-			//this.setState({ items });
-			console.log("products", products);
-			this.getAvailablePurchases();
-			//this.getPurchaseHistory();
-			//TODO da togliere, solo per debug
-			//this.state.ricevuta = "OK";
+
+			await AsyncStorage.getItem("ricevuta").then(value => {
+				//'inapp:it.netkomgroup.fiabe:'
+				var regex1 = RegExp("^inapp:it.netkomgroup.fiabe:*.");
+				console.log("testo la regexp ", regex1.test(value));
+				if (regex1.test(value)) {
+					this.setState({ ricevuta: "ok" });
+				}
+			});
+			console.log("aspetto  asyncstorage, valore " + this.state.ricevuta);
+			if (this.state.ricevuta != "ok") {
+				const result = await RNIap.prepare();
+				console.log("result", result);
+				const products = await RNIap.getProducts(itemSkus);
+				this.setState({ productList: products });
+				//this.setState({ items });
+				console.log("products", products);
+				//OCCHIO lo commento in debug  ma in produzione potrebbe servire per recuperare lo storico
+				this.getAvailablePurchases();
+				//this.getPurchaseHistory();
+			}
 		} catch (err) {
 			console.warn(err.code, err.message);
 		}
@@ -138,7 +145,8 @@ export default class MyHomeScreen extends React.Component {
 					// Error saving data
 					console.log("Errore storare ricevuta ", errore);
 				}
-				this.setState({ ricevuta: 'ok'})
+				console.log("settiamo state.ricevuta a ok dentro buyItem");
+				this.setState({ ricevuta: "ok" });
 				pagato = true;
 				if (Platform.OS === "android") return;
 				RNIap.finishTransaction();
@@ -181,7 +189,6 @@ export default class MyHomeScreen extends React.Component {
 			const purchases = await RNIap.getAvailablePurchases();
 			console.info("Available purchases :: ", purchases);
 			if (purchases && purchases.length > 0) {
-				
 				try {
 					await AsyncStorage.setItem(
 						"ricevuta",
@@ -191,12 +198,15 @@ export default class MyHomeScreen extends React.Component {
 					// Error saving data
 					console.log("Errore storare ricevuta ", error);
 				}
-				
+
 				pagato = true;
+				console.log(
+					"settiamo state.ricevuta a ok dentro getAvaiPurchases"
+				);
 				this.setState({
 					availableItemsMessage: `Got ${purchases.length} items.`,
 					receipt: purchases[0].transactionReceipt,
-					ricevuta: 'ok'
+					ricevuta: "ok"
 				});
 			}
 		} catch (err) {
@@ -206,16 +216,15 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	onPress = fiaba => {
-		if (fiaba > 1 && !this.state.ricevuta && 0) {
-			Alert.alert("Sblocca tutti i capitoli col pulsante in basso");
-			return;
-		} else {
-			console.log("vado al  capitolo" + fiaba);
-			this.props.capitolo(fiaba);
-		}
+		console.log("vado al capitolo " + fiaba);
+		this.props.capitolo(fiaba);
 		//console.log(this.props.navigation);
 		//this.props.navigation.navigate("Fiabe",{fiabe: fiaba})
 		//console.log('finito');
+	};
+
+	onPressBlock = fiaba => {
+			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche col pusante stella!");
 	};
 
 	playAll = () => {
@@ -241,193 +250,293 @@ export default class MyHomeScreen extends React.Component {
 		const receipt100 = receipt.substring(0, 100);
 		const playing = this.props.isLoopPlaying;
 
-		return (
-			<View
-				style={{ flex: 1, flexDirection: "column", minHeight: height }}
-			>
-				<ImageBackground
-					resizeMode={"stretch"} // or cover
-					style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
-					source={require("../Images/bg_01.jpg")}
+		//facciamo 2 view: gratis/pagato
+		console.log("sono in render");
+		console.log("ricevuta", this.state.ricevuta);
+
+		if (!this.state.ricevuta)
+			return (
+				<View
+					style={{
+						flex: 1,
+						flexDirection: "column",
+						minHeight: height,
+					}}
 				>
-
-            <View style={{ flexDirection: "row", zIndex:10000}}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start"
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.dispatch(
-                      DrawerActions.openDrawer()
-                    )
-                  }
-                >
-                  <Icon
-                    name="bars"
-                    size={40}
-                    style={{
-                      color: "gray",
-                      marginLeft: 10,
-                      marginTop: 10
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-          </View>
- 
-					<View style={styles.container1}>
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(1)}
+					<ImageBackground
+						resizeMode={"stretch"} // or cover
+						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+						source={require("../Images/bg_01.jpg")}
+					>
+						<View style={{ flexDirection: "row", zIndex: 10000 }}>
+							<View
+								style={{
+									flex: 1,
+									alignItems: "flex-start"
+								}}
 							>
-								<Text style={styles.grande}>
-									Persone e famiglia
-								</Text>
-								<Text style={styles.piccolo}>
-									9 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(2)}
-							>
-								<Text style={styles.grande}>Animali</Text>
-								<Text style={styles.piccolo}>
-									15 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(3)}
-							>
-								<Text style={styles.grande}>
-									Giochi da cortile, conti e ricami
-								</Text>
-								<Text style={styles.piccolo}>
-									10 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(4)}
-							>
-								<Text style={styles.grande}>
-									Buona notte, baiu bai
-								</Text>
-								<Text style={styles.piccolo}>
-									8 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(5)}
-							>
-								<Text style={styles.grande}>
-									Le stagioni
-								</Text>
-								<Text style={styles.piccolo}>
-									11 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-						<View style={styles.container}>
-							<TouchableOpacity
-								style={styles.button}
-								onPress={() => this.onPress(6)}
-							>
-								<Text style={styles.grande}>Frottole</Text>
-								<Text style={styles.piccolo}>
-									7 filastrocche
-								</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
-					{/*
-					<View style={styles.container}>
-						<Text style={styles.grande}>
-							Ricevuta locale: {this.state.ricevuta}
-						</Text>
-					</View>
-					*/}
-
-					{(!this.state.ricevuta || 1) && (
-					<View style={styles.paga}>
-						<TouchableOpacity
-							//onPress={() => this.buyItemOrig("android.test.purchased")}
-							onPress={() => this.buyItemOrig("capitoli_tutti")}
-						>
-							<View style={styles.button1}>
-								<Icon
-									style={{ flex: 1 }}
-									name="star"
-									size={40}
-									color="gold"
-								/>
-								<Text style={{ flex: 1 }}>
-									Sblocca tutti i capitoli!!!!!!!
-								</Text>
+								<TouchableOpacity
+									onPress={() =>
+										this.props.navigation.dispatch(
+											DrawerActions.openDrawer()
+										)
+									}
+								>
+									<Icon
+										name="bars"
+										size={40}
+										style={{
+											color: "gray",
+											marginLeft: 10,
+											marginTop: 10
+										}}
+									/>
+								</TouchableOpacity>
 							</View>
-						</TouchableOpacity>
-					</View>
-					)}
-					{(!this.state.ricevuta || 1) && (
-						<View style={styles.audio}>
-							<TouchableOpacity onPress={() => this.props.navigation.navigate("LoopMp3")}>
-								<View style={styles.button1}>
+						</View>
 
-								{!playing &&	<Icon
-										name="volume-up"
+						<View style={styles.containerTot}>
+							<View style={styles.containerCapDemo}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(100)}
+								>
+									<Text style={styles.grande}>
+										Capitolo dimostrativo
+									</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.container}>
+								<TouchableOpacity
+									//onPress={() =>
+									//	this.buyItemOrig("android.test.purchased")
+									//}
+									onPress={() =>
+										this.buyItemOrig("capitoli_tutti")
+									}
+								>
+									<View style={styles.button1}>
+										<Icon
+											style={{}}
+											name="star"
+											size={40}
+											color="gold"
+										/>
+										<Text style={styles.bottoneStella}>
+											Sblocca tutte le 60 filastrocche!
+										</Text>
+									</View>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.containerCap1}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(1)}
+								>
+									<Text style={styles.grande}>
+										Persone e famiglia
+									</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap2}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(2)}
+								>
+									<Text style={styles.grande}>Animali</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap3}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(3)}
+								>
+									<Text style={styles.grande}>
+										Giochi da cortile, conti e ricami
+									</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap4}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(4)}
+								>
+									<Text style={styles.grande}>
+										Buona notte, baiu bai
+									</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.containerCap5}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(5)}
+								>
+									<Text style={styles.grande}>
+										Le stagioni
+									</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.containerCap6}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPressBlock(6)}
+								>
+									<Text style={styles.grande}>Frottole</Text>
+								</TouchableOpacity>
+							</View>
+							
+						</View>
+
+							
+					</ImageBackground>
+				</View>
+			);
+		else
+			return (
+				<View
+					style={{
+						flex: 1,
+						flexDirection: "column",
+						minHeight: height
+					}}
+				>
+					<ImageBackground
+						resizeMode={"stretch"} // or cover
+						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+						source={require("../Images/bg_01.jpg")}
+					>
+						<View style={{ flexDirection: "row", zIndex: 10000 }}>
+							<View
+								style={{
+									flex: 1,
+									alignItems: "flex-start"
+								}}
+							>
+								<TouchableOpacity
+									onPress={() =>
+										this.props.navigation.dispatch(
+											DrawerActions.openDrawer()
+										)
+									}
+								>
+									<Icon
+										name="bars"
 										size={40}
 										style={{
 											color: "gray",
-											marginRight: 10,
+											marginLeft: 10,
 											marginTop: 10
 										}}
 									/>
+								</TouchableOpacity>
+							</View>
+						</View>
+
+						<View style={styles.containerTot}>
+						<View style={styles.containerCap1}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(1)}
+								>
+									<Text style={styles.grande}>
+										Persone e famiglia
+									</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap2}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(2)}
+								>
+									<Text style={styles.grande}>Animali</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap3}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(3)}
+								>
+									<Text style={styles.grande}>
+										Giochi da cortile, conti e ricami
+									</Text>
+								</TouchableOpacity>
+							</View>
+
+							<View style={styles.containerCap4}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(4)}
+								>
+									<Text style={styles.grande}>
+										Buona notte, baiu bai
+									</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.containerCap5}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(5)}
+								>
+									<Text style={styles.grande}>
+										Le stagioni
+									</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.containerCap6}>
+								<TouchableOpacity
+									style={styles.button}
+									onPress={() => this.onPress(6)}
+								>
+									<Text style={styles.grande}>Frottole</Text>
+								</TouchableOpacity>
+							</View>
+	
+						</View>
+
+						<View style={styles.audio}>
+							<TouchableOpacity
+								onPress={() =>
+									this.props.navigation.navigate("LoopMp3")
 								}
-								{playing &&	<Icon
-										name="volume-off"
-										size={40}
-										style={{
-											color: "gray",
-											marginRight: 10,
-											marginTop: 10
-										}}
-									/>
-								}
+							>
+								<View style={styles.button1}>
+									{!playing && (
+										<Icon
+											name="volume-up"
+											size={40}
+											style={{
+												color: "gray",
+												marginRight: 10,
+												marginTop: 10
+											}}
+										/>
+									)}
+									{playing && (
+										<Icon
+											name="volume-off"
+											size={40}
+											style={{
+												color: "gray",
+												marginRight: 10,
+												marginTop: 10
+											}}
+										/>
+									)}
 									<Text style={{ flex: 1 }}>
 										Ascolta tutte le fiabe
 									</Text>
 								</View>
 							</TouchableOpacity>
 						</View>
-					)}
-					{/*
-					<View style={styles.switch}>
-						<Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
-						<Text style={{ flex: 1 }}>
-									Ascolta tutte le fiabe
-						</Text>
-					</View>
-					*/}	
-				</ImageBackground>
-			</View>
-		);
+					</ImageBackground>
+				</View>
+			);
 	}
 }
 
@@ -457,16 +566,89 @@ const styles = StyleSheet.create({
 	container: {
 		marginTop: 10
 	},
+	containerCap1: {
+		backgroundColor:'red',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap2: {
+		backgroundColor:'orange',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap3: {
+		backgroundColor:'#CCCC00',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap4: {
+		backgroundColor:'green',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap5: {
+		backgroundColor:'blue',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap6: {
+		backgroundColor:'purple',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCapDemo: {
+		backgroundColor:'brown',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerTot: {
+		marginTop: 10,
+		marginLeft: 20,
+		justifyContent: "center",
+		alignItems: "center"
+	},
 	container1: {
 		marginTop: 10,
-		marginLeft: 20
 	},
 	icon: {
 		width: 24,
 		height: 24
 	},
 	grande: {
-		fontSize: 25
+		fontSize: 25,
+		color:'#ffffff'
+	},
+	bottoneStella: {
+		fontSize: 20,
+		color:'black'
 	},
 	piccolo: {}
 });

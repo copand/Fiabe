@@ -10,6 +10,7 @@ class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.manageLoop = this.manageLoop.bind(this);
+    console.log('PROPSSSSS '  + props.navigation.state.routeName);
     this.state = { currentScreen: props.navigation.state.routeName };
   }
 
@@ -34,62 +35,59 @@ class SideMenu extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-            <View style={styles.sectionHeadingStyle}>
+            <View style={styles.sectionHeadingStyle1}>
               <Icon
                 name="home"
-                size={30}
-                style={(this.state.currentScreen === 'Intro' ? {color:"red", marginRight:10} : {color:'grey', marginRight:10} )}
+                size={40}
+                style={(this.state.currentScreen === 'Intro' || this.state.currentScreen === 'Indice' ? styles.activeIcon : styles.inactiveIcon )}
               />
               <Text
-              style={[styles.view, (this.state.currentScreen === 'Intro' ? styles.active : styles.inactive )]}
-                onPress={this.navigateToScreen("Splash")}
+              style={[styles.view, (this.state.currentScreen === 'Intro' || this.state.currentScreen === 'Indice' ? styles.active : styles.inactive )]}
+                onPress={this.navigateToScreen("Intro")}
               >
-             Intro
+              HOME 
               </Text>
             </View>
-            <View style={styles.sectionHeadingStyle}>
+            <View style={styles.sectionHeadingStyle2}>
               <Icon
                 name="bars"
-                size={30}
-                style={(this.state.currentScreen === 'Capitoli' ? {color:"red", marginRight:10} : {color:'grey', marginRight:10} )}
+                size={40}
+                style={(this.state.currentScreen === 'Capitoli' ? styles.activeIcon : styles.inactiveIcon )}
               />
               <Text
                 style={[styles.view, (this.state.currentScreen === 'Capitoli' ? styles.active : styles.inactive )]}
                 onPress={this.navigateToScreen("Capitoli")}
               >
-              Capitoli
+              CAPITOLI
               </Text>
             </View>
-            <View style={styles.sectionHeadingStyle}>
+            <View style={styles.sectionHeadingStyle3}>
               <Icon
-                name="users"
-                size={30}
-                style={(this.state.currentScreen === 'Credits' ? {color:"red", marginRight:10} : {color:'grey', marginRight:10} )}
+                name="user"
+                size={40}
+                style={(this.state.currentScreen === 'Credits' ? styles.activeIcon : styles.inactiveIcon )}
               />
               <Text
                 style={[styles.view, (this.state.currentScreen === 'Credits' ? styles.active : styles.inactive )]}
                 onPress={this.navigateToScreen("Credits")}
               >
-                Credits
+               INFO 
               </Text>
             </View>
-            <View style={styles.sectionHeadingStyle}>
+            <View style={styles.sectionHeadingStyle4}>
               <Icon
-                name="volume-up"
-                size={30}
-                style={(this.state.currentScreen === 'LoopMp3' ? {color:"red", marginRight:10} : {color:'grey', marginRight:10} )}
+                name="play-circle"
+                size={40}
+                style={(this.state.currentScreen === 'LoopMp3' ? styles.activeIcon : styles.inactiveIcon )}
               />
               <Text
                 style={[styles.view, (this.state.currentScreen === 'LoopMp3' ? styles.active : styles.inactive )]}
                 onPress={this.navigateToScreen("LoopMp3")}
               >
-               Ciclo mp3 
+               CICLO CONTINUO
               </Text>
             </View>
         </ScrollView>
-        <View style={styles.footerContainer}>
-          <Text>© Netkom Group srl</Text>
-        </View>
       </View>
     );
   }

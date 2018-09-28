@@ -276,6 +276,8 @@ class Fiabe extends React.Component {
           <MyHomeScreen goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />
         </View>
       );
+    else if (this.state.capitolo == 100)
+      return <Capitolo0 goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 1)
       return <Capitolo1 goToIndice={this.goToIndice} capitolo={this.capitolo} navigation={this.props.navigation} isLoopPlaying={this.state.isLoopPlaying} />;
     else if (this.state.capitolo == 2)
@@ -421,7 +423,7 @@ const InnerNavigator = DrawerNavigator(
   },
   {
   contentComponent: SideMenu,
-  drawerWidth: Dimensions.get("window").width / 2.0,
+  drawerWidth: Dimensions.get("window").width / 1.5,
   drawerBackgroundColor: "#ffffff",
   contentOptions: {
       activeTintColor: "#3f77ba",
@@ -498,6 +500,70 @@ const SimpleApp = StackNavigator(
   }
 );
 
+
+class Capitolo0 extends React.Component {
+  render() {
+    return (
+      <Swiper
+        ref="sliderX"
+        index={this.props.inizio}
+        style={styles.wrapper}
+        showsButtons={false}
+        activeDotColor={'orange'}
+        showsPagination={true}
+        loop={false}
+        onIndexChanged={index => {
+          swiperIndexChanged(index);
+        }}
+        loadMinimal = {true}
+        loadMinimalSize = {4}
+      >
+        <View>
+          <Fiaba
+            slider={this.refs.sliderX}
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_134}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="134"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_118}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="118"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_234}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="234"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+        <View>
+          <Fiaba
+            goToIndice={this.props.goToIndice}
+            mynavigation={this.props.navigation}
+            htmlContent={fiaba_164}
+            isLoopPlaying={this.props.isLoopPlaying}
+            idf="164"
+            sfondo={require("./Images/bg_01.jpg")}
+          />
+        </View>
+      </Swiper>
+    );
+  }
+}
+
 class Capitolo1 extends React.Component {
   render() {
     return (
@@ -568,8 +634,6 @@ class Capitolo1 extends React.Component {
         </View>
         <View>
           <Fiaba
-            finale={this.props.capitolo}
-            capTitolo="Animali"
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
             htmlContent={fiaba_230}
@@ -606,6 +670,8 @@ class Capitolo1 extends React.Component {
             isLoopPlaying={this.props.isLoopPlaying}
             idf="161"
             sfondo={require("./Images/bg_01.jpg")}
+            finale={this.props.capitolo}
+            capTitolo="Animali"
           />
         </View>
       </Swiper>

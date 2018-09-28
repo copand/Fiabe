@@ -29,5 +29,20 @@ export default {
   },
   activeIcon: {
     color: 'red'
-  }
+  },
+  containerTot: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "purple"
+  },
+  viewTop: {
+    flex:1,
+    backgroundColor: "purple"
+  },
+  grande: {
+    textAlign:"center",
+    fontSize: 25,
+    marginBottom: 20,
+    color:'#ffffff'
+  },
 };
