@@ -2,10 +2,15 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styles from "./LoopMp3.style";
 import { NavigationActions } from "react-navigation";
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, ImageBackground, Image, Dimensions } from "react-native";
 import EventEmitter from "react-native-eventemitter";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
+import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
+
+const PAGE_WIDTH = Dimensions.get("window").width;
+const PAGE_HEIGHT = Dimensions.get("window").height;
+
 
 class LoopMp3 extends Component {
   constructor(props) {
@@ -30,6 +35,11 @@ class LoopMp3 extends Component {
   render() {
     return (
       <View style={styles.viewTop}>
+     <ImageBackground
+              resizeMode={"stretch"} // or cover
+              style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+              source={require("./Images/bg_ciclocontinuo.png")}
+            >
         <ScrollView>
           <View style={{ flexDirection: "row", marginBottom: 50 }}>
             <View
@@ -56,10 +66,11 @@ class LoopMp3 extends Component {
             </View>
           </View>
 
-        <View style={styles.containerTot}>
-              <Text style={styles.grande}>
+        <View style={styles.viewCenter}>
+        <Text style={styles.grande}>
                     RIPRODUZIONE A CICLO CONTINUO
-              </Text>
+        </Text>
+        <View style={styles.containerTot}>
           <View style={styles.sectionHeadingStyle}>
             <TouchableOpacity
               onPress={() => {
@@ -121,7 +132,16 @@ class LoopMp3 extends Component {
             </TouchableOpacity>
           </View>
           </View>
+          <TouchableOpacity
+                style={styles.contenuto}
+                onPress={() => this.props.navigation.navigate('Capitoli')}
+              >
+              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" size={70} style={{zIndex:12000, padding:40}} />
+          </TouchableOpacity>
+ 
+        </View>
         </ScrollView>
+        </ImageBackground>
       </View>
     );
   }

@@ -10,10 +10,9 @@ export default {
     backgroundColor: 'lightgrey'
   },
   sectionHeadingStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingVertical: 10,
-    paddingHorizontal: 5
+    width:'32%',
+    justifyContent: "center",
+    alignItems: "center",
   },
   footerContainer: {
     padding: 20,
@@ -31,13 +30,21 @@ export default {
     color: 'red'
   },
   containerTot: {
+    flex:1,
+    flexDirection: 'row',
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "purple"
   },
   viewTop: {
     flex:1,
-    backgroundColor: "purple"
+    backgroundColor: "purple",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  viewCenter: {
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   grande: {
     textAlign:"center",

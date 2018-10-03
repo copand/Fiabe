@@ -18,7 +18,10 @@ import { DrawerNavigator, DrawerActions } from "react-navigation";
 import Images from "../Constants.js";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import EventEmitter from "react-native-eventemitter";
+import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
+
 const { width, height } = Dimensions.get("window");
+const book = (<FontAwesome5Pro name={'book-open'} size={35} style={{paddingTop:10}} />);
 
 export default class Fiaba extends React.Component {
 
@@ -97,14 +100,7 @@ export default class Fiaba extends React.Component {
 								<TouchableOpacity
 									onPress={() => this.indice()}
 								>
-									<Icon
-										name="home"
-										size={40}
-										style={{
-											color: "gray",
-											marginTop: 10
-										}}
-									/>
+								{book}
 								</TouchableOpacity>
 							</View>
 						

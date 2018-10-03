@@ -1,6 +1,5 @@
 export default {
   container: {
-    paddingTop: 20,
     flex: 1
   },
   navItemStyle: {
@@ -29,5 +28,12 @@ export default {
   },
   activeIcon: {
     color: 'red'
-  }
+  },
+  contenuto: {
+    //paddingTop: height * 0.05,
+    padding:20,
+    justifyContent: "center",
+    alignItems: "center",
+    flex:1
+  },
 };

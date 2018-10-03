@@ -15,6 +15,9 @@ import * as Animatable from "react-native-animatable";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import { withNavigation } from 'react-navigation';
+import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
+
+const book = (<FontAwesome5Pro name={'book-open'} size={35} />);
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 const PAGE_HEIGHT = Dimensions.get("window").height;
@@ -61,35 +64,53 @@ class Splash extends Component {
           showsPagination={false}
           ref="sliderCop"
         >
-          <View style={styles.contenuto}>
             <ImageBackground
               resizeMode={"stretch"} // or cover
               style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
-              source={require("./Images/bg_02.jpg")}
+              source={require("./Images/bg_home.png")}
             >
+          <View style={styles.contenuto}>
               <TouchableOpacity
                 onPress={() => this.refs.sliderCop.scrollBy(1, true)}
               >
               <Image
-                      style={{marginTop:'50%'}}
+                      style={{marginTop:'-5%', width:PAGE_WIDTH/1.1}}
                       resizeMode="contain"
-                      source={require("./Images/shop7.png")}
+                      source={require("./Images/titolo_home.png")}
                     />
               </TouchableOpacity>
-            </ImageBackground>
           </View>
+            </ImageBackground>
+
+          <ImageBackground
+              resizeMode={"stretch"} // or cover
+              style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+              source={require("./Images/bg_intro.png")}
+            >
           <View style={styles.contenuto}>
+          <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 10, paddingTop:20, textAlign:'center'}}>
+          FOLCLORE RUSSO PER BAMBINI
+          </Text>
+          <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 15}}>
+          in lingua italiana
+          </Text>
+          <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 12, paddingTop:20}}>
+          PARTE DUE 
+          </Text>
+ 
           <TouchableOpacity
+                style={styles.contenuto}
                 onPress={() => this.props.navigation.navigate('Capitoli')}
               >
               <Image
-                      style={{}}
+                      style={{width:PAGE_WIDTH/1.5, marginTop:'-30%'}}
                       resizeMode="contain"
-                      source={require("./Images/shop8.png")}
+                      source={require("./Images/coniglio_home.png")}
                     />
+   <FontAwesome5Pro name={'book-open'} color="orange" size={70} style={{zIndex:12000, marginTop:'-35%'}} />
               </TouchableOpacity>
-   
           </View>
+            </ImageBackground>
         </Swiper>
       </View>
     );
@@ -210,7 +231,6 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     marginRight: 4
   },
-
   dotActive: {
     backgroundColor: "rgba(255, 255, 255, 1)",
     width: 9,
@@ -218,5 +238,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginLeft: 4,
     marginRight: 4
+  },
+  book:{
+    color:'orange'
   }
 });

@@ -10,7 +10,9 @@ import {
   Text,
   Animated,
   Easing,
-  AppState
+  AppState,
+  ImageBackground,
+  TouchableOpacity
 } from "react-native";
 //import HTMLView from "react-native-htmlview";
 import {
@@ -102,6 +104,8 @@ import fiaba_298 from "./Contenuti/fiaba298.js";
 import Spinner from "react-native-spinkit";
 import MyHomeScreen from "./Contenuti/Indice.js";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
+
 
 var indexTOIDF = [
   97,
@@ -142,7 +146,7 @@ var globalIndex = -1;
 var globalAudio = false;
 var playing = false;
 var whoosh = null;
-const { widthW } = Dimensions.get("window");
+const { widthW,height} = Dimensions.get("window");
 
 class Fiabe extends React.Component {
   constructor(props) {
@@ -558,6 +562,9 @@ class Capitolo0 extends React.Component {
             idf="164"
             sfondo={require("./Images/bg_01.jpg")}
           />
+        </View>
+        <View>
+        <Fine goToIndice={this.props.goToIndice} mynavigation={this.props.navigation}/>
         </View>
       </Swiper>
     );
@@ -1296,9 +1303,48 @@ class Capitolo6 extends React.Component {
             sfondo={require("./Images/bg_06.jpg")}
           />
         </View>
+        <View>
+        <Fine goToIndice={this.props.goToIndice} mynavigation={this.props.navigation}/>
+        </View>
        
       </Swiper>
     );
+  }
+}
+
+
+class Fine extends React.Component {
+  render(){
+    return(
+
+      <View
+        style={{ flex: 1, flexDirection: "column", minHeight: height ,justifyContent: "center"}}
+      >
+        <ImageBackground
+              resizeMode={"stretch"} // or cover
+              style={{ flex: 1, alignItems:'center' }} // must be passed from the parent, the number may vary depending upon your screen size
+              source={require("./Images/bg_fine.png")}
+            >
+                   <Image
+                      style={{width:'100%'}}
+                      resizeMode="contain"
+                      source={require("./Images/bouquet_pag_fine.png")}
+                    />
+                    <Text style={{color:'#FFFFFF', textAlign:'center', fontSize:50, marginTop:'-15%'}}>
+                    FINE
+                    </Text>
+              <TouchableOpacity
+                style={styles.contenuto}
+                onPress={() => {
+                  console.log("props",this.props);
+                  this.props.goToIndice()}}
+              >
+              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" size={60} style={{zIndex:12000,padding:30}} />
+              </TouchableOpacity>
+  
+        </ImageBackground>
+        </View>
+      );
   }
 }
 /*
@@ -1412,5 +1458,11 @@ const styles = StyleSheet.create({
     position:'absolute',
     zIndex:10000,
     top: '50%'
-  }
+  },
+  viewTop: {
+    flex:1,
+    backgroundColor: "purple",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
