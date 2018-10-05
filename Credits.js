@@ -68,42 +68,40 @@ class Credits extends Component {
           </View>
         <Swiper
           loop={false}
-          showsButtons={true}
-          dot={<View style={styles.dot} />}
-          activeDot={<View style={styles.dotActive} />}
-          paginationStyle={{ bottom: 70, right: 0 }}
           showsButtons={false}
           showsPagination={true}
+          dotColor="grey"
+          activeDotColor="#000000"
           ref="sliderCop"
         >
           <ScrollView>
-        <View style={styles.contenuto}>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, paddingTop:10,'textAlign':'center'}}>
+        <View style={styles.contenutoReg}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, paddingTop:10,'textAlign':'center', fontFamily:'Comfortaa-Bold'}}>
           REGOLE
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30, fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Le 60 filastrocche pubblicate in questa applicazione sono tradotte dal russo e destinate ai bambini di età prescolastica. 
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30,'textAlign':'justify', fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Ogni filastrocca è composta da un testo scritto accompagnato da immagini originali disegnate a mano libera e un file audio per ascoltarne la lettura da narratori professionisti.
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30,'textAlign':'justify', fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Le filastrocche sono suddivise in capitoli e possono essere ascoltate singolarmente oppure di seguito senza interruzioni.
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30,'textAlign':'justify', fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Il folclore russo per bambini è un mondo meraviglioso di fantasia e amore verso sé stessi e l’ambiente circostante. La tradizione del folclore russo è quella di accompagnare i minimi eventi nella vita del bambino con le strofe rimate, che sia un momento del bagnetto o della pappa per i più piccini, ma anche i giochi all’aperto per i bimbi più grandi. 
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30,'textAlign':'justify', fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Attraverso il folclore i bimbi imparano a parlare, a contare, a relazionarsi con le persone e animali, a capire i meccanismi e i ruoli nella società.
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:30,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30,'textAlign':'justify', fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Essendo folclore ogni filastrocca in lingua originale può avere più versioni. Come testo di riferimento in russo puoi consultare l’enciclopedia del folclore per bambini «Al nostro gran cancello…» (Энциклопедия детского фольклора “Как у наших у ворот…”, серия «Моя первая книга», изд.: «Белый город», 2009).
           </Text>
           <TouchableOpacity
                 style={styles.contenuto}
                 onPress={() => this.props.navigation.navigate('Capitoli')}
               >
-              <FontAwesome5Pro name={'book-open'} color="orange" size={70} style={{zIndex:12000,padding:20}} />
+              <FontAwesome5Pro name={'book-open'} color="#000000" size={40} style={{zIndex:12000,padding:20, marginBottom:20}} light/>
               </TouchableOpacity>
   
           </View>
@@ -111,42 +109,58 @@ class Credits extends Component {
           <ScrollView>
 
           <View style={styles.contenuto}>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, paddingTop:10,paddingLeft:-10,'textAlign':'center'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, 'textAlign':'center', fontFamily:'Comfortaa-Bold'}}>
           INFO
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Studio di registrazione:
-          NOME
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
+          DA INSERIRE
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Voci:
-          Marco Bertarini
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
+          Marco Bertarini e 
           Sonia Palla
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
-          Svilupo software:
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
+          Sviluppo software:
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
           NETKOM GROUP srl
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Traduzioni:
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
           VIKTORYIA ZAKHAROVA
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Immagini:
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
           VIKTORYIA ZAKHAROVA
           </Text>
-          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 16, paddingTop:10,'textAlign':'justify'}}>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Contatti:
+          </Text>
+          <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
           russofolclore@gmail.com
           </Text>
 
-          <TouchableOpacity
-                style={styles.contenuto}
+             <TouchableOpacity
+                style={styles.contenutoRegular}
                 onPress={() => this.props.navigation.navigate('Capitoli')}
               >
-              <FontAwesome5Pro name={'book-open'} color="orange" size={70} style={{zIndex:12000, padding:20}} />
+              <FontAwesome5Pro name={'book-open'} color="#000000" size={40} style={{zIndex:12000, padding:10}} light />
               </TouchableOpacity>
-          </View>
+
+              <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 22,textAlign:'justify', paddingBottom:45}}>
+              © Copyright 2018 Netkom Group srl
+              </Text>
+              </View>
           </ScrollView>
         </Swiper>
             </ImageBackground>

@@ -224,7 +224,7 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	onPressBlock = fiaba => {
-			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche col pusante stella!");
+			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche premendo sul lucchetto!");
 	};
 
 	playAll = () => {
@@ -253,7 +253,8 @@ export default class MyHomeScreen extends React.Component {
 		//facciamo 2 view: gratis/pagato
 		console.log("sono in render");
 		console.log("ricevuta", this.state.ricevuta);
-
+		//TODO da togliere in prod
+		///this.state.ricevuta = "ok";
 		if (!this.state.ricevuta)
 			return (
 				<View
@@ -266,7 +267,7 @@ export default class MyHomeScreen extends React.Component {
 					<ImageBackground
 						resizeMode={"stretch"} // or cover
 						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
-						source={require("../Images/bg_01.jpg")}
+						source={require("../Images/bg_capitoli.png")}
 					>
 						<View style={{ flexDirection: "row", zIndex: 10000 }}>
 							<View
@@ -286,7 +287,7 @@ export default class MyHomeScreen extends React.Component {
 										name="bars"
 										size={40}
 										style={{
-											color: "gray",
+											color: "white",
 											marginLeft: 10,
 											marginTop: 10
 										}}
@@ -296,6 +297,9 @@ export default class MyHomeScreen extends React.Component {
 						</View>
 
 						<View style={styles.containerTot}>
+						<Text style={styles.containerTit}>
+						CAPITOLI
+						</Text>
 							<View style={styles.containerCapDemo}>
 								<TouchableOpacity
 									style={styles.button}
@@ -319,9 +323,9 @@ export default class MyHomeScreen extends React.Component {
 									<View style={styles.button1}>
 										<Icon
 											style={{}}
-											name="star"
+											name="unlock-alt"
 											size={40}
-											color="gold"
+											color="black"
 										/>
 										<Text style={styles.bottoneStella}>
 											Sblocca tutte le 60 filastrocche!
@@ -329,69 +333,18 @@ export default class MyHomeScreen extends React.Component {
 									</View>
 								</TouchableOpacity>
 							</View>
-							<View style={styles.containerCap1}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(1)}
+							<TouchableOpacity
+									onPress={() =>
+										this.onPressBlock(1)
+									}
 								>
-									<Text style={styles.grande}>
-										Persone e famiglia
-									</Text>
-								</TouchableOpacity>
-							</View>
-
-							<View style={styles.containerCap2}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(2)}
-								>
-									<Text style={styles.grande}>Animali</Text>
-								</TouchableOpacity>
-							</View>
-
-							<View style={styles.containerCap3}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(3)}
-								>
-									<Text style={styles.grande}>
-										Giochi da cortile, conti e ricami
-									</Text>
-								</TouchableOpacity>
-							</View>
-
-							<View style={styles.containerCap4}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(4)}
-								>
-									<Text style={styles.grande}>
-										Buona notte, baiu bai
-									</Text>
-								</TouchableOpacity>
-							</View>
-							<View style={styles.containerCap5}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(5)}
-								>
-									<Text style={styles.grande}>
-										Le stagioni
-									</Text>
-								</TouchableOpacity>
-							</View>
-							<View style={styles.containerCap6}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPressBlock(6)}
-								>
-									<Text style={styles.grande}>Frottole</Text>
-								</TouchableOpacity>
-							</View>
-							
+							<Image
+							style={{width:width * 0.7, marginTop:-140}}
+							resizeMode="contain"
+							source={require("../Images/lista-capitoli-lock.png")}
+							/>
+							</TouchableOpacity>
 						</View>
-
-							
 					</ImageBackground>
 				</View>
 			);
@@ -407,7 +360,7 @@ export default class MyHomeScreen extends React.Component {
 					<ImageBackground
 						resizeMode={"stretch"} // or cover
 						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
-						source={require("../Images/bg_01.jpg")}
+						source={require("../Images/bg_capitoli.png")}
 					>
 						<View style={{ flexDirection: "row", zIndex: 10000 }}>
 							<View
@@ -427,7 +380,7 @@ export default class MyHomeScreen extends React.Component {
 										name="bars"
 										size={40}
 										style={{
-											color: "gray",
+											color: "white",
 											marginLeft: 10,
 											marginTop: 10
 										}}
@@ -437,6 +390,9 @@ export default class MyHomeScreen extends React.Component {
 						</View>
 
 						<View style={styles.containerTot}>
+						<Text style={styles.containerTit}>
+						CAPITOLI
+						</Text>
 						<View style={styles.containerCap1}>
 								<TouchableOpacity
 									style={styles.button}
@@ -463,7 +419,7 @@ export default class MyHomeScreen extends React.Component {
 									onPress={() => this.onPress(3)}
 								>
 									<Text style={styles.grande}>
-										Giochi da cortile, conti e ricami
+										Giochi da cortile e conte
 									</Text>
 								</TouchableOpacity>
 							</View>
@@ -506,31 +462,18 @@ export default class MyHomeScreen extends React.Component {
 								}
 							>
 								<View style={styles.button1}>
-									{!playing && (
 										<Icon
-											name="volume-up"
+											name="headphones"
 											size={40}
 											style={{
-												color: "gray",
-												marginRight: 10,
-												marginTop: 10
+												color: "#29ABE2",
 											}}
 										/>
-									)}
-									{playing && (
-										<Icon
-											name="volume-off"
-											size={40}
-											style={{
-												color: "gray",
-												marginRight: 10,
-												marginTop: 10
-											}}
-										/>
-									)}
-									<Text style={{ flex: 1 }}>
+										{/*
+										<Text style={{ flex: 1 }}>
 										Ascolta tutte le fiabe
-									</Text>
+										</Text>
+										*/}
 								</View>
 							</TouchableOpacity>
 						</View>
@@ -563,11 +506,26 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center"
 	},
+	button: {
+		width:'90%',
+		justifyContent: "center",
+		alignItems: "center"
+	},
 	container: {
 		marginTop: 10
 	},
+	containerCap1L: {
+		backgroundColor:'#ED1C24',
+		opacity:0.3,
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
 	containerCap1: {
-		backgroundColor:'red',
+		backgroundColor:'#ED1C24',
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -576,7 +534,17 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCap2: {
-		backgroundColor:'orange',
+		backgroundColor:'#FF7E00',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap2L: {
+		backgroundColor:'#FF7E00',
+		opacity:0.3,
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -585,7 +553,17 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCap3: {
-		backgroundColor:'#CCCC00',
+		backgroundColor:'#F7CF0B',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap3L: {
+		backgroundColor:'#F7CF0B',
+		opacity:0.3,
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -594,7 +572,17 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCap4: {
-		backgroundColor:'green',
+		backgroundColor:'#11D311',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap4L: {
+		backgroundColor:'#11D311',
+		opacity:0.3,
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -603,7 +591,17 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCap5: {
-		backgroundColor:'blue',
+		backgroundColor:'#29ABE2',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap5L: {
+		backgroundColor:'#29ABE2',
+		opacity:0.3,
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -612,7 +610,17 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCap6: {
-		backgroundColor:'purple',
+		backgroundColor:'#7F47DD',
+		marginTop: 10,
+		width:'90%',
+		padding:10,
+		borderRadius:10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerCap6L: {
+		backgroundColor:'#7F47DD',
+		opacity:0.3,
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -621,7 +629,7 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerCapDemo: {
-		backgroundColor:'brown',
+		backgroundColor:'#FF7E00',
 		marginTop: 10,
 		width:'90%',
 		padding:10,
@@ -630,8 +638,14 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	containerTot: {
-		marginTop: 10,
-		marginLeft: 20,
+		marginTop: 5,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	containerTit: {
+		fontSize: 30,
+		color:'#ffffff',
+		fontFamily:'Comfortaa-Bold',
 		justifyContent: "center",
 		alignItems: "center"
 	},
@@ -643,7 +657,8 @@ const styles = StyleSheet.create({
 		height: 24
 	},
 	grande: {
-		fontSize: 25,
+		fontFamily:'Comfortaa-Bold',
+		fontSize: 23,
 		color:'#ffffff'
 	},
 	bottoneStella: {

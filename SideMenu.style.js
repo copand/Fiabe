@@ -4,7 +4,7 @@ import {
 
 export default {
   container: {
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     flex: 1
   },
   navItemStyle: {

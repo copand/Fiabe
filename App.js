@@ -439,7 +439,7 @@ const InnerNavigator = DrawerNavigator(
       },
       labelStyle: {
         fontWeight: "bold",
-        fontFamily: "Roboto",
+        fontFamily: "Coiny-Regular",
         backgroundColor: "transparent"
       }
     }
@@ -530,7 +530,7 @@ class Capitolo0 extends React.Component {
             htmlContent={fiaba_134}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="134"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -540,7 +540,7 @@ class Capitolo0 extends React.Component {
             htmlContent={fiaba_118}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="118"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -550,7 +550,7 @@ class Capitolo0 extends React.Component {
             htmlContent={fiaba_234}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="234"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -560,7 +560,7 @@ class Capitolo0 extends React.Component {
             htmlContent={fiaba_164}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="164"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -596,7 +596,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_97}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="97"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -606,7 +606,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_218}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="218"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -616,7 +616,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_116}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="116"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -626,7 +626,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_130}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="130"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -636,7 +636,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_132}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="132"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -646,7 +646,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_230}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="230"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -656,7 +656,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_213}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="213"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -666,7 +666,7 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_160}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="160"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
           />
         </View>
         <View>
@@ -676,9 +676,10 @@ class Capitolo1 extends React.Component {
             htmlContent={fiaba_161}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="161"
-            sfondo={require("./Images/bg_01.jpg")}
+            sfondo={require("./Images/bg_cap_persone.png")}
             finale={this.props.capitolo}
             capTitolo="Animali"
+            numcap={2}
           />
         </View>
       </Swiper>
@@ -710,7 +711,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_134}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="134"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -720,7 +721,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_239}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="239"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -730,7 +731,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_243}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="243"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -740,7 +741,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_111}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="111"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -750,7 +751,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_270}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="270"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -760,7 +761,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_118}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="118"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -770,7 +771,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_234}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="234"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -780,7 +781,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_121}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="121"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -790,7 +791,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_164}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="164"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>       
         <View>
@@ -800,7 +801,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_162}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="162"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -810,7 +811,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_163}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="163"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -820,7 +821,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_169}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="169"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -830,7 +831,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_178}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="178"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -840,7 +841,7 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_184}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="184"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
           />
         </View>
         <View>
@@ -850,7 +851,10 @@ class Capitolo2 extends React.Component {
             htmlContent={fiaba_252}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="252"
-            sfondo={require("./Images/bg_02.jpg")}
+            sfondo={require("./Images/bg_animali.png")}
+            finale={this.props.capitolo}
+            numcap={3}
+            capTitolo="Giochi da cortile e conte"
           />
         </View>
         
@@ -883,7 +887,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_135}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="135"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -893,7 +897,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_137}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="137"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -903,7 +907,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_140}
             idf="140"
             isLoopPlaying={this.props.isLoopPlaying}
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -913,7 +917,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_175}
             idf="175"
             isLoopPlaying={this.props.isLoopPlaying}
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -923,7 +927,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_142}
             idf="142"
             isLoopPlaying={this.props.isLoopPlaying}
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -933,7 +937,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_145}
             idf="145"
             isLoopPlaying={this.props.isLoopPlaying}
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -943,7 +947,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_146}
             idf="146"
             isLoopPlaying={this.props.isLoopPlaying}
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         
@@ -954,7 +958,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_176}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="176"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -964,7 +968,7 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_39}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="39"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
           />
         </View>
         <View>
@@ -974,7 +978,10 @@ class Capitolo3 extends React.Component {
             htmlContent={fiaba_220}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="220"
-            sfondo={require("./Images/bg_03.jpg")}
+            sfondo={require("./Images/bg_giochi.png")}
+            finale={this.props.capitolo}
+            capTitolo="Buona notte, baiu bai"
+            numcap={4}
           />
         </View>
       </Swiper>
@@ -1006,7 +1013,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_157}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="157"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1016,7 +1023,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_90}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="90"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1026,7 +1033,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_154}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="154"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1036,7 +1043,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_174}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="174"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1046,7 +1053,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_186}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="186"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1056,7 +1063,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_248}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="248"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1066,7 +1073,7 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_151}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="151"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
           />
         </View>
         <View>
@@ -1076,7 +1083,10 @@ class Capitolo4 extends React.Component {
             htmlContent={fiaba_89}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="89"
-            sfondo={require("./Images/bg_04.jpg")}
+            sfondo={require("./Images/bg_buonanotte.png")}
+            finale={this.props.capitolo}
+            capTitolo="Le stagioni"
+            numcap={5}
           />
         </View>
       </Swiper>
@@ -1108,7 +1118,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_195}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="195"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1118,7 +1128,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_189}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="189"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1128,7 +1138,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_192}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="192"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1138,7 +1148,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_200}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="200"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1148,7 +1158,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_203}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="203"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1158,7 +1168,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_226}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="226"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1168,7 +1178,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_224}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="224"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1178,7 +1188,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_228}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="228"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1188,7 +1198,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_210}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="210"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1198,7 +1208,7 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_219}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="219"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
           />
         </View>
         <View>
@@ -1208,7 +1218,10 @@ class Capitolo5 extends React.Component {
             htmlContent={fiaba_241}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="241"
-            sfondo={require("./Images/bg_05.jpg")}
+            sfondo={require("./Images/bg_stagioni.png")}
+            finale={this.props.capitolo}
+            capTitolo="Frottole"
+            numcap={6}
           />
         </View>
       </Swiper>
@@ -1240,7 +1253,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_274}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="274"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
       </View>
       <View>
@@ -1250,7 +1263,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_244}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="244"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
       <View>
@@ -1260,7 +1273,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_122}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="122"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
         <View>
@@ -1270,7 +1283,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_285}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="285"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
        <View>
@@ -1280,7 +1293,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_296}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="296"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
         <View>
@@ -1290,7 +1303,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_288}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="288"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
         <View>
@@ -1300,7 +1313,7 @@ class Capitolo6 extends React.Component {
             htmlContent={fiaba_298}
             isLoopPlaying={this.props.isLoopPlaying}
             idf="298"
-            sfondo={require("./Images/bg_06.jpg")}
+            sfondo={require("./Images/bg_frottole.png")}
           />
         </View>
         <View>
@@ -1325,13 +1338,40 @@ class Fine extends React.Component {
               style={{ flex: 1, alignItems:'center' }} // must be passed from the parent, the number may vary depending upon your screen size
               source={require("./Images/bg_fine.png")}
             >
+            <View style={{ flexDirection: "row", zIndex:10000}}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start"
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.mynavigation.dispatch(
+                      DrawerActions.openDrawer()
+                    )
+                  }
+                >
+                  <Icon
+                    name="bars"
+                    type="light"
+                    size={40}
+                    style={{
+                      color: "white",
+                      marginLeft: 10,
+                      marginTop: 10
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+          </View>
                    <Image
                       style={{width:'100%'}}
                       resizeMode="contain"
                       source={require("./Images/bouquet_pag_fine.png")}
                     />
-                    <Text style={{color:'#FFFFFF', textAlign:'center', fontSize:50, marginTop:'-15%'}}>
-                    FINE
+                    <Text style={{color:'#FFFFFF', textAlign:'center', fontSize:60, marginTop:'-15%'}}>
+                    Fine
                     </Text>
               <TouchableOpacity
                 style={styles.contenuto}
@@ -1339,7 +1379,7 @@ class Fine extends React.Component {
                   console.log("props",this.props);
                   this.props.goToIndice()}}
               >
-              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" size={60} style={{zIndex:12000,padding:30}} />
+              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" light size={50} style={{zIndex:12000,padding:30}} />
               </TouchableOpacity>
   
         </ImageBackground>

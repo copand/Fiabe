@@ -136,7 +136,7 @@ class LoopMp3 extends Component {
                 style={styles.contenuto}
                 onPress={() => this.props.navigation.navigate('Capitoli')}
               >
-              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" size={70} style={{zIndex:12000, padding:40}} />
+              <FontAwesome5Pro name={'book-open'} color="#FFFFFF" size={40} light style={{zIndex:12000, padding:60}} />
           </TouchableOpacity>
  
         </View>

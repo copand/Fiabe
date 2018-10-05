@@ -45,11 +45,13 @@ export default {
     flex:1,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop:80
   },
   grande: {
     textAlign:"center",
     fontSize: 25,
     marginBottom: 20,
-    color:'#ffffff'
+    color:'#ffffff',
+    paddingTop:20
   },
 };

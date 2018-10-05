@@ -21,7 +21,10 @@ import EventEmitter from "react-native-eventemitter";
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 
 const { width, height } = Dimensions.get("window");
-const book = (<FontAwesome5Pro name={'book-open'} size={35} style={{paddingTop:10}} />);
+const book = (<FontAwesome5Pro name={'book-open'} size={35} color={'white'} style={{paddingTop:10}} />);
+const info = (<FontAwesome5Pro name={'info-circle'} size={25} color={'#29ABE2'} solid style={{paddingTop:10, paddingLeft:width * 0.05}} />);
+const voloff = (<FontAwesome5Pro name={'volume-off'} size={45} color={'white'} style={{paddingTop:5, paddingRight:15}} />);
+const cuffie = (<FontAwesome5Pro name={'headphones'} size={40} color={'white'} style={{paddingTop:5, paddingRight:15}} />);
 
 export default class Fiaba extends React.Component {
 
@@ -83,7 +86,7 @@ export default class Fiaba extends React.Component {
 										name="bars"
 										size={40}
 										style={{
-											color: "gray",
+											color: "white",
 											marginLeft: 10,
 											marginTop: 10
 										}}
@@ -104,6 +107,20 @@ export default class Fiaba extends React.Component {
 								</TouchableOpacity>
 							</View>
 						
+							{!!isLoopPlaying && (
+							<View
+								style={{
+									flex: 1,
+									alignItems: "flex-end"
+								}}
+							>
+								<TouchableOpacity
+									onPress={() => this.props.mynavigation.navigate("LoopMp3")}
+								>
+								{cuffie}
+								</TouchableOpacity>
+							</View>
+							)}
 							{!!!isLoopPlaying && (
 							<View
 								style={{
@@ -122,21 +139,14 @@ export default class Fiaba extends React.Component {
 										name="volume-up"
 										size={40}
 										style={{
-											color: "gray",
+											color: "white",
 											marginRight: 10,
 											marginTop: 10
 										}}
 									/>
 								}
-								{playing &&	<Icon
-										name="volume-off"
-										size={40}
-										style={{
-											color: "gray",
-											marginRight: 10,
-											marginTop: 10
-										}}
-									/>
+								{playing &&	
+									voloff
 								}
 								</TouchableOpacity>
 							</View>
@@ -163,6 +173,7 @@ export default class Fiaba extends React.Component {
 									if(classe == "box")
 										return (
 										<View key={key} style={styles['box']}>
+											{info}
 											<Text key={key} style={styles['boxTesto']}>
 												{content[key].value}
 											</Text>
@@ -181,7 +192,7 @@ export default class Fiaba extends React.Component {
 						</View>
 						{this.props.finale &&	
 						<View style={styles.footer}>
-							<TouchableOpacity onPress={() => this.finale(2)}>
+							<TouchableOpacity onPress={() => this.finale(this.props.numcap)}>
 								<Text style={styles.finale}>Vai al prossimo capitolo: {this.props.capTitolo}</Text>
 								<Icon
 										name="arrow-circle-right"
@@ -221,19 +232,21 @@ const styles = StyleSheet.create({
 		borderRadius: 75
 	},
 	testomt: {
+		marginLeft: width *0.05,
+		marginRight: width * 0.05,
 		textAlign: 'center',
 		marginTop: 25,
-		fontFamily: "sans-serif",
+		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,
-		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	},
 	testomb: {
+		marginLeft: width *0.05,
+		marginRight: width * 0.05,
 		marginBottom: 25,
-		fontFamily: "sans-serif",
+		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,
-		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	},
@@ -245,45 +258,49 @@ const styles = StyleSheet.create({
 		letterSpacing: 2
 	},
 	normale: {
-		marginLeft: width *0.1,
-		marginRight: width * 0.1,
+		marginLeft: width *0.05,
+		marginRight: width * 0.05,
 		textAlign: 'left',
 		alignSelf: 'flex-start',
-		fontFamily: "sans-serif",
+		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,
-		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	},
 	test: {
-		marginLeft: width *0.1,
-		marginRight: width * 0.1,
+		marginLeft: width *0.05,
+		marginRight: width * 0.05,
 		textAlign: 'left',
 		alignSelf: 'flex-start',
-		fontFamily: "sans-serif",
+		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,
-		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	},
 	boxTesto: {
-		marginLeft: width *0.1,
-		marginRight: width * 0.1,
+		marginLeft: width *0.05,
+		marginRight: width * 0.05,
+		color:'#000000',
+		fontStyle: 'italic',
+		fontFamily:'Coiny-Regular',
 		textAlign: 'left',
 		alignSelf: 'flex-start',
-		fontFamily: "Arial",
 		fontSize: 17,
 		fontWeight: "200",
-		letterSpacing: 2
+		letterSpacing: 2,
+		padding:10
 	},
 	box:{
 		//marginLeft:width*0.05,
 		//marginRight: width * 0.05,
+	/*
 		borderColor: 'lightgray',
-		borderStyle: 'solid',
 		borderWidth: 3,
-		marginBottom:width*0.05,
-		marginTop:width*0.05
+		borderStyle: 'solid',
+	*/
+		backgroundColor: 'rgba(0, 0, 0, 0.2)',
+		marginBottom:width*0.1,
+		marginTop:width*0.1
 	},
 	backgroundImage: {
 		flex: 1,
@@ -306,13 +323,12 @@ const styles = StyleSheet.create({
 		marginBottom: 50,
 	},
 	footer: {
-		marginBottom: 50,
+		marginBottom: 100,
 	},
 	finale: {
 		textAlign: 'center',
-		fontFamily: "sans-serif",
+		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,
-		fontStyle: "italic",
 		fontWeight: "200",
 		letterSpacing: 2
 	}

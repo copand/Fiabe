@@ -29,9 +29,20 @@ export default {
   activeIcon: {
     color: 'red'
   },
+  contenutoReg: {
+    //paddingTop: height * 0.05,
+    padding:20,
+    justifyContent: "center",
+    alignItems: "center",
+    flex:1
+  },
   contenuto: {
     //paddingTop: height * 0.05,
     padding:20,
+    flex:1
+  },
+  contenutoRegular: {
+    //paddingTop: height * 0.05,
     justifyContent: "center",
     alignItems: "center",
     flex:1

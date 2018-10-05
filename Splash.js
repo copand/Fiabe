@@ -69,17 +69,18 @@ class Splash extends Component {
               style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
               source={require("./Images/bg_home.png")}
             >
-          <View style={styles.contenuto}>
               <TouchableOpacity
+              style={styles.contenuto}
                 onPress={() => this.refs.sliderCop.scrollBy(1, true)}
               >
+          <View >
               <Image
                       style={{marginTop:'-5%', width:PAGE_WIDTH/1.1}}
                       resizeMode="contain"
                       source={require("./Images/titolo_home.png")}
                     />
-              </TouchableOpacity>
           </View>
+              </TouchableOpacity>
             </ImageBackground>
 
           <ImageBackground
@@ -87,9 +88,36 @@ class Splash extends Component {
               style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
               source={require("./Images/bg_intro.png")}
             >
+            <View style={{ flexDirection: "row", zIndex:10000}}>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "flex-start"
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.dispatch(
+                      DrawerActions.openDrawer()
+                    )
+                  }
+                >
+                  <Icon
+                    name="bars"
+                    type="light"
+                    size={40}
+                    style={{
+                      color: "white",
+                      marginLeft: 10,
+                      marginTop: 10
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+          </View>
           <View style={styles.contenuto}>
-          <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 10, paddingTop:20, textAlign:'center'}}>
-          FOLCLORE RUSSO PER BAMBINI
+          <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 10, paddingTop:20, textAlign:'center',fontFamily:'Comfortaa-Bold'}}>
+          Folclore russo per bambini
           </Text>
           <Text style={{'color':'#FFFFFF',fontSize: PAGE_WIDTH / 15}}>
           in lingua italiana
@@ -107,7 +135,7 @@ class Splash extends Component {
                       resizeMode="contain"
                       source={require("./Images/coniglio_home.png")}
                     />
-   <FontAwesome5Pro name={'book-open'} color="orange" size={70} style={{zIndex:12000, marginTop:'-35%'}} />
+   <FontAwesome5Pro name={'book-open'} color="orange" size={40} style={{zIndex:12000, marginTop:'-35%'}} />
               </TouchableOpacity>
           </View>
             </ImageBackground>

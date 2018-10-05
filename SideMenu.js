@@ -7,8 +7,16 @@ import EventEmitter from "react-native-eventemitter";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 
-const syncIconAtt = (<FontAwesome5Pro name={'sync'} size={35}  style={styles.activeIcon} />);
-const syncIconIna = (<FontAwesome5Pro name={'sync'} size={35}  style={styles.inactiveIcon} />);
+
+const homeIconAtt = (<FontAwesome5Pro name={'home'} size={35} light  style={styles.activeIcon} />);
+const homeIconIna = (<FontAwesome5Pro name={'home'} size={35} light  style={styles.inactiveIcon} />);
+const syncIconAtt = (<FontAwesome5Pro name={'headphones'} size={35}  style={styles.activeIcon} />);
+const syncIconIna = (<FontAwesome5Pro name={'headphones'} size={35}  style={styles.inactiveIcon} />);
+const bookIconIna = (<FontAwesome5Pro name={'book-open'} size={35} light  style={styles.inactiveIcon} />);
+const bookIconAtt = (<FontAwesome5Pro name={'book-open'} size={35} light  style={styles.activeIcon} />);
+const userIconIna = (<FontAwesome5Pro name={'user-alt'} size={35} light  style={styles.inactiveIcon} />);
+const userIconAtt = (<FontAwesome5Pro name={'user-alt'} size={35} light  style={styles.activeIcon} />);
+
 
 class SideMenu extends Component {
   constructor(props) {
@@ -39,20 +47,16 @@ class SideMenu extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.sectionHeadingStyle1}>
+          <View>
             <TouchableOpacity
+                style={styles.sectionHeadingStyle1}
                 onPress={this.navigateToScreen("Intro")}
             >
-              <Icon
-                name="home"
-                size={40}
-                style={
-                  this.state.currentScreen === "Intro" ||
-                  this.state.currentScreen === "Indice"
-                    ? styles.activeIcon
-                    : styles.inactiveIcon
-                }
-              />
+
+          {(this.state.currentScreen === "Intro" || this.state.currentScreen === "Indice") &&
+          homeIconAtt}
+          {(this.state.currentScreen != "Intro" && this.state.currentScreen != "Indice") &&  
+          homeIconIna}
               <Text
                 style={[
                   styles.view,
@@ -63,20 +67,20 @@ class SideMenu extends Component {
                 ]}
                 onPress={this.navigateToScreen("Intro")}
               >
-                HOME
+              INIZIO 
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.sectionHeadingStyle2}>
-            <Icon
-              name="bars"
-              size={40}
-              style={
-                this.state.currentScreen === "Capitoli"
-                  ? styles.activeIcon
-                  : styles.inactiveIcon
-              }
-            />
+          <View>
+
+          <TouchableOpacity
+                style={styles.sectionHeadingStyle2}
+                onPress={this.navigateToScreen("Capitoli")}
+            >
+          {this.state.currentScreen === "Capitoli" &&
+          bookIconAtt}
+          {this.state.currentScreen != "Capitoli" &&
+          bookIconIna}
             <Text
               style={[
                 styles.view,
@@ -84,21 +88,20 @@ class SideMenu extends Component {
                   ? styles.active
                   : styles.inactive
               ]}
-              onPress={this.navigateToScreen("Capitoli")}
             >
               CAPITOLI
             </Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.sectionHeadingStyle3}>
-            <Icon
-              name="user"
-              size={40}
-              style={
-                this.state.currentScreen === "Credits"
-                  ? styles.activeIcon
-                  : styles.inactiveIcon
-              }
-            />
+          <View>
+          <TouchableOpacity
+                style={styles.sectionHeadingStyle3}
+                onPress={this.navigateToScreen("Credits")}
+            >
+          {this.state.currentScreen === "Credits" &&
+          userIconAtt}
+          {this.state.currentScreen != "Credits" &&
+          userIconIna}
             <Text
               style={[
                 styles.view,
@@ -106,12 +109,16 @@ class SideMenu extends Component {
                   ? styles.active
                   : styles.inactive
               ]}
-              onPress={this.navigateToScreen("Credits")}
             >
-              INFO E REGOLE
+              INFO e REGOLE
             </Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.sectionHeadingStyle4}>
+          <View>
+          <TouchableOpacity
+                style={styles.sectionHeadingStyle4}
+                onPress={this.navigateToScreen("LoopMp3")}
+            >
           {this.state.currentScreen === "LoopMp3" &&
           syncIconAtt}
           {this.state.currentScreen != "LoopMp3" &&
@@ -123,10 +130,10 @@ class SideMenu extends Component {
                   ? styles.active
                   : styles.inactive
               ]}
-              onPress={this.navigateToScreen("LoopMp3")}
             >
               CICLO CONTINUO
             </Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
