@@ -160,8 +160,8 @@ class Fiabe extends React.Component {
     this.capitolo = this.capitolo.bind(this);
     this.goToIndice = this.goToIndice.bind(this);
     const navParams = props.navigation.state.params;
-    console.log("costruttore fiabe");
-    console.log(navParams);
+    //console.log("costruttore fiabe");
+    //console.log(navParams);
     if (navParams && navParams.fiabe) {
       console.log("vado alla fiaba");
       //this.goToFiaba(navParams.fiabe);
@@ -304,8 +304,16 @@ pauseSoundLoop = status => {
     whoosh.play()
 }
 
+stopSound = (loop) => {
+  if(!loop && whoosh){
+    whoosh.stop();
+    whoosh.release()
+    playing = false;
+  }
+}
+
 stopSoundLoop = () => {
-  if (playing) {
+  if (playing && whoosh) {
     whoosh.stop();
     whoosh.release()
     globalAudio = false;

@@ -35,6 +35,10 @@ export default class Fiaba extends React.Component {
 		this.finale = this.finale.bind(this);
 	}
 
+	componentWillUnmount() {
+		stopSound(this.props.isLoopPlaying);
+  	}
+
 	indice = () => {
 		this.props.goToIndice();
 	};

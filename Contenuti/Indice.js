@@ -21,6 +21,7 @@ import Icon from "react-native-vector-icons/dist/FontAwesome";
 import * as RNIap from "react-native-iap";
 import { AsyncStorage } from "react-native";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
+import Spinner from "react-native-spinkit";
 
 var pagato = false;
 
@@ -39,7 +40,8 @@ export default class MyHomeScreen extends React.Component {
 			receipt: "",
 			ricevuta: false,
 			availableItemsMessage: "",
-			switchValue: false
+			switchValue: false,
+			checked:false
 		};
 	}
 
@@ -57,28 +59,33 @@ export default class MyHomeScreen extends React.Component {
 
 	async componentDidMount() {
 		try {
+
+			const result = await RNIap.prepare();
+			//console.log("result", result);
 			//per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
+			//await RNIap.consumeAllItems();
 
 			await AsyncStorage.getItem("ricevuta").then(value => {
 				//'inapp:it.netkomgroup.fiabe:'
-				var regex1 = RegExp("^inapp:it.netkomgroup.fiabe:*.");
+				console.log('ricevuta in asynStorage', value);
+				var regex1 = RegExp("^null$");
 				console.log("testo la regexp ", regex1.test(value));
-				if (regex1.test(value)) {
-					this.setState({ ricevuta: "ok" });
+				if (!regex1.test(value)) {
+					this.setState({ ricevuta: "ok", checked: true });
 				}
 			});
-			console.log("aspetto  asyncstorage, valore " + this.state.ricevuta);
 			if (this.state.ricevuta != "ok") {
-				const result = await RNIap.prepare();
-				console.log("result", result);
+				console.log('ricevuta su storage nulla vado avanti');
 				const products = await RNIap.getProducts(itemSkus);
 				this.setState({ productList: products });
 				//this.setState({ items });
-				console.log("products", products);
+				//console.log("products", products);
+				//this.getPurchaseHistory();
 				//OCCHIO lo commento in debug  ma in produzione potrebbe servire per recuperare lo storico
 				this.getAvailablePurchases();
-				//this.getPurchaseHistory();
+				//per ora mandiamo alla pagina gratis
+				//this.setState({ ricevuta: false, checked: true });
 			}
 		} catch (err) {
 			console.warn(err.code, err.message);
@@ -146,7 +153,7 @@ export default class MyHomeScreen extends React.Component {
 					console.log("Errore storare ricevuta ", errore);
 				}
 				console.log("settiamo state.ricevuta a ok dentro buyItem");
-				this.setState({ ricevuta: "ok" });
+				this.setState({ ricevuta: "ok", checked: true });
 				pagato = true;
 				if (Platform.OS === "android") return;
 				RNIap.finishTransaction();
@@ -194,6 +201,7 @@ export default class MyHomeScreen extends React.Component {
 						"ricevuta",
 						purchases[0].transactionReceipt
 					);
+					console.log('setto ricevuta su localstorage da getAvalPurchases');
 				} catch (error) {
 					// Error saving data
 					console.log("Errore storare ricevuta ", error);
@@ -206,8 +214,13 @@ export default class MyHomeScreen extends React.Component {
 				this.setState({
 					availableItemsMessage: `Got ${purchases.length} items.`,
 					receipt: purchases[0].transactionReceipt,
-					ricevuta: "ok"
+					ricevuta: "ok",
+					checked:true
 				});
+			}
+			else {
+				//NON ci sono acquisti => pagina demo
+				this.setState({ ricevuta: false, checked: true });
 			}
 		} catch (err) {
 			console.warn(err.code, err.message);
@@ -249,12 +262,36 @@ export default class MyHomeScreen extends React.Component {
 		const { productList, receipt, availableItemsMessage } = this.state;
 		const receipt100 = receipt.substring(0, 100);
 		const playing = this.props.isLoopPlaying;
+		let checked = this.state.checked;
+
+		let type = "ChasingDots";
+    	let color = "#3f77ba";
+    	let size = 100;
 
 		//facciamo 2 view: gratis/pagato
 		console.log("sono in render");
 		console.log("ricevuta", this.state.ricevuta);
 		//TODO da togliere in prod
 		///this.state.ricevuta = "ok";
+		if(!checked){
+			return (
+				<View
+					style={{
+						flex: 1,
+						flexDirection: "column",
+						minHeight: height,
+					}}
+				>
+					<ImageBackground
+						resizeMode={"stretch"} // or cover
+						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
+						source={require("../Images/bg_capitoli.png")}
+					>
+		            {/*<Spinner style={styles.spinner} isVisible={true} size={size} type={type} color={color}/> */}
+					</ImageBackground>
+				</View>
+			);	
+		}
 		if (!this.state.ricevuta)
 			return (
 				<View
@@ -657,6 +694,7 @@ const styles = StyleSheet.create({
 		height: 24
 	},
 	grande: {
+		textAlign:'center',
 		fontFamily:'Comfortaa-Bold',
 		fontSize: 23,
 		color:'#ffffff'
@@ -664,6 +702,11 @@ const styles = StyleSheet.create({
 	bottoneStella: {
 		fontSize: 20,
 		color:'black'
+	},
+	spinner: {
+    	position:'absolute',
+    	zIndex:10000,
+    	top: '50%'
 	},
 	piccolo: {}
 });

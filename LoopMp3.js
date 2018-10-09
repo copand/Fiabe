@@ -7,6 +7,7 @@ import EventEmitter from "react-native-eventemitter";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
+import { AsyncStorage } from "react-native";
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 const PAGE_HEIGHT = Dimensions.get("window").height;
@@ -17,10 +18,22 @@ class LoopMp3 extends Component {
     super(props);
     this.state = {
       currentScreen: props.navigation.state.routeName,
-      status: "stop"
+      status: "stop",
+      ricevuta:null
     };
   }
 
+
+  componentDidMount() {
+    console.log('compwillmount loop');
+     AsyncStorage.getItem("ricevuta").then(value => {
+        console.log('ricevuta in loop asynStorage', value);
+        var regex1 = RegExp("^null$");
+        if (!regex1.test(value)) {
+          this.setState({ ricevuta: "ok"});
+        }
+      });
+  }
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: route,
@@ -33,8 +46,16 @@ class LoopMp3 extends Component {
   };
 
   render() {
-    return (
-      <View style={styles.viewTop}>
+    if(this.state.ricevuta != "ok"){
+      return (
+        <Text>
+        Contenuto a pagamento
+        </Text>
+      )
+    }
+    else
+      return (
+        <View style={styles.viewTop}>
      <ImageBackground
               resizeMode={"stretch"} // or cover
               style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
