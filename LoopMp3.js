@@ -46,6 +46,8 @@ class LoopMp3 extends Component {
   };
 
   render() {
+    //TODO da togliere in prod
+    this.state.ricevuta = 'ok';
     if(this.state.ricevuta != "ok"){
       return (
         <Text>

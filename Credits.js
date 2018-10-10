@@ -158,7 +158,7 @@ class Credits extends Component {
               </TouchableOpacity>
 
               <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 22,textAlign:'justify', paddingBottom:45}}>
-              © Copyright 2018 Netkom Group srl
+              © Copyright 2018 Netkom Group srl v2.4
               </Text>
               </View>
           </ScrollView>

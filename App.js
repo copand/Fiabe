@@ -334,8 +334,12 @@ playSound = idf => {
     whoosh.stop();
     whoosh.release()
     playing = false;
+    if(idf == 0)
+      globalAudio = false;
     return;
   }
+  if(!playing && idf == 0)
+    globalAudio = true;
   Sound.setCategory("Playback");
   console.log("playSound fiaba " + idf);
   // Load the sound file 'whoosh.mp3' from the app bundle
@@ -375,6 +379,8 @@ swiperIndexChanged = index => {
   globalIndex = index;
   let idf = indexTOIDF[index];
   console.log("non suono fiaba idf", idf);
+  if(!globalAudio)
+    stopSound(false);
   //se non è attivo globalAudio play singola fiaba
   //console.log("globalAudio");
   //console.log(globalAudio);

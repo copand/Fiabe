@@ -265,6 +265,7 @@ const styles = StyleSheet.create({
 		marginLeft: width *0.05,
 		marginRight: width * 0.05,
 		textAlign: 'left',
+		//color:'#747476',
 		alignSelf: 'flex-start',
 		fontFamily: "OpenSans-Semibold",
 		fontSize: 20,

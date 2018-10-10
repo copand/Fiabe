@@ -45,8 +45,8 @@ export default class MyHomeScreen extends React.Component {
 		};
 	}
 
-	componentWillMount() {
-		//vale solo per android
+	componentWillUnmount() {
+		console.log('comp will unmount');
 		RNIap.endConnection();
 	}
 
@@ -61,7 +61,7 @@ export default class MyHomeScreen extends React.Component {
 		try {
 
 			const result = await RNIap.prepare();
-			//console.log("result", result);
+			console.log("result in did mount", result);
 			//per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
 			//await RNIap.consumeAllItems();
@@ -237,7 +237,7 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	onPressBlock = fiaba => {
-			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche premendo sul lucchetto!");
+			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche premendo sul lucchetto rosso!");
 	};
 
 	playAll = () => {
@@ -272,7 +272,8 @@ export default class MyHomeScreen extends React.Component {
 		console.log("sono in render");
 		console.log("ricevuta", this.state.ricevuta);
 		//TODO da togliere in prod
-		///this.state.ricevuta = "ok";
+		//this.state.ricevuta = "ok";
+		//checked = true;
 		if(!checked){
 			return (
 				<View
@@ -362,7 +363,7 @@ export default class MyHomeScreen extends React.Component {
 											style={{}}
 											name="unlock-alt"
 											size={40}
-											color="black"
+											color="red"
 										/>
 										<Text style={styles.bottoneStella}>
 											Sblocca tutte le 60 filastrocche!
@@ -700,8 +701,8 @@ const styles = StyleSheet.create({
 		color:'#ffffff'
 	},
 	bottoneStella: {
-		fontSize: 20,
-		color:'black'
+		fontSize: 21,
+		color:'red'
 	},
 	spinner: {
     	position:'absolute',
