@@ -541,9 +541,9 @@ class Capitolo0 extends React.Component {
             slider={this.refs.sliderX}
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_134}
+            htmlContent={fiaba_218}
             isLoopPlaying={this.props.isLoopPlaying}
-            idf="134"
+            idf="218"
             sfondo={require("./Images/bg_animali.png")}
           />
         </View>
@@ -551,9 +551,9 @@ class Capitolo0 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_118}
+            htmlContent={fiaba_274}
             isLoopPlaying={this.props.isLoopPlaying}
-            idf="118"
+            idf="274"
             sfondo={require("./Images/bg_animali.png")}
           />
         </View>
@@ -561,9 +561,9 @@ class Capitolo0 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_234}
+            htmlContent={fiaba_192}
             isLoopPlaying={this.props.isLoopPlaying}
-            idf="234"
+            idf="192"
             sfondo={require("./Images/bg_animali.png")}
           />
         </View>
@@ -571,9 +571,9 @@ class Capitolo0 extends React.Component {
           <Fiaba
             goToIndice={this.props.goToIndice}
             mynavigation={this.props.navigation}
-            htmlContent={fiaba_164}
+            htmlContent={fiaba_146}
             isLoopPlaying={this.props.isLoopPlaying}
-            idf="164"
+            idf="146"
             sfondo={require("./Images/bg_animali.png")}
           />
         </View>

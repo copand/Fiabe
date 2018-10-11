@@ -20,63 +20,62 @@ const contenuto = {
   },
   4: {
     value: "il cestino tengo stretto,",
-    type: "text",
-    classe: "test"
-  },
-  4: {
-    value: "io prendo dei funghetti,",
     type: "text"
   },
   5: {
-    value: "impegnati gli occhietti.",
+    value: "io prendo dei funghetti,",
     type: "text"
   },
   6: {
-    value: "L’orso bruno poi appare,",
+    value: "impegnati gli occhietti.",
     type: "text"
   },
   7: {
-    value: "ora cosa devo fare?",
+    value: "L’orso bruno poi appare,",
     type: "text"
   },
   8: {
-    value: "“Orso, orso, lascia stare,",
+    value: "ora cosa devo fare?",
     type: "text"
   },
   9: {
-    value: "prendi altri per mangiare,",
+    value: "“Orso, orso, lascia stare,",
     type: "text"
   },
   10: {
-    value: "prendi topi e gattini,",
+    value: "prendi altri per mangiare,",
     type: "text"
   },
   11: {
-    value: "cerca, cerca sotto i pini”.",
+    value: "prendi topi e gattini,",
     type: "text"
   },
   12: {
-    value: "“Con la paglia tappo tutto,",
+    value: "cerca, cerca sotto i pini”.",
     type: "text"
   },
   13: {
-    value: "con il latte faccio il flutto.",
+    value: "“Con la paglia tappo tutto,",
     type: "text"
   },
   14: {
-    value: "Via, via, voi ometti,",
+    value: "con il latte faccio il flutto.",
     type: "text"
   },
   15: {
-    value: "via, via, voi bimbetti!”",
+    value: "Via, via, voi ometti,",
     type: "text"
   },
   16: {
+    value: "via, via, voi bimbetti!”",
+    type: "text"
+  },
+  17: {
     value: require("../Images/fiabe/142_02-img.png"),
     type: "image",
     classe: "imagemc"
   },
-  17: {
+  18: {
     value:
     "Alle ultime parole “l’orso” si alza e cerca di prendere i giocatori “nel bosco”. Però non può entrare in “casa”. Il gioco finisce quando “l’orso” prende tutti i giocatori.",
     type: "text",

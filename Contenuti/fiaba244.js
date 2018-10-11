@@ -41,28 +41,28 @@ const contenuto = {
     value: "Mi aspettano gli sposi,",
     type: "text"
   },
-  9: {
+  10: {
     value: "invitati numerosi,",
     type: "text"
   },
-  9: {
+  11: {
     value: "oggi tutti festeggiamo,",
     type: "text"
   },
-  9: {
+  12: {
     value: "matrimonio facciamo,",
     type: "text"
   },
-  9: {
+  13: {
     value: "noi ricchezza e bellezza",
     type: "text"
   },
-  9: {
+  14: {
     value: "degli sposi celebriamo”.",
     type: "text"
   },
 
-  10: {
+  15: {
     value: require("../Images/fiabe/244_02-img.png"),
     type: "image",
     classe: "imagemc"

@@ -120,11 +120,13 @@ const contenuto = {
     value: "Baiu-baiu-bai.",
     type: "text"
   },
+  /*
   29: {
     value: require("../Images/fiabe/89_02-img.png"),
     type: "image",
     classe: "imagemc"
   }
+  */
 };
 
 export default contenuto;

@@ -272,7 +272,7 @@ export default class MyHomeScreen extends React.Component {
 		console.log("sono in render");
 		console.log("ricevuta", this.state.ricevuta);
 		//TODO da togliere in prod
-		//this.state.ricevuta = "ok";
+		//this.state.ricevuta = null;
 		//checked = true;
 		if(!checked){
 			return (

@@ -57,7 +57,7 @@ class Splash extends Component {
           loop={false}
           scrollEnabled={false}
           autoplay={true}
-          autoplayTimeout={5}
+          autoplayTimeout={15}
           showsButtons={true}
           dot={<View style={styles.dot} />}
           onMomentumScrollEnd={this.startAnimate.bind(this)}
