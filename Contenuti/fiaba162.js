@@ -21,8 +21,6 @@ const contenuto = {
       type:  "text"},
     10 :{  value: "non scordarti dei pulcini.",
       type:  "text"},
-    11 :{  value: require("../Images/fiabe/162_01-img.png"),
-      type:  "image", classe: 'imagemc'},
   }
 
 export default contenuto

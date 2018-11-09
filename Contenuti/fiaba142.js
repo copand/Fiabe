@@ -1,6 +1,6 @@
 const contenuto = {
   0: {
-    value: "Giro per il bosco (giochiamo a rincorrersi)",
+    value: "Giro per il bosco (giochiamo a rincorrerci)",
     type: "text"
   },
   1: {

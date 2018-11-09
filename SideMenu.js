@@ -110,7 +110,7 @@ class SideMenu extends Component {
                   : styles.inactive
               ]}
             >
-              INFO e REGOLE
+              INFO
             </Text>
             </TouchableOpacity>
           </View>

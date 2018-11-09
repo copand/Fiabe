@@ -59,7 +59,7 @@ const contenuto = {
     classe: "imagemc"
   },
   14: {
-    value: "A questo gioco molto popolare più spesso giocano in acqua. Si prende più aria possibile nei polmoni ci si mette sott’acqua. Però la variante “terrestre” del gioco è bella anche lei. Il bambino fa gli stessi movimenti: salta, cammina, si inchina, si alza in punta dei piedi e poi si mette sui talloni.",
+    value: "A questo gioco molto popolare più spesso giocano in acqua. Si prende più aria possibile nei polmoni e ci si mette sott’acqua.Però la variante “terrestre” del gioco è bella anche lei. Il bambino fa gli stessi movimenti: salta, cammina, si inchina, si alza in punta dei piedi e poi si mette sui talloni.",
     type: "text", classe: "box"
   },
 };

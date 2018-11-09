@@ -11,7 +11,7 @@ const contenuto = {
       type:  "text"},
     5 :{  value: "“Come la barba hai colorato?”",
       type:  "text"},
-    6 :{  value: require("../Images/fiabe/130_02-img.jpg"),
+    6 :{  value: require("../Images/fiabe/130_02-img.png"),
       type:  "image", classe: 'imagemc'},
     7 :{  value: "“Né tinta né altro ho usato,",
       type:  "text"},

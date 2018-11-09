@@ -1,6 +1,6 @@
 const contenuto = {
-    0 :{  value: require("../Images/fiabe/163_01-img.png"),
-      type:  "image", classe: 'imagemc'},
+    //0 :{  value: require("../Images/fiabe/163_01-img.png"),
+    //  type:  "image", classe: 'imagemc'},
     1 :{  value: "Fan così le paperette:",
       type:  "text"},
     2 :{  value: "“Kria-kria-kria! Kria-kria-kria!”",

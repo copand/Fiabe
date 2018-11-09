@@ -1,7 +1,7 @@
 const contenuto = {
     0 :{  value: "Tutti fermi!",
       type:  "text"},
-    1 :{  value: "La filastrocca può accompagnare sia il gioco da cortile, che il gioco del silenzio, che il gioco battimani e può essere anche usata come conta).",
+    1 :{  value: "La filastrocca può accompagnare sia il gioco da cortile, che il gioco del silenzio, che il gioco battimani e può essere anche usata come conta.",
       type:  "text", classe: 'box'},
     2 :{  value: require("../Images/fiabe/146_01-img.png"),
       type:  "image", classe: 'imagemc'},

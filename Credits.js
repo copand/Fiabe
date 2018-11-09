@@ -77,7 +77,7 @@ class Credits extends Component {
           <ScrollView>
         <View style={styles.contenutoReg}>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, paddingTop:10,'textAlign':'center', fontFamily:'Comfortaa-Bold'}}>
-          REGOLE
+          INFO
           </Text>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 18, paddingTop:30, fontFamily:'OpenSans-Regular','textAlign':'justify'}}>
           Le 60 filastrocche pubblicate in questa applicazione sono tradotte dal russo e destinate ai bambini di età prescolastica. 
@@ -110,13 +110,13 @@ class Credits extends Component {
 
           <View style={styles.contenuto}>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 10, 'textAlign':'center', fontFamily:'Comfortaa-Bold'}}>
-          INFO
+          CREDITS
           </Text>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Studio di registrazione:
           </Text>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 17, 'textAlign':'justify', fontFamily:'OpenSans-Semibold'}}>
-          DA INSERIRE
+          DoubleOne Studio Pro
           </Text>
           <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 20, paddingTop:10,'textAlign':'justify', fontFamily:'OpenSans-Regular'}}>
           Voci:
@@ -157,8 +157,10 @@ class Credits extends Component {
               <FontAwesome5Pro name={'book-open'} color="#000000" size={40} style={{zIndex:12000, padding:10}} light />
               </TouchableOpacity>
 
-              <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 22,textAlign:'justify', paddingBottom:45}}>
-              © Copyright 2018 Netkom Group srl v2.4
+              <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 22,textAlign:'justify'}}>
+              © Copyright:               </Text>
+              <Text style={{'color':'#000000',fontSize: PAGE_WIDTH / 22,textAlign:'justify'}}>
+              Tutti i diritti riservati
               </Text>
               </View>
           </ScrollView>

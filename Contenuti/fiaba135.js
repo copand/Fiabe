@@ -29,6 +29,8 @@ const contenuto = {
       type:  "text"},
     14 :{  value: "esca fuori dal “cancello”!",
       type:  "text"},
+    15 :{  value: require("../Images/fiabe/135_02-img.png"),
+      type:  "image", classe: 'imagemc'},
   }
 
 export default contenuto

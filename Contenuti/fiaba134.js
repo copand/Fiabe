@@ -41,9 +41,9 @@ const contenuto = {
       type:  "text"},
     20 :{  value: "guida i piccoli pulcini,",
       type:  "text"},
-    10 :{  value: "il signore sta a guardare,",
+    21 :{  value: "il signore sta a guardare,",
       type:  "text"},
-    21 :{  value: "un sorriso grande a fare.",
+    22 :{  value: "un sorriso grande a fare.",
       type:  "text"},
   }
 

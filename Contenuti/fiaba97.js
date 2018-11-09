@@ -1,6 +1,6 @@
 const contenuto = {
 	0: {
-		value: require("../Images/fiabe/97-img.png"),
+		value: require("../Images/fiabe/97_01-img.png"),
 		type: "image",
 		classe: "imagemc"
 	},

@@ -994,7 +994,7 @@ class Capitolo3 extends React.Component {
             idf="220"
             sfondo={require("./Images/bg_giochi.png")}
             finale={this.props.capitolo}
-            capTitolo="Buona notte, baiu bai"
+            capTitolo="Buona notte, baiu-bai"
             numcap={4}
           />
         </View>
