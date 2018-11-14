@@ -5,7 +5,7 @@ const contenuto = {
       type:  "text"},
     2 :{  value: "“Kria-kria-kria! Kria-kria-kria!”",
       type:  "text"},
-    3 :{  value: "E il verso di ochette:",
+    3 :{  value: "E il verso delle ochette:",
       type:  "text", classe: "test"},
     4 :{  value: "“Ga-ga-ga! Ga-ga-ga!”",
       type:  "text"},

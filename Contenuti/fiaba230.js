@@ -17,8 +17,6 @@ const contenuto = {
       type:  "text"},
     8 :{  value: "spero poi mi sposerò.",
       type:  "text"},
-    9 :{  value: require("../Images/fiabe/230_02-img.png"),
-      type:  "image", classe: 'imagemc'},
   }
 
 export default contenuto

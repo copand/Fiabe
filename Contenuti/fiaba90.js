@@ -11,7 +11,7 @@ const contenuto = {
       type:  "text"},
     5 :{  value: "son di feltro gli stivali,",
       type:  "text"},
-    6 :{  value: "ai miei uguali.",
+    6 :{  value: "ai miei sono uguali.",
       type:  "text"},
     7 :{  value: "Tania poi li porterà,",
       type:  "text"},

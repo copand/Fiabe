@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -46,7 +45,8 @@
 		3D610B1801B34AB1A919A2DE /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 594D4C5E94854A2E9859EB8E /* OpenSans-Semibold.ttf */; };
 		401A5F27A18B4736A66EC632 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB5A737CB484E228A459D05 /* Feather.ttf */; };
 		4354A560FCDA46879454E6E2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 134438882EAE49A69C7EBAA0 /* Foundation.ttf */; };
-		58A7066387894D67AF60B7F1 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244F8C1C08CC41DD96D07968 /* OpenSans-Regular.ttf */; };
+		5368690321981A1D00E7BA4F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5368690221981A1D00E7BA4F /* OpenSans-Regular.ttf */; };
+		537C84F02196C1B6007B7344 /* FontAwesome5Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 537C84EF2196C1B6007B7344 /* FontAwesome5Pro.ttf */; };
 		5BCD5EE10FC2450EB212A114 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A1509AB803F4856BDA25D42 /* Zocial.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		61946D8C9E8945C6A9F0EF56 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FCDBF09892C4B81A79B8EF3 /* Comfortaa-Regular.ttf */; };
@@ -414,6 +414,9 @@
 		4644D89C87E94C28AA21293F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		4DB5A737CB484E228A459D05 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		5191236816094763B0027AFA /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
+		5368690221981A1D00E7BA4F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		537C84C32196C023007B7344 /* FontAwesome5_Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Pro.ttf; path = ../FontAwesome5_Pro.ttf; sourceTree = "<group>"; };
+		537C84EF2196C1B6007B7344 /* FontAwesome5Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5Pro.ttf; path = ../FontAwesome5Pro.ttf; sourceTree = "<group>"; };
 		53AEA2E1749E49C0850CEFA2 /* RNIap.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIap.xcodeproj; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; };
 		594D4C5E94854A2E9859EB8E /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Semibold.ttf"; path = "../assets/fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -716,6 +719,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5368690221981A1D00E7BA4F /* OpenSans-Regular.ttf */,
+				537C84EF2196C1B6007B7344 /* FontAwesome5Pro.ttf */,
+				537C84C32196C023007B7344 /* FontAwesome5_Pro.ttf */,
 				13B07FAE1A68108700A75B9A /* Fiabe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FiabeTests */,
@@ -864,10 +870,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 789QGJZ2BP;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 5J83V4BD63;
+						DevelopmentTeam = 789QGJZ2BP;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1276,6 +1283,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5368690321981A1D00E7BA4F /* OpenSans-Regular.ttf in Resources */,
+				537C84F02196C1B6007B7344 /* FontAwesome5Pro.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				37BD633126DE4A49AE6641BD /* Entypo.ttf in Resources */,
@@ -1298,7 +1307,6 @@
 				E438CA2D192B4A3E89FDC74C /* OpenSans-Bold.ttf in Resources */,
 				0476B7DCE3614B9CBC544411 /* OpenSans-Italic.ttf in Resources */,
 				C9DC18A8639F425EB713388B /* OpenSans-LightItalic.ttf in Resources */,
-				58A7066387894D67AF60B7F1 /* OpenSans-Regular.ttf in Resources */,
 				3D610B1801B34AB1A919A2DE /* OpenSans-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1418,6 +1426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 789QGJZ2BP;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1453,6 +1462,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 789QGJZ2BP;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
@@ -1485,7 +1495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 5J83V4BD63;
+				DEVELOPMENT_TEAM = 789QGJZ2BP;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
@@ -1500,7 +1510,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = it.netkomgroup.fiabe;
+				PRODUCT_BUNDLE_IDENTIFIER = it.netkomgroup.fiabe2;
 				PRODUCT_NAME = Fiabe;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1511,7 +1521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5J83V4BD63;
+				DEVELOPMENT_TEAM = 789QGJZ2BP;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
@@ -1526,7 +1536,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = it.netkomgroup.fiabe;
+				PRODUCT_BUNDLE_IDENTIFIER = it.netkomgroup.fiabe2;
 				PRODUCT_NAME = Fiabe;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

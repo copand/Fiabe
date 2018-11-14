@@ -19,6 +19,8 @@ const contenuto = {
       type:  "text"},
     10 :{  value: require("../Images/fiabe/154_02-img.png"),
       type:  "image", classe: 'imagemc'},
+    11 :{  value: require("../Images/fiabe/154_03-img.png"),
+      type:  "image", classe: 'imagemc'},
   }
 
 export default contenuto

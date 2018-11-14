@@ -41,12 +41,12 @@ export default class MyHomeScreen extends React.Component {
 			ricevuta: false,
 			availableItemsMessage: "",
 			switchValue: false,
-			checked:false
+			checked: false
 		};
 	}
 
 	componentWillUnmount() {
-		console.log('comp will unmount');
+		console.log("comp will unmount");
 		RNIap.endConnection();
 	}
 
@@ -59,7 +59,6 @@ export default class MyHomeScreen extends React.Component {
 
 	async componentDidMount() {
 		try {
-
 			const result = await RNIap.prepare();
 			console.log("result in did mount", result);
 			//per i test x rimuovere ricevuta su localstorage
@@ -68,7 +67,7 @@ export default class MyHomeScreen extends React.Component {
 
 			await AsyncStorage.getItem("ricevuta").then(value => {
 				//'inapp:it.netkomgroup.fiabe:'
-				console.log('ricevuta in asynStorage', value);
+				console.log("ricevuta in asynStorage", value);
 				var regex1 = RegExp("^null$");
 				console.log("testo la regexp ", regex1.test(value));
 				if (!regex1.test(value)) {
@@ -76,7 +75,7 @@ export default class MyHomeScreen extends React.Component {
 				}
 			});
 			if (this.state.ricevuta != "ok") {
-				console.log('ricevuta su storage nulla vado avanti');
+				console.log("ricevuta su storage nulla vado avanti");
 				const products = await RNIap.getProducts(itemSkus);
 				this.setState({ productList: products });
 				//this.setState({ items });
@@ -201,7 +200,9 @@ export default class MyHomeScreen extends React.Component {
 						"ricevuta",
 						purchases[0].transactionReceipt
 					);
-					console.log('setto ricevuta su localstorage da getAvalPurchases');
+					console.log(
+						"setto ricevuta su localstorage da getAvalPurchases"
+					);
 				} catch (error) {
 					// Error saving data
 					console.log("Errore storare ricevuta ", error);
@@ -215,10 +216,9 @@ export default class MyHomeScreen extends React.Component {
 					availableItemsMessage: `Got ${purchases.length} items.`,
 					receipt: purchases[0].transactionReceipt,
 					ricevuta: "ok",
-					checked:true
+					checked: true
 				});
-			}
-			else {
+			} else {
 				//NON ci sono acquisti => pagina demo
 				this.setState({ ricevuta: false, checked: true });
 			}
@@ -237,7 +237,10 @@ export default class MyHomeScreen extends React.Component {
 	};
 
 	onPressBlock = fiaba => {
-			Alert.alert("Contenuti bloccati","Sblocca tutte le 60 filastrocche premendo sul lucchetto rosso!");
+		Alert.alert(
+			"Contenuti bloccati",
+			"Sblocca tutte le 60 filastrocche premendo sul lucchetto rosso!"
+		);
 	};
 
 	playAll = () => {
@@ -265,8 +268,8 @@ export default class MyHomeScreen extends React.Component {
 		let checked = this.state.checked;
 
 		let type = "ChasingDots";
-    	let color = "#3f77ba";
-    	let size = 100;
+		let color = "#3f77ba";
+		let size = 100;
 
 		//facciamo 2 view: gratis/pagato
 		console.log("sono in render");
@@ -274,13 +277,13 @@ export default class MyHomeScreen extends React.Component {
 		//TODO da togliere in prod
 		//this.state.ricevuta = null;
 		//checked = true;
-		if(!checked){
+		if (!checked) {
 			return (
 				<View
 					style={{
 						flex: 1,
 						flexDirection: "column",
-						minHeight: height,
+						minHeight: height
 					}}
 				>
 					<ImageBackground
@@ -288,10 +291,10 @@ export default class MyHomeScreen extends React.Component {
 						style={{ flex: 1 }} // must be passed from the parent, the number may vary depending upon your screen size
 						source={require("../Images/bg_capitoli.png")}
 					>
-		            {/*<Spinner style={styles.spinner} isVisible={true} size={size} type={type} color={color}/> */}
+						{/*<Spinner style={styles.spinner} isVisible={true} size={size} type={type} color={color}/> */}
 					</ImageBackground>
 				</View>
-			);	
+			);
 		}
 		if (!this.state.ricevuta)
 			return (
@@ -299,7 +302,7 @@ export default class MyHomeScreen extends React.Component {
 					style={{
 						flex: 1,
 						flexDirection: "column",
-						minHeight: height,
+						minHeight: height
 					}}
 				>
 					<ImageBackground
@@ -334,22 +337,22 @@ export default class MyHomeScreen extends React.Component {
 							</View>
 						</View>
 
-						<View style={styles.containerTot}>
-						<Text style={styles.containerTit}>
-						CAPITOLI
-						</Text>
-							<View style={styles.containerCapDemo}>
-								<TouchableOpacity
-									style={styles.button}
-									onPress={() => this.onPress(100)}
-								>
-									<Text style={styles.grande}>
-										Capitolo dimostrativo
-									</Text>
-								</TouchableOpacity>
+						<View style={styles.containerTotDemo}>
+							<Text style={styles.containerTit}>CAPITOLI</Text>
+							<View style={styles.containerCapCon}>
+								<View style={styles.containerCapDemo}>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={() => this.onPress(100)}
+									>
+										<Text style={styles.grande}>
+											Capitolo dimostrativo
+										</Text>
+									</TouchableOpacity>
+								</View>
 							</View>
 
-							<View style={styles.container}>
+							<View style={styles.containerLuc}>
 								<TouchableOpacity
 									//onPress={() =>
 									//	this.buyItemOrig("android.test.purchased")
@@ -369,19 +372,16 @@ export default class MyHomeScreen extends React.Component {
 											Sblocca tutte le 60 filastrocche!
 										</Text>
 									</View>
+									<Image
+										style={{
+											width: width * 0.7,
+											marginTop: -140
+										}}
+										resizeMode="contain"
+										source={require("../Images/lista-capitoli-lock.png")}
+									/>
 								</TouchableOpacity>
 							</View>
-							<TouchableOpacity
-									onPress={() =>
-										this.onPressBlock(1)
-									}
-								>
-							<Image
-							style={{width:width * 0.7, marginTop:-140}}
-							resizeMode="contain"
-							source={require("../Images/lista-capitoli-lock.png")}
-							/>
-							</TouchableOpacity>
 						</View>
 					</ImageBackground>
 				</View>
@@ -428,10 +428,8 @@ export default class MyHomeScreen extends React.Component {
 						</View>
 
 						<View style={styles.containerTot}>
-						<Text style={styles.containerTit}>
-						CAPITOLI
-						</Text>
-						<View style={styles.containerCap1}>
+							<Text style={styles.containerTit}>CAPITOLI</Text>
+							<View style={styles.containerCap1}>
 								<TouchableOpacity
 									style={styles.button}
 									onPress={() => this.onPress(1)}
@@ -468,7 +466,7 @@ export default class MyHomeScreen extends React.Component {
 									onPress={() => this.onPress(4)}
 								>
 									<Text style={styles.grande}>
-										Buona notte, baiu bai
+										Buona notte, baiu-bai
 									</Text>
 								</TouchableOpacity>
 							</View>
@@ -490,7 +488,6 @@ export default class MyHomeScreen extends React.Component {
 									<Text style={styles.grande}>Frottole</Text>
 								</TouchableOpacity>
 							</View>
-	
 						</View>
 
 						<View style={styles.audio}>
@@ -500,14 +497,14 @@ export default class MyHomeScreen extends React.Component {
 								}
 							>
 								<View style={styles.button1}>
-										<Icon
-											name="headphones"
-											size={40}
-											style={{
-												color: "#29ABE2",
-											}}
-										/>
-										{/*
+									<Icon
+										name="headphones"
+										size={40}
+										style={{
+											color: "#29ABE2"
+										}}
+									/>
+									{/*
 										<Text style={{ flex: 1 }}>
 										Ascolta tutte le fiabe
 										</Text>
@@ -545,7 +542,7 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	button: {
-		width:'90%',
+		width: "90%",
 		justifyContent: "center",
 		alignItems: "center"
 	},
@@ -553,125 +550,125 @@ const styles = StyleSheet.create({
 		marginTop: 10
 	},
 	containerCap1L: {
-		backgroundColor:'#ED1C24',
-		opacity:0.3,
+		backgroundColor: "#ED1C24",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap1: {
-		backgroundColor:'#ED1C24',
+		backgroundColor: "#ED1C24",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap2: {
-		backgroundColor:'#FF7E00',
+		backgroundColor: "#FF7E00",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap2L: {
-		backgroundColor:'#FF7E00',
-		opacity:0.3,
+		backgroundColor: "#FF7E00",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap3: {
-		backgroundColor:'#F7CF0B',
+		backgroundColor: "#F7CF0B",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap3L: {
-		backgroundColor:'#F7CF0B',
-		opacity:0.3,
+		backgroundColor: "#F7CF0B",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap4: {
-		backgroundColor:'#11D311',
+		backgroundColor: "#11D311",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap4L: {
-		backgroundColor:'#11D311',
-		opacity:0.3,
+		backgroundColor: "#11D311",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap5: {
-		backgroundColor:'#29ABE2',
+		backgroundColor: "#29ABE2",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap5L: {
-		backgroundColor:'#29ABE2',
-		opacity:0.3,
+		backgroundColor: "#29ABE2",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap6: {
-		backgroundColor:'#7F47DD',
+		backgroundColor: "#7F47DD",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCap6L: {
-		backgroundColor:'#7F47DD',
-		opacity:0.3,
+		backgroundColor: "#7F47DD",
+		opacity: 0.3,
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	containerCapDemo: {
-		backgroundColor:'#FF7E00',
+		backgroundColor: "#FF7E00",
 		marginTop: 10,
-		width:'90%',
-		padding:10,
-		borderRadius:10,
+		width: "90%",
+		padding: 10,
+		borderRadius: 10,
 		justifyContent: "center",
 		alignItems: "center"
 	},
@@ -680,34 +677,50 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center"
 	},
+	containerTotDemo: {
+		//backgroundColor: 'red'
+		flex: 10,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+
+	containerLuc: {
+		//backgroundColor: 'red'
+		flex: 8,
+		alignItems: "center"
+	},
+	containerCapCon: {
+		//backgroundColor: 'red'
+		flex: 2
+	},
 	containerTit: {
 		fontSize: 30,
-		color:'#ffffff',
-		fontFamily:'Comfortaa-Bold',
+		color: "#ffffff",
+		fontFamily: "Comfortaa-Bold",
 		justifyContent: "center",
 		alignItems: "center"
 	},
 	container1: {
-		marginTop: 10,
+		marginTop: 10
 	},
 	icon: {
 		width: 24,
 		height: 24
 	},
 	grande: {
-		textAlign:'center',
-		fontFamily:'Comfortaa-Bold',
+		textAlign: "center",
+		fontFamily: "Comfortaa-Bold",
 		fontSize: 23,
-		color:'#ffffff'
+		color: "#ffffff"
 	},
 	bottoneStella: {
 		fontSize: 21,
-		color:'red'
+		color: "red"
 	},
 	spinner: {
-    	position:'absolute',
-    	zIndex:10000,
-    	top: '50%'
+		position: "absolute",
+		zIndex: 10000,
+		top: "50%"
 	},
 	piccolo: {}
 });

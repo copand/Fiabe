@@ -11,6 +11,7 @@ import {
   Animated,
   Easing,
   AppState,
+  Alert,
   ImageBackground,
   TouchableOpacity
 } from "react-native";
@@ -525,7 +526,7 @@ class Capitolo0 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         activeDotColor={'orange'}
         showsPagination={true}
@@ -591,7 +592,7 @@ class Capitolo1 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         activeDotColor={'orange'}
         showsPagination={true}
@@ -707,7 +708,7 @@ class Capitolo2 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         showsPagination={true}
         activeDotColor={'orange'}
@@ -883,7 +884,7 @@ class Capitolo3 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         showsPagination={true}
         activeDotColor={'orange'}
@@ -1009,7 +1010,7 @@ class Capitolo4 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         showsPagination={true}
         activeDotColor={'orange'}
@@ -1114,7 +1115,7 @@ class Capitolo5 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         showsPagination={true}
         activeDotColor={'orange'}
@@ -1249,7 +1250,7 @@ class Capitolo6 extends React.Component {
       <Swiper
         ref="sliderX"
         index={this.props.inizio}
-        style={styles.wrapper}
+        containerStyle={styles.wrapper}
         showsButtons={false}
         showsPagination={true}
         activeDotColor={'orange'}
