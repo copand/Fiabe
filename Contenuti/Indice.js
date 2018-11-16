@@ -22,6 +22,7 @@ import * as RNIap from "react-native-iap";
 import { AsyncStorage } from "react-native";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import Spinner from "react-native-spinkit";
+import DeviceInfo from 'react-native-device-info';
 
 var pagato = false;
 
@@ -60,7 +61,17 @@ export default class MyHomeScreen extends React.Component {
 	async componentDidMount() {
 		try {
 			const result = await RNIap.prepare();
-			console.log("result in did mount", result);
+			//console.log("result in did mount", result);
+			let isSim = false;
+			await DeviceInfo.getBatteryLevel().then(batteryLevel => {
+				isSim = batteryLevel == -1 ? true : false;
+
+			});
+			if(isSim) {
+				console.log('Qui dovrebbe darmi true se uso il sim !!!!!!!!!!', isSim);
+				this.setState({ricevuta:null,checked:true});
+				return;
+			}
 			//per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
 			//await RNIap.consumeAllItems();
@@ -192,6 +203,7 @@ export default class MyHomeScreen extends React.Component {
 			console.info(
 				"Get available purchases (non-consumable or unconsumed consumable)"
 			);
+			//qui errore simulatore
 			const purchases = await RNIap.getAvailablePurchases();
 			console.info("Available purchases :: ", purchases);
 			if (purchases && purchases.length > 0) {

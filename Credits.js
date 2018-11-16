@@ -179,6 +179,19 @@ class Credits extends Component {
                   у ворот…”, серия «Моя первая книга», изд.: «Белый город»,
                   2009).
                 </Text>
+                <Text
+                  style={{
+                    color: "#000000",
+                    fontSize: PAGE_WIDTH / 18,
+                    paddingTop: 30,
+                    textAlign: "justify",
+                    fontFamily: "OpenSans",
+                    textAlign: "justify"
+                  }}
+                >
+                Per avere una riproduzione del ciclo continuo senza interruzioni 
+                si consiglia di togliere il blocco schermo del telefono nelle impostazioni.
+                </Text>
                 <TouchableOpacity
                   style={styles.contenuto}
                   onPress={() => this.props.navigation.navigate("Capitoli")}
