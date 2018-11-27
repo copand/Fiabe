@@ -22,7 +22,7 @@ import * as RNIap from "react-native-iap";
 import { AsyncStorage } from "react-native";
 import { DrawerNavigator, DrawerActions } from "react-navigation";
 import Spinner from "react-native-spinkit";
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from "react-native-device-info";
 
 var pagato = false;
 
@@ -60,27 +60,29 @@ export default class MyHomeScreen extends React.Component {
 
 	async componentWillMount() {
 		try {
-			console.log('inizio didmount')
 			const brand = DeviceInfo.getBrand();
-			console.log('BRAND ' + brand);
+			console.log("BRAND " + brand);
 			const isEmulator = DeviceInfo.isEmulator(); // false
-			console.log('isEmulator ' + isSim);
-			//console.log("result in did mount", result);
+			console.log("isEmulator " + isSim);
 			let isSim = false;
+			//su ios batterylevel -1 per ios e 1 per android
 			await DeviceInfo.getBatteryLevel().then(batteryLevel => {
-				isSim = batteryLevel == -1 || 1 ? true : false;
-				console.log('batteryLevel vale!!!!!!!!!!!!!! ' + batteryLevel)
-
+				isSim = batteryLevel == -1 ? true : false;
+				console.log("batteryLevel vale!!!!!!!!!!!!!! " + batteryLevel);
 			});
-			if(isSim || brand == "google") {
-				console.log('Qui dovrebbe darmi true se uso il sim !!!!!!!!!!', isSim);
-				this.setState({ricevuta:null,checked:true});
+			if (isSim) {
+				console.log(
+					"Qui dovrebbe darmi true se uso il sim !!!!!!!!!!",
+					isSim
+				);
+				this.setState({ ricevuta: null, checked: true });
 				return;
 			}
+			//copmod Non sono nel simulatore, partono le iap
 			const result = await RNIap.prepare();
-			//per i test x rimuovere ricevuta su localstorage
-			//await AsyncStorage.removeItem('ricevuta');
-			//await RNIap.consumeAllItems();
+			//copmod per i test x rimuovere ricevuta su localstorage
+			await AsyncStorage.removeItem('ricevuta');
+			await RNIap.consumeAllItems();
 
 			await AsyncStorage.getItem("ricevuta").then(value => {
 				//'inapp:it.netkomgroup.fiabe:'
@@ -390,14 +392,22 @@ export default class MyHomeScreen extends React.Component {
 											Sblocca tutte le 60 filastrocche!
 										</Text>
 									</View>
-									<Image
+
+									<View
 										style={{
-											width: width * 0.7,
-											marginTop: -140
+											flexDirection: "column",
+											alignItems: "center"
 										}}
-										resizeMode="contain"
-										source={require("../Images/lista-capitoli-lock.png")}
-									/>
+									>
+										<Image
+											style={{
+												width: width * 0.6,
+												marginTop: -180
+											}}
+											resizeMode="contain"
+											source={require("../Images/lista-capitoli-lock.png")}
+										/>
+									</View>
 								</TouchableOpacity>
 							</View>
 						</View>
