@@ -58,20 +58,26 @@ export default class MyHomeScreen extends React.Component {
 		//console.log(prevState);
 	}
 
-	async componentDidMount() {
+	async componentWillMount() {
 		try {
-			const result = await RNIap.prepare();
+			console.log('inizio didmount')
+			const brand = DeviceInfo.getBrand();
+			console.log('BRAND ' + brand);
+			const isEmulator = DeviceInfo.isEmulator(); // false
+			console.log('isEmulator ' + isSim);
 			//console.log("result in did mount", result);
 			let isSim = false;
 			await DeviceInfo.getBatteryLevel().then(batteryLevel => {
-				isSim = batteryLevel == -1 ? true : false;
+				isSim = batteryLevel == -1 || 1 ? true : false;
+				console.log('batteryLevel vale!!!!!!!!!!!!!! ' + batteryLevel)
 
 			});
-			if(isSim) {
+			if(isSim || brand == "google") {
 				console.log('Qui dovrebbe darmi true se uso il sim !!!!!!!!!!', isSim);
 				this.setState({ricevuta:null,checked:true});
 				return;
 			}
+			const result = await RNIap.prepare();
 			//per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
 			//await RNIap.consumeAllItems();
@@ -284,10 +290,10 @@ export default class MyHomeScreen extends React.Component {
 		let size = 100;
 
 		//facciamo 2 view: gratis/pagato
-		console.log("sono in render");
+		console.log("sono in render di Indice");
 		console.log("ricevuta", this.state.ricevuta);
 		//TODO da togliere in prod
-		//this.state.ricevuta = null;
+		//this.state.ricevuta = 1;
 		//checked = true;
 		if (!checked) {
 			return (

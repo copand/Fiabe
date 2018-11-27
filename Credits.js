@@ -375,6 +375,7 @@ class Credits extends Component {
                   }}
                 >
                   Tutti i diritti riservati
+                  v 2.8
                 </Text>
               </View>
             </ScrollView>
