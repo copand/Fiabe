@@ -66,6 +66,7 @@ export default class MyHomeScreen extends React.Component {
 			console.log("isEmulator " + isSim);
 			let isSim = false;
 			//su ios batterylevel -1 per ios e 1 per android
+			/*
 			await DeviceInfo.getBatteryLevel().then(batteryLevel => {
 				isSim = batteryLevel == -1 ? true : false;
 				console.log("batteryLevel vale!!!!!!!!!!!!!! " + batteryLevel);
@@ -78,6 +79,7 @@ export default class MyHomeScreen extends React.Component {
 				this.setState({ ricevuta: null, checked: true });
 				return;
 			}
+			*/
 			//copmod Non sono nel simulatore, partono le iap
 			const result = await RNIap.prepare();
 			//copmod per i test x rimuovere ricevuta su localstorage
