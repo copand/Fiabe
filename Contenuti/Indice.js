@@ -83,8 +83,8 @@ export default class MyHomeScreen extends React.Component {
 			//copmod Non sono nel simulatore, partono le iap
 			const result = await RNIap.prepare();
 			//copmod per i test x rimuovere ricevuta su localstorage
-			await AsyncStorage.removeItem('ricevuta');
-			await RNIap.consumeAllItems();
+			//await AsyncStorage.removeItem('ricevuta');
+			//await RNIap.consumeAllItems();
 
 			await AsyncStorage.getItem("ricevuta").then(value => {
 				//'inapp:it.netkomgroup.fiabe:'

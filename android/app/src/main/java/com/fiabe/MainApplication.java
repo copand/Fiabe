@@ -1,4 +1,4 @@
-package it.netkomgroup.fiabe;
+package it.netkomgroup.fiabe2;
 
 import android.app.Application;
 
