@@ -1,6 +1,4 @@
 const contenuto = {
-    0 :{  value: require("../Images/fiabe/137_01-img.png"),
-      type:  "image", classe: 'imagemc'},
     1 :{  value: "Sotto il portico d’oro",
       type:  "text"},
     2 :{  value: "stavano tutti costoro:",

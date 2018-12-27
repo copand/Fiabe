@@ -102,8 +102,8 @@ android {
         applicationId "it.netkomgroup.fiabe2"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 31 
-        versionName "3.1"
+        versionCode 35 
+        versionName "3.5"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

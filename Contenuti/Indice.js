@@ -44,6 +44,9 @@ export default class MyHomeScreen extends React.Component {
 			switchValue: false,
 			checked: false
 		};
+		this._showPurchaseAlert = this._showPurchaseAlert.bind(this);
+		this._restorePurchases = this._restorePurchases.bind(this);
+		this._purchase = this._purchase.bind(this);
 	}
 
 	componentWillUnmount() {
@@ -82,9 +85,23 @@ export default class MyHomeScreen extends React.Component {
 			*/
 			//copmod Non sono nel simulatore, partono le iap
 			const result = await RNIap.prepare();
+			const products = await RNIap.getProducts(itemSkus);
+			console.log("PRODUCTS!!!!!!!!!!!!");
+			console.log(products);
 			//copmod per i test x rimuovere ricevuta su localstorage
 			//await AsyncStorage.removeItem('ricevuta');
 			//await RNIap.consumeAllItems();
+			/*
+			AsyncStorage.getItem("InApp")
+			.then(response => {
+				if (response == "success") {
+					this.setState({
+						inAppDone: true
+					});
+				}
+			})
+			.catch(error => {});
+*/
 
 			await AsyncStorage.getItem("ricevuta").then(value => {
 				//'inapp:it.netkomgroup.fiabe:'
@@ -93,8 +110,12 @@ export default class MyHomeScreen extends React.Component {
 				console.log("testo la regexp ", regex1.test(value));
 				if (!regex1.test(value)) {
 					this.setState({ ricevuta: "ok", checked: true });
+				} else {
+					this.setState({ ricevuta: false, checked: true });
 				}
 			});
+			//questo lo togliamo e mettiamo il bottonr recupera
+			/*
 			if (this.state.ricevuta != "ok") {
 				console.log("ricevuta su storage nulla vado avanti");
 				const products = await RNIap.getProducts(itemSkus);
@@ -107,6 +128,7 @@ export default class MyHomeScreen extends React.Component {
 				//per ora mandiamo alla pagina gratis
 				//this.setState({ ricevuta: false, checked: true });
 			}
+			*/
 		} catch (err) {
 			console.warn(err.code, err.message);
 		}
@@ -128,32 +150,72 @@ export default class MyHomeScreen extends React.Component {
 		}
 	};
 
-	buyItem = async sku => {
-		try {
-			console.info("buyItem: " + sku);
-			// const purchase = await RNIap.buyProduct(sku);
-			const purchase = await RNIap.buyProductWithoutFinishTransaction(
-				sku
-			);
-			this.setState({ receipt: purchase.transactionReceipt });
-			console.info("purchase", purchase);
-			/*
-			try {
-				await AsyncStorage.setItem(
-					"ricevuta",
-					purchase.transactionReceipt
+	_purchase() {
+		RNIap.buyProduct("capitoli_tutti")
+			.then(purchase => {
+				this._inAppSuccessfull();
+			})
+			.catch(err => {
+				console.log(err);
+				Alert.alert(
+					"Failed",
+					"Impossibile comprare gli stickers. Prova tra poco!"
 				);
-			} catch (error) {
-				// Error saving data
-				console.log("Errore storare ricevuta ", errore);
-			}
-			*/
-		} catch (err) {
-			console.warn(err.code, err.message);
-			console.log("errore nel pagamento", err.message);
-			Alert.alert(err.message);
-		}
-	};
+			});
+	}
+
+	_showPurchaseAlert() {
+		Alert.alert(
+			"Filastrocche",
+			"Stai per acquistare tutte le filastrocche disponibili",
+			[
+				{
+					text: "Cancel",
+					onPress: () => console.log("Cancel Pressed"),
+					style: "cancel"
+				},
+				{
+					text: "OK",
+					onPress: () => {
+						this._purchase();
+					}
+				}
+			]
+		);
+	}
+
+	_inAppSuccessfull() {
+		AsyncStorage.setItem("ricevuta", "ok")
+			.then(response => {
+				this.setState({
+					ricevuta:"ok",
+					checked: true
+				});
+			})
+			.catch(error => {});
+	}
+
+	_restorePurchases() {
+		RNIap.getAvailablePurchases()
+			.then(purchases => {
+				console.log("PURCHASES recuperati!!!!!!!!!!");
+				console.log(purchases);
+				purchases.forEach(purchase => {
+					console.log("SINGLE PURCHASE recuperato!!!!!!!!!!");
+					console.log(purchase.productId);
+					if (purchase.productId == itemSkus) {
+						console.log('qui ho il match!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+						this._inAppSuccessfull();
+					}
+				});
+			})
+			.catch(error => {
+				Alert.alert(
+					"Failed",
+					"Impossibile ripristinare le filastrocche. Prova tra poco!"
+				);
+			});
+	}
 
 	buyItemOrig = async sku => {
 		try {
@@ -357,6 +419,18 @@ export default class MyHomeScreen extends React.Component {
 									/>
 								</TouchableOpacity>
 							</View>
+							<TouchableOpacity
+								style={{
+									height: 40,
+									top: 10,
+									justifyContent: "center",
+									alignItems: "center",
+									right: 10
+								}}
+								onPress={this._restorePurchases}
+							>
+								<Text style={{ color: "white" }}>Recupera</Text>
+							</TouchableOpacity>
 						</View>
 
 						<View style={styles.containerTotDemo}>
@@ -364,7 +438,7 @@ export default class MyHomeScreen extends React.Component {
 							<View style={styles.containerCapCon}>
 								<View style={styles.containerCapDemo}>
 									<TouchableOpacity
-										style={styles.button}
+										style={styles.demoButton}
 										onPress={() => this.onPress(100)}
 									>
 										<Text style={styles.grande}>
@@ -576,6 +650,11 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center"
 	},
+	demoButton: {
+		width: "90%",
+		justifyContent: "center",
+		alignItems: "center"
+	},
 	container: {
 		marginTop: 10
 	},
@@ -716,12 +795,12 @@ const styles = StyleSheet.create({
 
 	containerLuc: {
 		//backgroundColor: 'red'
-		flex: 8,
+		flex: 7,
 		alignItems: "center"
 	},
 	containerCapCon: {
 		//backgroundColor: 'red'
-		flex: 2
+		flex: 3
 	},
 	containerTit: {
 		fontSize: 30,

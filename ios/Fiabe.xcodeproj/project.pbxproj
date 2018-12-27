@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -109,6 +110,7 @@
 		5368690321981A1D00E7BA4F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5368690221981A1D00E7BA4F /* OpenSans-Regular.ttf */; };
 		537C84F02196C1B6007B7344 /* FontAwesome5Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 537C84EF2196C1B6007B7344 /* FontAwesome5Pro.ttf */; };
 		5387A295219DAFB700DD6A5C /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5387A294219DAFB700DD6A5C /* Images-2.xcassets */; };
+		53A3631B21B97B9600048212 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A3631A21B97B9600048212 /* StoreKit.framework */; };
 		58B6E20371874C3EAB51760E /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC70ABE81F8E44DB81FCC0AC /* libRNDeviceInfo.a */; };
 		5BCD5EE10FC2450EB212A114 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A1509AB803F4856BDA25D42 /* Zocial.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -558,6 +560,7 @@
 		537C84C32196C023007B7344 /* FontAwesome5_Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Pro.ttf; path = ../FontAwesome5_Pro.ttf; sourceTree = "<group>"; };
 		537C84EF2196C1B6007B7344 /* FontAwesome5Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5Pro.ttf; path = ../FontAwesome5Pro.ttf; sourceTree = "<group>"; };
 		5387A294219DAFB700DD6A5C /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "Fiabe/Images-2.xcassets"; sourceTree = "<group>"; };
+		53A3631A21B97B9600048212 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		53AEA2E1749E49C0850CEFA2 /* RNIap.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIap.xcodeproj; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; };
 		594D4C5E94854A2E9859EB8E /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Semibold.ttf"; path = "../assets/fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -598,6 +601,7 @@
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				53A3631B21B97B9600048212 /* StoreKit.framework in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -762,6 +766,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53A3631A21B97B9600048212 /* StoreKit.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
@@ -1094,6 +1099,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 789QGJZ2BP;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
